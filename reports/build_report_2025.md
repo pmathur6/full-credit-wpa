@@ -3,7 +3,7 @@
 - Events: 189,735 (183,385 plate appearances, 6,350 mid-PA events); runner moves: 246,292
 - Tracked state vs Savant at the first pitch (178,100 PAs; 4,818 skipped where Savant lists one runner on two bases): bases 100.00%, outs 100.00%, score 100.00%
 - Games whose deltas sum to the final result (within .001): 100.00% of 2,430; max gap 0.0000
-- Win-prob lookups needing a fallback: {'count 0-0': 281, 'unresolved (decided game)': 7}
+- Win-prob lookups needing a fallback: {'unresolved (decided game)': 135, 'count 0-0': 281, 'clamped inning/score': 22}
 - PAs with a batted ball: 124,891; with outfield catch probability: 36,163
 - PAs with a Savant final pitch: 99.92%; truncated PAs: 459
 
