@@ -57,7 +57,8 @@ team_target["gap"] = (team_target.credited - team_target.target).abs()
 L += ["## 1. Accounting identities (must hold exactly)", "",
       f"- Events: {len(s):,}. Offense credits equal the event's change on {(off_gap < 1e-9).mean():.3%}; "
       f"defense credits equal minus the change on {(def_gap < 1e-9).mean():.3%} (max gaps {off_gap.max():.2e} / {def_gap.max():.2e})",
-      f"- Events with no credit rows: {int((s[['off', 'def']].abs().sum(axis=1) == 0).sum())}",
+      f"- Events with no credit rows: {int(s.index.difference(cr.set_index(key).index.unique()).size)}; "
+      f"events with no change in win probability (decided games): {int((s['d_we_bat'].abs() < 1e-12).sum()):,}",
       f"- Teams whose total credit equals wins minus summed starting win probability: "
       f"{(team_target.gap < 1e-6).sum()} of {len(team_target)} (max gap {team_target.gap.max():.2e})",
       f"- Credit rows with no player (coaching buckets): {cr.player_id.isna().sum():,}; "
