@@ -17,14 +17,7 @@ RUNNER, R_SLUG = "682829", "elly-de-la-cruz"
 GAME = "776135"
 
 CANDIDATES = {
-    "catcher-throwing (player=)": f"{S}/player-services/catcher-throwing?player={CATCHER}&season={SEASON}",
-    "catcher-throwing (player=, year=)": f"{S}/player-services/catcher-throwing?player={CATCHER}&year={SEASON}",
     "catcher-throwing (player=, no season)": f"{S}/player-services/catcher-throwing?player={CATCHER}",
-    "pitcher running game leaderboard": f"{S}/leaderboard/pitcher-running-game?game_type=Regular&n=1&season_start={SEASON}&season_end={SEASON}&split=no&team=&pitch_hand=&runner_moved=&target_base=All&prior_pk=All&with_team_only=1&csv=true",
-    "pitcher running game page": f"{S}/leaderboard/pitcher-running-game",
-    "basestealing run value (type=Pitcher)": f"{S}/leaderboard/basestealing-run-value?game_type=Regular&n=1&target_base=All&split=no&team=&type=Pitcher&with_team_only=1&season_start={SEASON}&season_end={SEASON}&csv=true",
-    "basestealing run value (type=Catcher)": f"{S}/leaderboard/basestealing-run-value?game_type=Regular&n=1&target_base=All&split=no&team=&type=Catcher&with_team_only=1&season_start={SEASON}&season_end={SEASON}&csv=true",
-    "catcher throwing leaderboard page": f"{S}/leaderboard/catcher-throwing",
 }
 TERMS = re.compile(r"pop|time_to|to_plate|lead|steal|sb_|cs_|throw|exchange|arm_|jump|secondary|primary|attempt", re.I)
 
@@ -45,6 +38,9 @@ for name, url in CANDIDATES.items():
     try:
         r = requests.get(url, headers=H, timeout=90)
         t = r.text
+        if name.startswith("catcher-throwing (player=, no"):
+            Path("probe").mkdir(exist_ok=True)
+            Path("probe/catcher_throwing_sample.html").write_text(t)
         ctype = r.headers.get("content-type", "")
         lines.append(f"- Status {r.status_code}, {ctype}, {len(t):,} chars")
         if "csv" in ctype or (t[:300].count(",") > 5 and "<html" not in t[:500].lower()):
