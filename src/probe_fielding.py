@@ -11,8 +11,8 @@ from pathlib import Path
 import requests
 
 SEASON = sys.argv[1] if len(sys.argv) > 1 else "2025"
-PLAYER = "691718"  # Pete Crow-Armstrong
-SLUG = "pete-crow-armstrong"
+PLAYER = sys.argv[2] if len(sys.argv) > 2 else "691718"  # default: Pete Crow-Armstrong
+SLUG = sys.argv[3] if len(sys.argv) > 3 else "pete-crow-armstrong"
 OUT = Path("probe")
 OUT.mkdir(exist_ok=True)
 HEADERS = {"User-Agent": "Mozilla/5.0 (full-credit-wpa research; github.com/pmathur6/full-credit-wpa)"}
@@ -24,7 +24,9 @@ CANDIDATES = {
     "catch prob leaderboard csv": f"{S}/leaderboard/catch_probability?type=player&year={SEASON}&total=0&min=q&csv=true",
     "OAA leaderboard csv": f"{S}/leaderboard/outs_above_average?type=Fielder&startYear={SEASON}&endYear={SEASON}&split=no&team=&range=year&min=q&pos=&roles=&viz=hide&csv=true",
     "player-services range": f"{S}/player-services/range?playerId={PLAYER}&season={SEASON}&playerType=fielder",
-    "visuals oaa": f"{S}/visuals/oaa?playerId={PLAYER}&season={SEASON}",
+    "player-services range (infield)": f"{S}/player-services/range?playerId={PLAYER}&season={SEASON}&playerType=fielder&type=infield",
+    "player-services infield": f"{S}/player-services/infield?playerId={PLAYER}&season={SEASON}",
+    "player page (IF fielding)": f"{S}/savant-player/{SLUG}-{PLAYER}?stats=statcast-r-fielding-if",
     "statcast_catch_probability": f"{S}/statcast_catch_probability",
     "fielding run value csv": f"{S}/leaderboard/fielding-run-value?gameType=Regular&seasonStart={SEASON}&seasonEnd={SEASON}&type=fielder&position=&minInnings=0&minResults=1&csv=true",
 }
@@ -74,5 +76,5 @@ for name, url in CANDIDATES.items():
         lines.append(f"- FAILED: {e!r}")
     lines.append("")
 
-(OUT / "fielding_report.md").write_text("\n".join(lines) + "\n")
+(OUT / f"fielding_report_{PLAYER}.md").write_text("\n".join(lines) + "\n")
 print("\n".join(lines))

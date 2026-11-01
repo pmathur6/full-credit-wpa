@@ -8,6 +8,14 @@ on:
         description: "Season to check"
         default: "2025"
         required: true
+      player:
+        description: "MLBAM player id"
+        default: "691718"
+        required: true
+      slug:
+        description: "Savant name slug"
+        default: "pete-crow-armstrong"
+        required: true
 
 permissions:
   contents: write
@@ -21,7 +29,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python src/probe_fielding.py "${{ inputs.season }}"
+      - run: python src/probe_fielding.py "${{ inputs.season }}" "${{ inputs.player }}" "${{ inputs.slug }}"
       - name: Commit report
         run: |
           git config user.name "github-actions[bot]"
