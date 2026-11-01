@@ -109,7 +109,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Brandon Lockridge (batter, batting): -0.0040
   - Angel Chivilli (pitcher, pitching): -0.0005
   - COL coaching (positioning, coaching): -0.0002
-  - Adael Amador (2B, fielding): +0.0046
+  - Adael Amador (2B, fielding): +0.0020
+  - Angel Chivilli (pitcher, pitching): +0.0026
   - Adael Amador (2B, fielding): +0.0001
   - COL coaching (positioning, coaching): -0.0001
 
@@ -117,7 +118,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Kevin Newman (batter, batting): -0.0350
   - Trent Thornton (pitcher, pitching): +0.0015
   - SEA coaching (positioning, coaching): -0.0028
-  - J.P. Crawford (SS, fielding): +0.0362
+  - J.P. Crawford (SS, fielding): +0.0305
+  - Trent Thornton (pitcher, pitching): +0.0057
   - J.P. Crawford (SS, fielding): -0.0018
   - SEA coaching (positioning, coaching): +0.0018
 
@@ -125,13 +127,15 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Ke'Bryan Hayes (batter, batting): -0.0800
   - Michael McGreevy (pitcher, pitching): +0.0338
   - STL coaching (positioning, coaching): +0.0001
-  - Michael McGreevy (P, fielding): +0.0461
+  - Michael McGreevy (P, fielding): +0.0133
+  - Michael McGreevy (pitcher, pitching): +0.0328
 
 **7T, 1 out, BOS vs ATH** - Jarren Duran grounds into a double play, second baseman Zack Gelof to shortstop Darell Hernaiz to first baseman Nick Kurtz. Carlos Narváez out at 2nd. Jarren Duran out at 1st. (change -0.007 for the offense; xBA 0.115)
   - Jarren Duran (batter, batting): -0.0070
   - Brady Basso (pitcher, pitching): +0.0033
   - ATH coaching (positioning, coaching): -0.0000
-  - Zack Gelof (2B, fielding): +0.0038
+  - Zack Gelof (2B, fielding): +0.0010
+  - Brady Basso (pitcher, pitching): +0.0027
   - Zack Gelof (2B, fielding): -0.0000
   - ATH coaching (positioning, coaching): +0.0000
 
@@ -139,7 +143,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Anthony Seigler (batter, batting): -0.0080
   - Max Lazar (pitcher, pitching): +0.0029
   - PHI coaching (positioning, coaching): -0.0002
-  - Trea Turner (SS, fielding): +0.0053
+  - Trea Turner (SS, fielding): +0.0014
+  - Max Lazar (pitcher, pitching): +0.0039
   - Trea Turner (SS, fielding): +0.0004
   - PHI coaching (positioning, coaching): -0.0004
 
@@ -147,7 +152,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Santiago Espinal (batter, batting): -0.0270
   - Andrew Heaney (pitcher, pitching): +0.0119
   - PIT coaching (positioning, coaching): +0.0001
-  - Ke'Bryan Hayes (3B, fielding): +0.0151
+  - Ke'Bryan Hayes (3B, fielding): +0.0040
+  - Andrew Heaney (pitcher, pitching): +0.0110
   - Ke'Bryan Hayes (3B, fielding): -0.0001
   - PIT coaching (positioning, coaching): +0.0001
 
@@ -155,7 +161,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Yohel Pozo (batter, batting): -0.1350
   - Jared Koenig (pitcher, pitching): +0.0560
   - MIL coaching (positioning, coaching): -0.0000
-  - Joey Ortiz (SS, fielding): +0.0790
+  - Joey Ortiz (SS, fielding): +0.0273
+  - Jared Koenig (pitcher, pitching): +0.0518
   - Joey Ortiz (SS, fielding): +0.0038
   - MIL coaching (positioning, coaching): -0.0038
 
@@ -163,7 +170,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Ezequiel Duran (batter, batting): -0.0690
   - Bailey Falter (pitcher, pitching): +0.0339
   - PIT coaching (positioning, coaching): +0.0009
-  - Ke'Bryan Hayes (3B, fielding): +0.0342
+  - Ke'Bryan Hayes (3B, fielding): +0.0069
+  - Bailey Falter (pitcher, pitching): +0.0273
   - Ke'Bryan Hayes (3B, fielding): -0.0003
   - PIT coaching (positioning, coaching): +0.0003
 
@@ -172,6 +180,7 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Jimmy Herget (pitcher, pitching): -0.0000
   - COL coaching (positioning, coaching): -0.0000
   - Kyle Farmer (2B, fielding): +0.0000
+  - Jimmy Herget (pitcher, pitching): +0.0000
   - Kyle Farmer (2B, fielding): -0.0000
   - COL coaching (positioning, coaching): +0.0000
 
@@ -179,7 +188,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Jo Adell (batter, batting): -0.0970
   - Jason Alexander (pitcher, pitching): -0.0524
   - HOU coaching (positioning, coaching): +0.0001
-  - Ramón Urías (3B, fielding): +0.1493
+  - Ramón Urías (3B, fielding): +0.1077
+  - Jason Alexander (pitcher, pitching): +0.0416
   - Ramón Urías (3B, fielding): -0.0041
   - HOU coaching (positioning, coaching): +0.0041
 
@@ -243,7 +253,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Ernie Clement (runner, baserunning): +0.0006
   - Brandon Eisert (pitcher, pitching): -0.0002
   - CWS coaching (positioning, coaching): +0.0001
-  - Kyle Teel (C, fielding): -0.0014
+  - Kyle Teel (C, fielding): +0.0010
+  - Brandon Eisert (pitcher, pitching): -0.0024
   - Kyle Teel (C, fielding): -0.0006
 
 **1T, 0 out, SD vs STL** - Luis Arraez out on a sacrifice bunt, pitcher Matthew Liberatore to first baseman Willson Contreras. Fernando Tatis Jr. to 2nd. (change -0.017 for the offense)
@@ -253,7 +264,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Luis Arraez (batter-runner, baserunning): -0.0028
   - Matthew Liberatore (pitcher, pitching): +0.0109
   - STL coaching (positioning, coaching): +0.0000
-  - Matthew Liberatore (P, fielding): +0.0024
+  - Matthew Liberatore (P, fielding): +0.0309
+  - Matthew Liberatore (pitcher, pitching): -0.0285
   - Matthew Liberatore (P, fielding): +0.0037
 
 **6T, 0 out, KC vs DET** - Luke Maile out on a sacrifice bunt, first baseman Spencer Torkelson to second baseman Javier Báez. Kyle Isbel to 3rd. (change -0.008 for the offense)
@@ -263,7 +275,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Luke Maile (batter-runner, baserunning): -0.0063
   - Tyler Holton (pitcher, pitching): +0.0126
   - DET coaching (positioning, coaching): +0.0022
-  - Spencer Torkelson (1B, fielding): -0.0151
+  - Spencer Torkelson (1B, fielding): +0.0050
+  - Tyler Holton (pitcher, pitching): -0.0200
   - Spencer Torkelson (1B, fielding): +0.0083
   - Spencer Torkelson (1B, fielding): -0.0011
   - DET coaching (positioning, coaching): +0.0011
@@ -275,7 +288,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Ceddanne Rafaela (batter-runner, baserunning): -0.0030
   - Daniel Lynch IV (pitcher, pitching): +0.0045
   - KC coaching (positioning, coaching): +0.0001
-  - Daniel Lynch IV (P, fielding): -0.0066
+  - Daniel Lynch IV (P, fielding): +0.0044
+  - Daniel Lynch IV (pitcher, pitching): -0.0109
   - Daniel Lynch IV (P, fielding): +0.0039
 
 **2B, 0 out, BOS vs NYM** - David Hamilton out on a sacrifice bunt, catcher Francisco Alvarez to second baseman Jeff McNeil. Nick Sogard to 3rd. Trevor Story to 2nd. (change -0.003 for the offense)
@@ -286,7 +300,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - David Hamilton (batter-runner, baserunning): -0.0055
   - Clay Holmes (pitcher, pitching): +0.0205
   - NYM coaching (positioning, coaching): -0.0028
-  - Francisco Alvarez (C, fielding): -0.0238
+  - Francisco Alvarez (C, fielding): +0.0211
+  - Clay Holmes (pitcher, pitching): -0.0449
   - Francisco Alvarez (C, fielding): +0.0090
 
 **7B, 0 out, TOR vs CHC** - Ernie Clement out on a sacrifice bunt, pitcher Matthew Boyd to first baseman Michael Busch. Davis Schneider to 2nd. (change -0.032 for the offense)
@@ -296,7 +311,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Ernie Clement (batter-runner, baserunning): -0.0058
   - Matthew Boyd (pitcher, pitching): +0.0382
   - CHC coaching (positioning, coaching): -0.0007
-  - Matthew Boyd (P, fielding): -0.0131
+  - Matthew Boyd (P, fielding): +0.0520
+  - Matthew Boyd (pitcher, pitching): -0.0650
   - Matthew Boyd (P, fielding): +0.0075
 
 **8B, 0 out, TOR vs WSH** - Will Wagner hits a sacrifice bunt. Fielding error by pitcher José A. Ferrer. George Springer to 2nd. Will Wagner to 1st. (change +0.088 for the offense)
@@ -315,7 +331,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Tyler Fitzgerald (batter-runner, baserunning): -0.0043
   - Nick Lodolo (pitcher, pitching): +0.0227
   - CIN coaching (positioning, coaching): -0.0079
-  - Nick Lodolo (P, fielding): +0.0057
+  - Nick Lodolo (P, fielding): +0.0494
+  - Nick Lodolo (pitcher, pitching): -0.0437
   - Nick Lodolo (P, fielding): +0.0056
 
 **12B, 0 out, KC vs BOS** - Cavan Biggio out on a sacrifice bunt, catcher Connor Wong to first baseman Abraham Toro. Michael Massey to 3rd. (change +0.028 for the offense)
@@ -325,7 +342,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Cavan Biggio (batter-runner, baserunning): -0.0093
   - Sean Newcomb (pitcher, pitching): -0.0420
   - BOS coaching (positioning, coaching): -0.0007
-  - Connor Wong (C, fielding): +0.0025
+  - Connor Wong (C, fielding): +0.0603
+  - Sean Newcomb (pitcher, pitching): -0.0577
   - Connor Wong (C, fielding): +0.0122
 
 **6T, 1 out, TEX vs CLE** - Michael Helman hits a sacrifice bunt. Billy McKinney scores. Michael Helman to 1st. (change +0.061 for the offense)
@@ -334,8 +352,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Michael Helman (batter-runner, baserunning): +0.0232
   - Matt Festa (pitcher, pitching): +0.0042
   - CLE coaching (positioning, coaching): +0.0029
-  - Jhonkensy Noel (1B, fielding): -0.0224
-  - Matt Festa (P, fielding): -0.0224
+  - Jhonkensy Noel (1B, fielding): -0.0344
+  - Matt Festa (P, fielding): -0.0344
+  - Matt Festa (pitcher, pitching): +0.0240
   - Jhonkensy Noel (1B, fielding): -0.0232
 
 ## intent_walk (556 plays)
@@ -429,9 +448,10 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Matt Shaw (batter, batting): +0.0065
   - Ian Gibaut (pitcher, pitching): +0.0182
   - CIN coaching (positioning, coaching): -0.0009
-  - Matt McLain (2B, fielding): -0.0342
-  - Ian Gibaut (P, fielding): -0.0038
-  - Elly De La Cruz (SS, fielding): -0.0048
+  - Matt McLain (2B, fielding): -0.0364
+  - Ian Gibaut (P, fielding): -0.0040
+  - Elly De La Cruz (SS, fielding): -0.0051
+  - Ian Gibaut (pitcher, pitching): +0.0027
   - Matt McLain (2B, fielding): -0.0065
   - Matt McLain (2B, fielding): +0.0008
   - Elly De La Cruz (SS, fielding): +0.0001
@@ -462,9 +482,10 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Alex Freeland (runner, baserunning): +0.0023
   - Brendon Little (pitcher, pitching): -0.0019
   - TOR coaching (positioning, coaching): -0.0033
-  - Ernie Clement (2B, fielding): -0.0024
-  - Addison Barger (3B, fielding): -0.0067
-  - Bo Bichette (SS, fielding): -0.0204
+  - Ernie Clement (2B, fielding): -0.0029
+  - Addison Barger (3B, fielding): -0.0081
+  - Bo Bichette (SS, fielding): -0.0247
+  - Brendon Little (pitcher, pitching): +0.0062
   - Bo Bichette (SS, fielding): -0.0023
   - Ernie Clement (2B, fielding): +0.0000
   - Addison Barger (3B, fielding): -0.0004
@@ -507,9 +528,10 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Masataka Yoshida (batter-runner, baserunning): -0.0023
   - Wandy Peralta (pitcher, pitching): +0.0127
   - SD coaching (positioning, coaching): -0.0077
-  - Luis Arraez (1B, fielding): -0.0224
-  - Jake Cronenworth (2B, fielding): -0.0328
-  - Wandy Peralta (P, fielding): -0.0041
+  - Luis Arraez (1B, fielding): -0.0214
+  - Jake Cronenworth (2B, fielding): -0.0313
+  - Wandy Peralta (P, fielding): -0.0039
+  - Wandy Peralta (pitcher, pitching): -0.0027
   - Jake Cronenworth (2B, fielding): +0.0023
   - Luis Arraez (1B, fielding): -0.0010
   - Jake Cronenworth (2B, fielding): +0.0002
@@ -523,9 +545,10 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Nolan Schanuel (batter-runner, baserunning): -0.0073
   - JoJo Romero (pitcher, pitching): +0.0876
   - STL coaching (positioning, coaching): +0.0126
-  - Brendan Donovan (2B, fielding): -0.2720
-  - JoJo Romero (P, fielding): -0.0389
-  - Masyn Winn (SS, fielding): -0.0291
+  - Brendan Donovan (2B, fielding): -0.2864
+  - JoJo Romero (P, fielding): -0.0410
+  - Masyn Winn (SS, fielding): -0.0306
+  - JoJo Romero (pitcher, pitching): +0.0181
   - Brendan Donovan (2B, fielding): +0.0367
   - Brendan Donovan (2B, fielding): +0.0060
   - Masyn Winn (SS, fielding): +0.0015
@@ -539,7 +562,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Kameron Misner (batter-runner, baserunning): -0.0030
   - Ryan Thompson (pitcher, pitching): -0.0388
   - AZ coaching (positioning, coaching): +0.0013
-  - Josh Naylor (1B, fielding): -0.0441
+  - Josh Naylor (1B, fielding): -0.0589
+  - Ryan Thompson (pitcher, pitching): +0.0149
   - Josh Naylor (1B, fielding): +0.0396
   - Josh Naylor (1B, fielding): -0.0016
   - AZ coaching (positioning, coaching): +0.0016
@@ -550,7 +574,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Jacob Wilson (batter, batting): -0.1460
   - Germán Márquez (pitcher, pitching): +0.0161
   - COL coaching (positioning, coaching): -0.0021
-  - Ryan McMahon (3B, fielding): +0.1319
+  - Ryan McMahon (3B, fielding): +0.0265
+  - Germán Márquez (pitcher, pitching): +0.1054
   - Ryan McMahon (3B, fielding): -0.0024
   - COL coaching (positioning, coaching): +0.0024
 
@@ -992,7 +1017,8 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Brooks Lee (batter, batting): -0.2060
   - Brendon Little (pitcher, pitching): +0.0256
   - TOR coaching (positioning, coaching): -0.1103
-  - Addison Barger (RF, fielding): +0.2908
+  - Addison Barger (RF, fielding): +0.1897
+  - Brendon Little (pitcher, pitching): +0.1010
 
 **1T, 2 out, AZ vs MIA** - Lourdes Gurriel Jr. flies out to left fielder Griffin Conine. (change -0.048 for the offense; xBA 0.122; catch prob 0.05)
   - Lourdes Gurriel Jr. (batter, batting): -0.0480
@@ -1050,15 +1076,17 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Elly De La Cruz (batter-runner, baserunning): -0.0012
   - Yoshinobu Yamamoto (pitcher, pitching): +0.0221
   - LAD coaching (positioning, coaching): +0.0141
-  - Michael Conforto (LF, fielding): -0.0991
-  - Michael Conforto (LF, fielding): +0.0098
+  - Michael Conforto (LF, fielding): -0.1149
+  - Yoshinobu Yamamoto (pitcher, pitching): +0.0158
+  - Mookie Betts (SS, fielding): +0.0098
 
 **2T, 0 out, LAA vs ATH** - Yoán Moncada singles on a fly ball to left fielder JJ Bleday. (change +0.040 for the offense; xBA 0.175; catch prob 0.99)
   - Yoán Moncada (batter, batting): +0.0389
   - Yoán Moncada (batter, batting): +0.0011
   - Jack Perkins (pitcher, pitching): +0.0181
   - ATH coaching (positioning, coaching): +0.0051
-  - JJ Bleday (LF, fielding): -0.0621
+  - JJ Bleday (LF, fielding): -0.0734
+  - Jack Perkins (pitcher, pitching): +0.0113
   - JJ Bleday (LF, fielding): -0.0011
 
 **7B, 0 out, COL vs MIL** - Mickey Moniak doubles (1) on a fly ball to center fielder Garrett Mitchell. (change +0.017 for the offense; xBA 0.018; catch prob 0.99)
@@ -1066,29 +1094,33 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Mickey Moniak (batter-runner, baserunning): +0.0004
   - Joel Payamps (pitcher, pitching): +0.0058
   - MIL coaching (positioning, coaching): +0.0000
-  - Sal Frelick (RF, fielding): -0.0224
-  - Sal Frelick (RF, fielding): -0.0004
+  - Sal Frelick (RF, fielding): -0.0180
+  - Joel Payamps (pitcher, pitching): -0.0043
+  - Garrett Mitchell (CF, fielding): -0.0004
 
 **2T, 0 out, CIN vs ATH** - Will Benson triples (2) on a sharp fly ball to right fielder JJ Bleday. (change +0.089 for the offense; xBA 0.219; catch prob 0.95)
   - Will Benson (batter, batting): +0.0892
   - Will Benson (batter, batting): -0.0002
   - J.T. Ginn (pitcher, pitching): +0.0223
   - ATH coaching (positioning, coaching): -0.0031
-  - JJ Bleday (RF, fielding): -0.1084
+  - JJ Bleday (RF, fielding): -0.0916
+  - J.T. Ginn (pitcher, pitching): -0.0168
   - JJ Bleday (RF, fielding): +0.0002
 
 **6T, 2 out, COL vs AZ** - Mickey Moniak doubles (14) on a fly ball to center fielder Jorge Barrosa. (change +0.007 for the offense; xBA 0.205; catch prob 0.95)
   - Mickey Moniak (batter, batting): +0.0070
   - Zac Gallen (pitcher, pitching): +0.0027
   - AZ coaching (positioning, coaching): +0.0008
-  - Lourdes Gurriel Jr. (LF, fielding): -0.0105
+  - Lourdes Gurriel Jr. (LF, fielding): -0.0092
+  - Zac Gallen (pitcher, pitching): -0.0014
 
 **6T, 2 out, BOS vs CWS** - Trevor Story doubles (2) on a sharp fly ball to right fielder Brooks Baldwin. Alex Bregman scores. Wilyer Abreu scores. (change +0.277 for the offense; xBA 0.369; catch prob 0.95)
   - Trevor Story (batter, batting): +0.2639
   - Wilyer Abreu (runner, baserunning): +0.0131
   - Shane Smith (pitcher, pitching): +0.0425
   - CWS coaching (positioning, coaching): +0.0079
-  - Brooks Baldwin (RF, fielding): -0.3143
+  - Brooks Baldwin (RF, fielding): -0.3157
+  - Shane Smith (pitcher, pitching): +0.0014
   - Brooks Baldwin (RF, fielding): -0.0131
 
 **3B, 1 out, LAD vs CHC** - Mookie Betts singles on a fly ball to center fielder Pete Crow-Armstrong, deflected by right fielder Kyle Tucker. (change +0.028 for the offense; xBA 0.238; catch prob 0.99)
@@ -1096,8 +1128,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Mookie Betts (batter, batting): +0.0009
   - Colin Rea (pitcher, pitching): +0.0114
   - CHC coaching (positioning, coaching): +0.0062
-  - Kyle Tucker (RF, fielding): -0.0446
-  - Kyle Tucker (RF, fielding): -0.0009
+  - Kyle Tucker (RF, fielding): -0.0474
+  - Colin Rea (pitcher, pitching): +0.0029
+  - Pete Crow-Armstrong (CF, fielding): -0.0009
 
 **8T, 1 out, MIA vs BAL** - Jesús Sánchez singles on a fly ball to right fielder Ramón Laureano. (change -0.000 for the offense; xBA 0.218; catch prob 0.95)
   - Jesús Sánchez (batter, batting): +0.0009
@@ -1106,13 +1139,15 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Yennier Cano (pitcher, pitching): -0.0007
   - BAL coaching (positioning, coaching): +0.0000
   - Ramón Laureano (RF, fielding): -0.0003
+  - Yennier Cano (pitcher, pitching): +0.0000
   - Ramón Laureano (RF, fielding): +0.0009
 
 **5T, 2 out, MIN vs KC** - Matt Wallner doubles (4) on a fly ball to right fielder Hunter Renfroe. (change +0.027 for the offense; xBA 0.010; catch prob 0.99)
   - Matt Wallner (batter, batting): +0.0270
   - Michael Lorenzen (pitcher, pitching): +0.0116
   - KC coaching (positioning, coaching): +0.0000
-  - Hunter Renfroe (RF, fielding): -0.0387
+  - Hunter Renfroe (RF, fielding): -0.0338
+  - Michael Lorenzen (pitcher, pitching): -0.0048
 
 **7T, 2 out, ATL vs MIA** - Matt Olson doubles (35) on a fly ball to left fielder Jakob Marsee. (change -0.000 for the offense; xBA 0.043; catch prob 0.99)
   - Matt Olson (batter, batting): +0.0000
