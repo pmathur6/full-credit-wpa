@@ -3,7 +3,7 @@
 ## 1. Accounting identities (must hold exactly)
 
 - Events: 189,735. Offense credits equal the event's change on 100.000%; defense credits equal minus the change on 100.000% (max gaps 3.33e-16 / 3.33e-16)
-- Events with no credit rows: 5425
+- Events with no credit rows: 0; events with no change in win probability (decided games): 7,061
 - Teams whose total credit equals wins minus summed starting win probability: 30 of 30 (max gap 5.91e-15)
 - Credit rows with no player (coaching buckets): 36,487; non-coaching rows with no player: 0
 
