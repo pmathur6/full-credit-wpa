@@ -391,13 +391,76 @@ for row in pa.itertuples(index=False):
 
 # ---------------------------------------------------------------- mid-PA events
 MID_DEF = {
-    "stolen_base": [("pitcher", 0.5), ("C", 0.5)],
-    "caught_stealing": [("pitcher", 0.5), ("C", 0.5)],
     "pickoff_caught_stealing": [("pitcher", 1.0)],
     "pickoff": [("pitcher", 1.0)],
     "wild_pitch": [("pitcher", 1.0)], "balk": [("pitcher", 1.0)], "forced_balk": [("pitcher", 1.0)],
     "passed_ball": [("C", 1.0)],
 }
+
+# ---- stolen-base attempts: staged split from season skill (Savant)
+# baseline league caught-stealing rate for the target base -> + pitcher's effect -> + catcher's
+# effect; the rest (attempt at league-average defense, and actual vs expected) splits 50/50
+REF = Path("reference")
+SHRINK = 5  # attempts of league-average added to each player's season effect
+PIT_FX, CAT_FX = {}, {}
+if (REF / f"pitcher_running_{season}.csv").exists() and (REF / f"catcher_throwing_{season}.csv").exists():
+    pr = pd.read_csv(REF / f"pitcher_running_{season}.csv")
+    pr = pr[pr.key_target_base.eq("All")]
+    PIT_FX = (pr.n_pitcher_cs_aa / (pr.n_sb + pr.n_cs + SHRINK)).groupby(pr.player_id).sum().to_dict()
+    ct = pd.read_csv(REF / f"catcher_throwing_{season}.csv")
+    CAT_FX = (ct.caught_stealing_above_average / (ct.sb_attempts + SHRINK)).groupby(ct.player_id).sum().to_dict()
+else:
+    stats["steal split: no Savant reference, 50/50"] += 1
+_att = ev[ev.kind.eq("mid") & ev.event_type.str.match(r"^(stolen_base|caught_stealing)_(2b|3b|home)$", na=False)]
+_base = _att.event_type.str.extract(r"_(2b|3b|home)$")[0]
+CS_RATE = _att.event_type.str.startswith("caught").groupby(_base).mean().to_dict()
+TARGET = {"2b": 2, "3b": 3, "home": 4}
+
+
+def steal_split(row, g, D):
+    """Defense credits for a single-runner steal attempt; None if it can't be staged."""
+    if not (PIT_FX or CAT_FX):
+        return None
+    runners = {m["runner"] for m in g}
+    if len(runners) != 1:
+        return None
+    m0 = g[0]
+    base = row.event_type.rsplit("_", 1)[1]
+    start, tgt = m0["start"], TARGET[base]
+    if start != tgt - 1:
+        return None
+    bases = {1: row.on_1b, 2: row.on_2b, 3: row.on_3b}
+    bases = {b: (None if v != v else v) for b, v in bases.items()}
+
+    def value(safe):
+        bs = dict(bases)
+        bs[start] = None
+        h, a, outs = row.home_before, row.away_before, row.outs_before
+        if safe and tgt == 4:
+            h, a = (h + 1, a) if row.half == "bottom" else (h, a + 1)
+        elif safe:
+            bs[tgt] = m0["runner"]
+        else:
+            outs += 1
+        mask = sum(1 << (b - 1) for b, v in bs.items() if v is not None)
+        return bat(WP.state(row.inning, row.half, outs, mask, h, a, row.balls, row.strikes), row.half)
+
+    v_sb, v_cs = value(True), value(False)
+    before = bat(row.we_before, row.half)
+    act = bat(row.we_after, row.half)
+
+    def E(p):
+        return p * v_cs + (1 - p) * v_sb
+
+    p0 = CS_RATE.get(base, 0.2)
+    p1 = min(max(p0 + PIT_FX.get(row.pitcher, 0.0), 0.01), 0.99)
+    cat = None if row.f2 != row.f2 else int(row.f2)
+    p2 = min(max(p1 + CAT_FX.get(cat, 0.0), 0.01), 0.99)
+    shared = -(E(p0) - before) - (act - E(p2))
+    return [(row.pitcher, "pitching", "pitcher", shared / 2 - (E(p1) - E(p0))),
+            (cat, "fielding", "C", shared / 2 - (E(p2) - E(p1)))]
+
+
 for row in ev[ev.kind.eq("mid")].itertuples(index=False):
     off, deff, D = row.batting_team, row.fielding_team, row.d_we_bat
     g = groups.get((row.game_pk, row.at_bat_index, row.play_index), [])
@@ -411,7 +474,17 @@ for row in ev[ev.kind.eq("mid")].itertuples(index=False):
     key = next((k for k in ("pickoff_caught_stealing", "pickoff_error", "stolen_base", "caught_stealing",
                             "pickoff", "wild_pitch", "passed_ball", "forced_balk", "balk",
                             "defensive_indiff", "error") if et.startswith(k)), "other")
-    if key in ("pickoff_error", "error"):
+    if key in ("stolen_base", "caught_stealing"):
+        split = steal_split(row, g, D)
+        if split is None:
+            stats["steal attempt split 50/50 (double steal etc.)"] += 1
+            split = [(row.pitcher, "pitching", "pitcher", -D / 2),
+                     (None if row.f2 != row.f2 else int(row.f2), "fielding", "C", -D / 2)]
+        else:
+            stats["steal attempt staged"] += 1
+        for pid, bucket, role, c in split:
+            add(row, pid, deff, "def", bucket, role, c)
+    elif key in ("pickoff_error", "error"):
         err = credits_of(g, {"f_fielding_error", "f_throwing_error", "f_error_dropped_ball"})
         if err:
             add(row, err[0]["id"], deff, "def", "fielding", err[0]["pos"], -D)

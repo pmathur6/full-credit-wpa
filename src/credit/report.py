@@ -92,6 +92,25 @@ if (REF / f"oaa_{season}.csv").exists():
 else:
     L.append("- Savant OAA reference not available in this run")
 
+# ---------------------------------------------------------------- 2b. steals vs Savant
+st = cr[cr.event_type.str.match(r"^(stolen_base|caught_stealing)_", na=False) & cr.side.eq("def")]
+L += ["", "## 2b. Stolen-base defense vs Savant", ""]
+for role, fname, col, label in (("C", "catcher_throwing", "catcher_stealing_runs", "catcher stealing runs"),
+                                ("pitcher", "pitcher_running", "runs_prevented_on_running_attr", "pitcher running-game runs")):
+    f = REF / f"{fname}_{season}.csv"
+    if not f.exists():
+        L.append(f"- {label}: reference not available")
+        continue
+    ref = pd.read_csv(f)
+    if "key_target_base" in ref:
+        ref = ref[ref.key_target_base.eq("All")]
+    ref = ref.groupby("player_id")[col].sum()
+    ours_s = st[st.role.eq(role)].groupby("player_id")["credit"].sum()
+    j = pd.concat([ref.rename("savant"), ours_s.rename("ours")], axis=1, join="inner")
+    j = j[(j.savant != 0) | (j.ours != 0)]
+    L.append(f"- {label}: {len(j)} players; correlation of our steal-attempt credit (wins, leverage-weighted) "
+             f"with Savant's (runs): **{np.corrcoef(j.savant, j.ours)[0, 1]:.3f}**")
+
 # ---------------------------------------------------------------- per-player table
 p = cr.dropna(subset=["player_id"]).pivot_table(index="player_id", columns="bucket", values="credit",
                                                  aggfunc="sum", fill_value=0)

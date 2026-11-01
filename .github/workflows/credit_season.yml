@@ -31,8 +31,8 @@ jobs:
           mkdir -p data/build
           gh release download "data-$SEASON" -D data/build \
             -p "events_$SEASON.parquet" -p "runner_moves_$SEASON.parquet" -p "we_lookup_$SEASON.parquet"
+      - run: python src/credit/fetch_reference.py "$SEASON" data/build
       - run: python src/credit/engine.py "$SEASON" data/build data/credit
-      - run: python src/credit/fetch_reference.py "$SEASON" data/credit
       - run: python src/credit/report.py "$SEASON" data/build data/credit
       - run: gh release upload "data-$SEASON" "data/credit/credits_$SEASON.parquet" --clobber
       - name: Commit reports and outputs
