@@ -17,19 +17,14 @@ RUNNER, R_SLUG = "682829", "elly-de-la-cruz"
 GAME = "776135"
 
 CANDIDATES = {
-    "pop time leaderboard": f"{S}/leaderboard/poptime?year={SEASON}&team=&min2b=1&min3b=0&csv=true",
-    "catcher throwing leaderboard": f"{S}/leaderboard/catcher-throwing?game_type=Regular&n=1&season_start={SEASON}&season_end={SEASON}&split=no&team=&type=Cat&with_team_only=1&csv=true",
-    "basestealing run value: pitchers": f"{S}/leaderboard/basestealing-run-value?game_type=Regular&n=1&pitch_hand=&runner_moved=&target_base=All&prior_pk=All&split=no&team=&type=Pit&with_team_only=1&expanded=0&season_start={SEASON}&season_end={SEASON}&csv=true",
-    "basestealing run value: catchers": f"{S}/leaderboard/basestealing-run-value?game_type=Regular&n=1&pitch_hand=&runner_moved=&target_base=All&prior_pk=All&split=no&team=&type=Cat&with_team_only=1&expanded=0&season_start={SEASON}&season_end={SEASON}&csv=true",
-    "basestealing run value: runners": f"{S}/leaderboard/basestealing-run-value?game_type=Regular&n=1&pitch_hand=&runner_moved=&target_base=All&prior_pk=All&split=no&team=&type=Run&with_team_only=1&expanded=0&season_start={SEASON}&season_end={SEASON}&csv=true",
-    "catcher page": f"{S}/savant-player/{C_SLUG}-{CATCHER}?stats=statcast-r-catching",
-    "pitcher page": f"{S}/savant-player/{P_SLUG}-{PITCHER}?stats=statcast-r-pitching",
-    "runner page": f"{S}/savant-player/{R_SLUG}-{RUNNER}?stats=statcast-r-hitting",
-    "player-services catcher-throwing": f"{S}/player-services/catcher-throwing?playerId={CATCHER}&season={SEASON}",
-    "player-services poptime": f"{S}/player-services/poptime?playerId={CATCHER}&season={SEASON}",
-    "player-services running-game (pitcher)": f"{S}/player-services/running-game?playerId={PITCHER}&season={SEASON}",
-    "player-services basestealing (runner)": f"{S}/player-services/basestealing?playerId={RUNNER}&season={SEASON}",
-    "game feed": f"{S}/gf?game_pk={GAME}",
+    "catcher-throwing (player=)": f"{S}/player-services/catcher-throwing?player={CATCHER}&season={SEASON}",
+    "catcher-throwing (player=, year=)": f"{S}/player-services/catcher-throwing?player={CATCHER}&year={SEASON}",
+    "catcher-throwing (player=, no season)": f"{S}/player-services/catcher-throwing?player={CATCHER}",
+    "pitcher running game leaderboard": f"{S}/leaderboard/pitcher-running-game?game_type=Regular&n=1&season_start={SEASON}&season_end={SEASON}&split=no&team=&pitch_hand=&runner_moved=&target_base=All&prior_pk=All&with_team_only=1&csv=true",
+    "pitcher running game page": f"{S}/leaderboard/pitcher-running-game",
+    "basestealing run value (type=Pitcher)": f"{S}/leaderboard/basestealing-run-value?game_type=Regular&n=1&target_base=All&split=no&team=&type=Pitcher&with_team_only=1&season_start={SEASON}&season_end={SEASON}&csv=true",
+    "basestealing run value (type=Catcher)": f"{S}/leaderboard/basestealing-run-value?game_type=Regular&n=1&target_base=All&split=no&team=&type=Catcher&with_team_only=1&season_start={SEASON}&season_end={SEASON}&csv=true",
+    "catcher throwing leaderboard page": f"{S}/leaderboard/catcher-throwing",
 }
 TERMS = re.compile(r"pop|time_to|to_plate|lead|steal|sb_|cs_|throw|exchange|arm_|jump|secondary|primary|attempt", re.I)
 
