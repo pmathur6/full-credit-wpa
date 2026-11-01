@@ -1,0 +1,480 @@
+{
+  "result": {
+    "type": "atBat",
+    "event": "Single",
+    "eventType": "single",
+    "description": "Abraham Toro singles on a line drive to right fielder Daylen Lile. Roman Anthony to 3rd.",
+    "rbi": 0,
+    "awayScore": 0,
+    "homeScore": 0,
+    "isOut": false
+  },
+  "about": {
+    "atBatIndex": 2,
+    "halfInning": "top",
+    "isTopInning": true,
+    "inning": 1,
+    "startTime": "2025-07-04T15:06:56.976Z",
+    "endTime": "2025-07-04T15:08:32.808Z",
+    "isComplete": true,
+    "isScoringPlay": false,
+    "hasReview": false,
+    "hasOut": false,
+    "captivatingIndex": 33
+  },
+  "count": {
+    "balls": 2,
+    "strikes": 1,
+    "outs": 1
+  },
+  "matchup": {
+    "batter": {
+      "id": 647351,
+      "fullName": "Abraham Toro",
+      "link": "/api/v1/people/647351"
+    },
+    "batSide": {
+      "code": "L",
+      "description": "Left"
+    },
+    "pitcher": {
+      "id": 647336,
+      "fullName": "Michael Soroka",
+      "link": "/api/v1/people/647336"
+    },
+    "pitchHand": {
+      "code": "R",
+      "description": "Right"
+    },
+    "postOnFirst": {
+      "id": 647351,
+      "fullName": "Abraham Toro",
+      "link": "/api/v1/people/647351"
+    },
+    "postOnThird": {
+      "id": 701350,
+      "fullName": "Roman Anthony",
+      "link": "/api/v1/people/701350"
+    },
+    "batterHotColdZones": [],
+    "pitcherHotColdZones": [],
+    "splits": {
+      "batter": "vs_RHP",
+      "pitcher": "vs_LHB",
+      "menOnBase": "RISP"
+    }
+  },
+  "pitchIndex": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "actionIndex": [],
+  "runnerIndex": [
+    0,
+    1,
+    2
+  ],
+  "runners": [
+    {
+      "movement": {
+        "originBase": null,
+        "start": null,
+        "end": "1B",
+        "outBase": null,
+        "isOut": false,
+        "outNumber": null
+      },
+      "details": {
+        "event": "Single",
+        "eventType": "single",
+        "movementReason": null,
+        "runner": {
+          "id": 647351,
+          "fullName": "Abraham Toro",
+          "link": "/api/v1/people/647351"
+        },
+        "responsiblePitcher": null,
+        "isScoringEvent": false,
+        "rbi": false,
+        "earned": false,
+        "teamUnearned": false,
+        "playIndex": 3
+      },
+      "credits": [
+        {
+          "player": {
+            "id": 695734,
+            "link": "/api/v1/people/695734"
+          },
+          "position": {
+            "code": "9",
+            "name": "Outfielder",
+            "type": "Outfielder",
+            "abbreviation": "RF"
+          },
+          "credit": "f_fielded_ball"
+        }
+      ]
+    },
+    {
+      "movement": {
+        "originBase": "1B",
+        "start": "1B",
+        "end": "2B",
+        "outBase": null,
+        "isOut": false,
+        "outNumber": null
+      },
+      "details": {
+        "event": "Single",
+        "eventType": "single",
+        "movementReason": "r_adv_force",
+        "runner": {
+          "id": 701350,
+          "fullName": "Roman Anthony",
+          "link": "/api/v1/people/701350"
+        },
+        "responsiblePitcher": null,
+        "isScoringEvent": false,
+        "rbi": false,
+        "earned": false,
+        "teamUnearned": false,
+        "playIndex": 3
+      },
+      "credits": []
+    },
+    {
+      "movement": {
+        "originBase": "1B",
+        "start": "2B",
+        "end": "3B",
+        "outBase": null,
+        "isOut": false,
+        "outNumber": null
+      },
+      "details": {
+        "event": "Single",
+        "eventType": "single",
+        "movementReason": "r_adv_play",
+        "runner": {
+          "id": 701350,
+          "fullName": "Roman Anthony",
+          "link": "/api/v1/people/701350"
+        },
+        "responsiblePitcher": null,
+        "isScoringEvent": false,
+        "rbi": false,
+        "earned": false,
+        "teamUnearned": false,
+        "playIndex": 3
+      },
+      "credits": []
+    }
+  ],
+  "playEvents": [
+    {
+      "details": {
+        "call": {
+          "code": "B",
+          "description": "Ball"
+        },
+        "description": "Ball",
+        "code": "B",
+        "ballColor": "rgba(39, 161, 39, 1.0)",
+        "trailColor": "rgba(50, 50, 50, 1.0)",
+        "isInPlay": false,
+        "isStrike": false,
+        "isBall": true,
+        "type": {
+          "code": "SV",
+          "description": "Slurve"
+        },
+        "isOut": false,
+        "hasReview": false
+      },
+      "count": {
+        "balls": 1,
+        "strikes": 0,
+        "outs": 1
+      },
+      "pitchData": {
+        "startSpeed": 80.0,
+        "endSpeed": 74.3,
+        "strikeZoneTop": 3.39978255277552,
+        "strikeZoneBottom": 1.75334079548089,
+        "strikeZoneWidth": 17.0,
+        "strikeZoneDepth": 17.0,
+        "coordinates": {
+          "aY": 21.361952528525347,
+          "aZ": -35.23226531636704,
+          "pfxX": 1.7147889178412683,
+          "pfxZ": -2.232335409915593,
+          "pX": 1.3640806043806777,
+          "pZ": 1.1398497002319268,
+          "vX0": 8.495954004697214,
+          "vY0": -116.19106015498309,
+          "vZ0": -3.2796084768913327,
+          "x": 65.0,
+          "y": 208.0,
+          "x0": -2.5595386776801825,
+          "y0": 50.00237557222858,
+          "z0": 5.910660908237019,
+          "aX": 2.3488829197523375
+        },
+        "breaks": {
+          "breakAngle": 6.0,
+          "breakLength": 10.8,
+          "breakY": 24.0,
+          "breakVertical": -47.4,
+          "breakVerticalInduced": -4.6,
+          "breakHorizontal": -5.2,
+          "spinRate": 2825,
+          "spinDirection": 42
+        },
+        "zone": 14,
+        "typeConfidence": 2.0,
+        "plateTime": 0.4710453220527677,
+        "extension": 6.10262091303561
+      },
+      "index": 0,
+      "playId": "ae49bf28-1470-3ca5-acf3-9c2cf58429d1",
+      "pitchNumber": 1,
+      "startTime": "2025-07-04T15:07:19.495Z",
+      "endTime": "2025-07-04T15:07:24.216Z",
+      "isPitch": true,
+      "type": "pitch"
+    },
+    {
+      "details": {
+        "call": {
+          "code": "B",
+          "description": "Ball"
+        },
+        "description": "Ball",
+        "code": "B",
+        "ballColor": "rgba(39, 161, 39, 1.0)",
+        "trailColor": "rgba(188, 0, 33, 1.0)",
+        "isInPlay": false,
+        "isStrike": false,
+        "isBall": true,
+        "type": {
+          "code": "FF",
+          "description": "Four-Seam Fastball"
+        },
+        "isOut": false,
+        "hasReview": false
+      },
+      "count": {
+        "balls": 2,
+        "strikes": 0,
+        "outs": 1
+      },
+      "pitchData": {
+        "startSpeed": 91.9,
+        "endSpeed": 83.4,
+        "strikeZoneTop": 3.33713403405796,
+        "strikeZoneBottom": 1.62890900136541,
+        "strikeZoneWidth": 17.0,
+        "strikeZoneDepth": 17.0,
+        "coordinates": {
+          "aY": 30.608295114420095,
+          "aZ": -15.65420639722162,
+          "pfxX": -6.592650363136187,
+          "pfxZ": 9.186235597443169,
+          "pX": -1.555868699168914,
+          "pZ": 4.4613560216557,
+          "vX0": 5.543491452112688,
+          "vY0": -133.71519387325873,
+          "vZ0": -0.5441088884969505,
+          "x": 176.31,
+          "y": 118.32,
+          "x0": -2.806072142506376,
+          "y0": 50.006592539210914,
+          "z0": 5.797412428781142,
+          "aX": -11.862083544737992
+        },
+        "breaks": {
+          "breakAngle": 33.6,
+          "breakLength": 4.8,
+          "breakY": 24.0,
+          "breakVertical": -15.8,
+          "breakVerticalInduced": 16.7,
+          "breakHorizontal": 10.7,
+          "spinRate": 2442,
+          "spinDirection": 231
+        },
+        "zone": 11,
+        "typeConfidence": 2.0,
+        "plateTime": 0.41065057378174474,
+        "extension": 6.012391683866163
+      },
+      "index": 1,
+      "playId": "223e6e89-a85c-35b0-806c-f3862f60d223",
+      "pitchNumber": 2,
+      "startTime": "2025-07-04T15:07:39.646Z",
+      "endTime": "2025-07-04T15:07:44.647Z",
+      "isPitch": true,
+      "type": "pitch"
+    },
+    {
+      "details": {
+        "call": {
+          "code": "C",
+          "description": "Called Strike"
+        },
+        "description": "Called Strike",
+        "code": "C",
+        "ballColor": "rgba(170, 21, 11, 1.0)",
+        "trailColor": "rgba(188, 0, 33, 1.0)",
+        "isInPlay": false,
+        "isStrike": true,
+        "isBall": false,
+        "type": {
+          "code": "FF",
+          "description": "Four-Seam Fastball"
+        },
+        "isOut": false,
+        "hasReview": false
+      },
+      "count": {
+        "balls": 2,
+        "strikes": 1,
+        "outs": 1
+      },
+      "pitchData": {
+        "startSpeed": 92.0,
+        "endSpeed": 83.8,
+        "strikeZoneTop": 3.28183902090526,
+        "strikeZoneBottom": 1.60507812213458,
+        "strikeZoneWidth": 17.0,
+        "strikeZoneDepth": 17.0,
+        "coordinates": {
+          "aY": 30.06080227018165,
+          "aZ": -15.209995959861475,
+          "pfxX": -6.848029074366472,
+          "pfxZ": 9.402667266718346,
+          "pX": -0.9403669658877567,
+          "pZ": 2.323881675970153,
+          "vX0": 6.932208314445541,
+          "vY0": -133.75445463429085,
+          "vZ0": -5.8287714266928266,
+          "x": 152.84,
+          "y": 176.04,
+          "x0": -2.68156462644572,
+          "y0": 50.00092011172476,
+          "z0": 5.630235908022105,
+          "aX": -12.351509166111086
+        },
+        "breaks": {
+          "breakAngle": 33.6,
+          "breakLength": 4.8,
+          "breakY": 24.0,
+          "breakVertical": -16.6,
+          "breakVerticalInduced": 15.8,
+          "breakHorizontal": 10.8,
+          "spinRate": 2388,
+          "spinDirection": 225
+        },
+        "zone": 13,
+        "typeConfidence": 2.0,
+        "plateTime": 0.41022254257219615,
+        "extension": 5.991748772198127
+      },
+      "index": 2,
+      "playId": "72022640-233a-32fe-8fab-fe0d62e44ac7",
+      "pitchNumber": 3,
+      "startTime": "2025-07-04T15:08:01.862Z",
+      "endTime": "2025-07-04T15:08:06.873Z",
+      "isPitch": true,
+      "type": "pitch"
+    },
+    {
+      "details": {
+        "call": {
+          "code": "D",
+          "description": "In play, no out"
+        },
+        "description": "In play, no out",
+        "code": "D",
+        "ballColor": "rgba(26, 86, 190, 1.0)",
+        "trailColor": "rgba(50, 50, 50, 1.0)",
+        "isInPlay": true,
+        "isStrike": false,
+        "isBall": false,
+        "type": {
+          "code": "SV",
+          "description": "Slurve"
+        },
+        "isOut": false,
+        "hasReview": false
+      },
+      "count": {
+        "balls": 2,
+        "strikes": 1,
+        "outs": 1
+      },
+      "pitchData": {
+        "startSpeed": 81.0,
+        "endSpeed": 75.4,
+        "strikeZoneTop": 3.34,
+        "strikeZoneBottom": 1.61,
+        "strikeZoneWidth": 17.0,
+        "strikeZoneDepth": 17.0,
+        "coordinates": {
+          "aY": 20.856434508618108,
+          "aZ": -36.722236741399044,
+          "pfxX": 3.153841815503925,
+          "pfxZ": -3.1978623687920145,
+          "pX": -0.16281439245378093,
+          "pZ": 2.0432830057245766,
+          "vX0": 4.978696160297955,
+          "vY0": -117.99375108193222,
+          "vZ0": -1.2480298430326773,
+          "x": 123.21,
+          "y": 183.61,
+          "x0": -2.7038213609915434,
+          "y0": 50.00401359675798,
+          "z0": 5.93970910698443,
+          "aX": 4.4813765257428555
+        },
+        "breaks": {
+          "breakAngle": 8.4,
+          "breakLength": 10.8,
+          "breakY": 24.0,
+          "breakVertical": -47.2,
+          "breakVerticalInduced": -5.9,
+          "breakHorizontal": -6.8,
+          "spinRate": 2844,
+          "spinDirection": 41
+        },
+        "zone": 8,
+        "typeConfidence": 2.0,
+        "plateTime": 0.4628611418600097,
+        "extension": 6.039864795351858
+      },
+      "hitData": {
+        "launchSpeed": 97.5,
+        "launchAngle": 11.0,
+        "totalDistance": 168.0,
+        "trajectory": "line_drive",
+        "hardness": "medium",
+        "location": "9",
+        "coordinates": {
+          "coordX": 178.92,
+          "coordY": 130.64
+        }
+      },
+      "index": 3,
+      "playId": "e21622d1-7bc6-3a28-a5e9-25858af4b573",
+      "pitchNumber": 4,
+      "startTime": "2025-07-04T15:08:22.437Z",
+      "endTime": "2025-07-04T15:08:32.808Z",
+      "isPitch": true,
+      "type": "pitch"
+    }
+  ],
+  "playEndTime": "2025-07-04T15:08:32.808Z",
+  "atBatIndex": 2
+}
