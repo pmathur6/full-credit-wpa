@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.venv/
+# raw pulls live in GitHub releases, not the repo
+data/raw/

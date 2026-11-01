@@ -1,0 +1,31 @@
+name: probe
+
+# Pulls one day of data from each source and commits a field-coverage report to probe/.
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Game date to sample (YYYY-MM-DD)"
+        default: "2025-07-04"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python src/probe.py "${{ inputs.date }}"
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add probe/
+          git commit -m "Probe report for ${{ inputs.date }}" || echo "No changes"
+          git push

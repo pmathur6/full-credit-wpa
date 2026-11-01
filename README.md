@@ -1,1 +1,79 @@
 # full-credit-wpa
+
+Win Probability Added that credits **every player involved in a play**, not just the batter and pitcher.
+
+Traditional WPA hands the whole swing in win probability to the batter and the pitcher. This project splits each play's swing across the batter, baserunners, pitcher, catcher and fielders, using Statcast to decide the split, and sums those shares into season totals.
+
+## Credit rules
+
+1. **Results, not expectations.** Every play is scored on what actually happened. The offense receives the actual change in win probability and the defense receives exactly the opposite, so every play (and every game) sums to zero. Players eat their own bad luck.
+2. **Statcast decides only the split.** Expected values (xBA, catch probability, expected runner advancement) are used to divide each side's actual share among the players on that side. They never add or remove credit.
+3. **Defense on a ball in play** splits in two stages:
+   - *Contact* (pitcher): start-of-PA win probability → expected win probability given the batted ball.
+   - *Conversion* (fielders): expected → actual. A fielder who makes a play gets (1 − catch probability) × the value of the out; a missed play costs catch probability × that value.
+4. **Offense with runners on base**: the batter gets the value of his hit at standard advancement; runners get credit or blame for advancing beyond or short of that.
+5. **Non-PA events** (steals, pickoffs, wild pitches, passed balls, balks) are their own plays.
+
+### Worked example
+
+Bottom 7th, tie, 1 out, bases empty (win probability .560). Line drive, .700 xBA, shortstop makes a diving catch (.535 after the out; a single would have been .600).
+
+| Player | Credit | Why |
+|---|---|---|
+| Batter | −.025 | Actual result: .560 → .535 |
+| Pitcher | −.0205 | Allowed contact worth .5805 (.700 × .600 + .300 × .535) |
+| Shortstop | +.0455 | .70 × (.600 − .535): converted a ball caught 30% of the time |
+
+Defense nets +.025, matching the batter's −.025.
+
+### Buckets
+
+Every credit lands in one of four buckets:
+
+- **Batting**: the batter's share of each plate appearance, at standard advancement.
+- **Baserunning**: what a player does as a runner — steals, extra bases, advancing on fly balls and wild pitches (positive); caught stealing, pickoffs, thrown out advancing, doubled off (negative). Includes the batter-runner's own trip, e.g. a single stretched into an out at second.
+- **Fielding**: catches, misses, throws that cut down runners, and catcher work (SB defense, passed balls).
+- **Pitching**: the pitcher's share of each plate appearance, plus wild pitches, balks and pickoffs.
+
+### Edge cases
+
+| Scenario | Rule |
+|---|---|
+| SB / CS | Runner takes the offense's share; defense splits catcher vs pitcher (50/50 until timing data is available) |
+| WP / PB, pickoff, balk | Pitcher or catcher vs runners |
+| Error | Charged fielder absorbs actual minus expected |
+| Double play / fielder's choice | Fielders credited for turning it beyond the expected DP chance |
+| Robbed HR | Fielder via catch probability |
+| Ground-rule double | Runner held by the rule gets no blame |
+| Dropped third strike | Strikeout as normal; reaching base is a WP/PB |
+| Catcher's interference, obstruction | The offending fielder |
+| Batter's / runner's interference, runner hit by batted ball | That offensive player |
+| Pitch-clock violation | Whoever committed it |
+| Intentional walk | Manager bucket |
+| Extra-innings automatic runner | No credit for being placed |
+| Walk-off | Win probability is capped at 1, so extra runs are worth 0 |
+| Mid-play substitutions | Whoever was on the field for that event |
+
+## Output (planned)
+
+A GitHub Pages site:
+
+- **Leaderboard**: one row per player, total WPA plus Batting / Baserunning / Fielding / Pitching, alongside traditional WPA and the difference. Hitter / pitcher toggle (two-way players on both). Filters for season, team, position and minimum PA/IP. Positions listed like `2B/SS`, for every position with 10+ appearances, ordered by games.
+- **Player page**: game log by component; each game expands to every play he was involved in and his share. Fielding broken out by position.
+- **Game view**: win-probability chart with each play's split across all players, plus the zero-sum check.
+
+## How it runs
+
+Everything runs as GitHub Actions; nothing runs locally.
+
+| Workflow | What it does |
+|---|---|
+| `probe` | Pulls one day of Savant pitch data and MLB game feeds and writes a field-coverage report to `probe/` |
+
+## Status
+
+- [x] Credit rules agreed
+- [ ] Confirm data fields (probe)
+- [ ] Data pull pipeline
+- [ ] Credit engine
+- [ ] Site
