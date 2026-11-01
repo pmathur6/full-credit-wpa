@@ -471,40 +471,40 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **3T, 2 out, BOS vs CLE** - Guardians challenged (tag play), call on the field was upheld: Jarren Duran steals (9) home. (change +0.028 for the offense)
   - Jarren Duran (runner, baserunning): +0.0280
-  - Doug Nikhazy (pitcher, pitching): -0.0140
-  - Bo Naylor (C, fielding): -0.0140
+  - Doug Nikhazy (pitcher, pitching): -0.0146
+  - Bo Naylor (C, fielding): -0.0134
 
 ## caught_stealing_home (19 plays)
 
 **8T, 2 out, CHC vs PIT** - Ball In Dirt (change -0.009 for the offense)
   - Nico Hoerner (runner, baserunning): -0.0090
-  - Carmen Mlodzinski (pitcher, pitching): +0.0045
-  - Henry Davis (C, fielding): +0.0045
+  - Carmen Mlodzinski (pitcher, pitching): +0.0031
+  - Henry Davis (C, fielding): +0.0059
 
 **7B, 2 out, TB vs CLE** - Ball (change -0.072 for the offense)
   - Jake Mangum (runner, baserunning): -0.0720
-  - Erik Sabrowski (pitcher, pitching): +0.0360
-  - Bo Naylor (C, fielding): +0.0360
+  - Erik Sabrowski (pitcher, pitching): +0.0411
+  - Bo Naylor (C, fielding): +0.0309
 
 **3T, 2 out, TB vs ATH** - Ball (change -0.030 for the offense)
   - Brandon Lowe (runner, baserunning): -0.0300
-  - Jeffrey Springs (pitcher, pitching): +0.0150
-  - Shea Langeliers (C, fielding): +0.0150
+  - Jeffrey Springs (pitcher, pitching): +0.0114
+  - Shea Langeliers (C, fielding): +0.0186
 
 **6T, 2 out, MIN vs CWS** - Caught Stealing Home (change -0.027 for the offense)
   - Edouard Julien (runner, baserunning): -0.0270
-  - Fraser Ellard (pitcher, pitching): +0.0135
-  - Korey Lee (C, fielding): +0.0135
+  - Fraser Ellard (pitcher, pitching): +0.0192
+  - Korey Lee (C, fielding): +0.0078
 
 **8T, 2 out, TEX vs CLE** - Swinging Strike (change -0.123 for the offense)
   - Dylan Moore (runner, baserunning): -0.1230
-  - Cade Smith (pitcher, pitching): +0.0615
-  - Austin Hedges (C, fielding): +0.0615
+  - Cade Smith (pitcher, pitching): +0.0350
+  - Austin Hedges (C, fielding): +0.0880
 
 **2T, 2 out, CIN vs SF** - Pickoff Attempt 1B (change -0.043 for the offense)
   - Jeimer Candelario (runner, baserunning): -0.0430
-  - Logan Webb (pitcher, pitching): +0.0215
-  - Patrick Bailey (C, fielding): +0.0215
+  - Logan Webb (pitcher, pitching): +0.0126
+  - Patrick Bailey (C, fielding): +0.0304
 
 ## pickoff_error_1b (97 plays)
 

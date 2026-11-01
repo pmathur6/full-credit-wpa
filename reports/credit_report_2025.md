@@ -4,7 +4,7 @@
 
 - Events: 189,735. Offense credits equal the event's change on 100.000%; defense credits equal minus the change on 100.000% (max gaps 3.33e-16 / 3.33e-16)
 - Events with no credit rows: 0; events with no change in win probability (decided games): 7,061
-- Teams whose total credit equals wins minus summed starting win probability: 30 of 30 (max gap 5.91e-15)
+- Teams whose total credit equals wins minus summed starting win probability: 30 of 30 (max gap 6.19e-15)
 - Credit rows with no player (coaching buckets): 36,487; non-coaching rows with no player: 0
 
 | Team | W | G | Credited | Wins - starting WP |
@@ -58,6 +58,11 @@ Largest differences (Savant OAA includes direction/arm adjustments and other pos
 | Sal Frelick | +7 | +3.8 |
 | Brenton Doyle | +6 | +2.8 |
 
+## 2b. Stolen-base defense vs Savant
+
+- catcher stealing runs: 100 players; correlation of our steal-attempt credit (wins, leverage-weighted) with Savant's (runs): **0.787**
+- pitcher running-game runs: 647 players; correlation of our steal-attempt credit (wins, leverage-weighted) with Savant's (runs): **0.470**
+
 ## 3. Leaderboards (eye test)
 
 Wins added. Hitters 300+ PA, pitchers 300+ batters faced. `trad` = traditional WPA (batter / pitcher gets the whole play).
@@ -66,7 +71,7 @@ Wins added. Hitters 300+ PA, pitchers 300+ batters faced. `trad` = traditional W
 
 | Player | Pos | Team | total | batting | baserunning | fielding | trad_bat |
 |---|---|---|---|---|---|---|---|
-| Shohei Ohtani | P/DH | LAD | +6.15 | +4.63 | +0.68 | +0.13 | +4.92 |
+| Shohei Ohtani | P/DH | LAD | +6.14 | +4.63 | +0.68 | +0.13 | +4.92 |
 | Aaron Judge | RF/DH | NYY | +5.58 | +5.18 | -0.02 | +0.41 | +5.11 |
 | Bobby Witt Jr. | SS | KC | +5.54 | +2.28 | +1.55 | +1.71 | +2.52 |
 | Geraldo Perdomo | SS | AZ | +5.27 | +3.15 | +0.90 | +1.22 | +2.90 |
@@ -90,7 +95,7 @@ Wins added. Hitters 300+ PA, pitchers 300+ batters faced. `trad` = traditional W
 | Alek Thomas | CF | AZ | -3.68 | -1.85 | -0.18 | -1.65 | -1.99 |
 | Nick Castellanos | RF | PHI | -3.51 | -2.57 | -0.33 | -0.62 | -2.71 |
 | Lenyn Sosa | 2B/1B/DH | CWS | -3.50 | -2.90 | +0.34 | -0.94 | -2.70 |
-| Logan O'Hoppe | C/DH | LAA | -3.41 | -2.98 | -0.11 | -0.32 | -3.12 |
+| Logan O'Hoppe | C/DH | LAA | -3.46 | -2.98 | -0.11 | -0.37 | -3.12 |
 
 ### Fielding: top 10
 
@@ -156,61 +161,61 @@ Wins added. Hitters 300+ PA, pitchers 300+ batters faced. `trad` = traditional W
 
 | Player | Pos | Team | pitching | fielding | trad_pit |
 |---|---|---|---|---|---|
-| Garrett Crochet | P | BOS | +5.64 | +0.15 | +5.00 |
-| Cristopher Sánchez | P | PHI | +5.05 | +0.26 | +4.65 |
+| Garrett Crochet | P | BOS | +5.59 | +0.15 | +5.00 |
+| Cristopher Sánchez | P | PHI | +5.00 | +0.26 | +4.65 |
 | Paul Skenes | P | PIT | +4.91 | +0.16 | +5.15 |
-| Tarik Skubal | P | DET | +4.07 | -0.10 | +4.24 |
-| Yoshinobu Yamamoto | P | LAD | +3.95 | +0.16 | +4.09 |
-| Cade Smith | P | CLE | +3.81 | -0.27 | +2.34 |
-| Max Fried | P | NYY | +3.43 | +0.21 | +2.40 |
-| Freddy Peralta | P | MIL | +3.36 | +0.09 | +3.74 |
+| Tarik Skubal | P | DET | +4.06 | -0.10 | +4.24 |
+| Yoshinobu Yamamoto | P | LAD | +3.97 | +0.16 | +4.09 |
+| Cade Smith | P | CLE | +3.78 | -0.27 | +2.34 |
+| Max Fried | P | NYY | +3.42 | +0.21 | +2.40 |
 | Andrew Abbott | P | CIN | +3.34 | +0.08 | +2.74 |
+| Freddy Peralta | P | MIL | +3.34 | +0.09 | +3.74 |
 | Chris Sale | P | ATL | +3.17 | +0.10 | +2.79 |
 
 ### Pitchers: bottom 10
 
 | Player | Pos | Team | pitching | fielding | trad_pit |
 |---|---|---|---|---|---|
-| Jack Kochanowicz | P | LAA | -2.06 | +0.02 | -2.79 |
+| Jack Kochanowicz | P | LAA | -2.05 | +0.02 | -2.79 |
 | Germán Márquez | P | COL | -1.90 | +0.14 | -3.55 |
-| Charlie Morton | P | BAL/DET/ATL | -1.87 | +0.02 | -2.35 |
+| Charlie Morton | P | BAL/DET/ATL | -1.88 | +0.02 | -2.35 |
 | Tyler Alexander | P | CWS/MIL | -1.71 | +0.23 | -2.70 |
-| Antonio Senzatela | P | COL | -1.50 | +0.28 | -2.95 |
-| Jake Irvin | P | WSH | -1.49 | +0.09 | -2.81 |
-| Tanner Gordon | P | COL | -1.48 | +0.06 | -1.54 |
+| Antonio Senzatela | P | COL | -1.49 | +0.28 | -2.95 |
+| Jake Irvin | P | WSH | -1.48 | +0.09 | -2.81 |
+| Tanner Gordon | P | COL | -1.47 | +0.06 | -1.54 |
 | Mitchell Parker | P | WSH | -1.44 | +0.07 | -1.78 |
-| Erick Fedde | P | STL/ATL/MIL | -1.35 | +0.13 | -1.47 |
-| Bryce Miller | P | SEA | -1.33 | +0.01 | -1.27 |
+| Erick Fedde | P | STL/ATL/MIL | -1.36 | +0.13 | -1.47 |
+| Bryce Miller | P | SEA | -1.32 | +0.01 | -1.27 |
 
 ### Pitchers hurt most by their defense (our pitching credit above traditional WPA: fielders took some blame)
 
 | Player | Pos | Team | gap | pitching | trad_pit |
 |---|---|---|---|---|---|
-| Andre Pallante | P | STL | +1.79 | -0.82 | -2.61 |
-| Dylan Cease | P | SD | +1.68 | +0.80 | -0.87 |
+| Andre Pallante | P | STL | +1.81 | -0.81 | -2.61 |
+| Dylan Cease | P | SD | +1.76 | +0.89 | -0.87 |
 | Germán Márquez | P | COL | +1.65 | -1.90 | -3.55 |
-| Cade Smith | P | CLE | +1.48 | +3.81 | +2.34 |
-| Eduardo Rodriguez | P | AZ | +1.46 | +0.06 | -1.39 |
-| Antonio Senzatela | P | COL | +1.45 | -1.50 | -2.95 |
-| Tylor Megill | P | NYM | +1.41 | +0.85 | -0.56 |
-| Yusei Kikuchi | P | LAA | +1.39 | +1.50 | +0.11 |
-| Logan Allen | P | CLE | +1.33 | +1.14 | -0.19 |
+| Eduardo Rodriguez | P | AZ | +1.46 | +0.07 | -1.39 |
+| Antonio Senzatela | P | COL | +1.46 | -1.49 | -2.95 |
+| Cade Smith | P | CLE | +1.44 | +3.78 | +2.34 |
+| Yusei Kikuchi | P | LAA | +1.40 | +1.51 | +0.11 |
+| Tylor Megill | P | NYM | +1.39 | +0.84 | -0.56 |
+| Logan Allen | P | CLE | +1.34 | +1.16 | -0.19 |
 | Kyle Freeland | P | COL | +1.33 | -0.23 | -1.56 |
 
 ### Pitchers helped most by their defense (our pitching credit below traditional WPA: fielders took some credit)
 
 | Player | Pos | Team | gap | pitching | trad_pit |
 |---|---|---|---|---|---|
-| Nathan Eovaldi | P | TEX | -1.56 | +2.56 | +4.13 |
-| Drew Rasmussen | P | TB | -1.45 | +1.40 | +2.85 |
+| Nathan Eovaldi | P | TEX | -1.55 | +2.57 | +4.13 |
+| Drew Rasmussen | P | TB | -1.40 | +1.46 | +2.85 |
 | Tyler Phillips | P | MIA | -1.38 | +0.98 | +2.36 |
 | Noah Cameron | P | KC | -1.33 | +1.01 | +2.34 |
-| Emerson Hancock | P | SEA | -1.13 | -0.90 | +0.23 |
-| Nick Martinez | P | CIN | -1.02 | -0.78 | +0.24 |
-| Seth Lugo | P | KC | -0.93 | -0.87 | +0.06 |
+| Emerson Hancock | P | SEA | -1.09 | -0.85 | +0.23 |
+| Nick Martinez | P | CIN | -0.99 | -0.75 | +0.24 |
+| Seth Lugo | P | KC | -0.92 | -0.86 | +0.06 |
 | Grant Holmes | P | ATL | -0.85 | -0.46 | +0.39 |
-| Hunter Brown | P | HOU | -0.74 | +2.95 | +3.69 |
-| Jacob deGrom | P | TEX | -0.69 | +2.34 | +3.03 |
+| Hunter Brown | P | HOU | -0.71 | +2.98 | +3.69 |
+| Scott Barlow | P | CIN | -0.69 | +0.90 | +1.59 |
 
 ### Coaching (team)
 
@@ -250,7 +255,7 @@ Wins added. Hitters 300+ PA, pitchers 300+ batters faced. `trad` = traditional W
 ### Bucket totals (league)
 
 - def / coaching: -11.3
-- def / fielding: -100.1
+- def / fielding: -100.0
 - def / pitching: +276.4
 - off / baserunning: +61.0
 - off / batting: -227.9
