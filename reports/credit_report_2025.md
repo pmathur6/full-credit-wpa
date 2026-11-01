@@ -60,15 +60,17 @@ Largest differences (Savant OAA includes direction/arm adjustments and other pos
 
 ## 2a. Infield vs Savant OAA
 
-- Ground balls with a responsible infielder: 48,616 of 52,496
-- Infielders (primary 1B/2B/3B/SS) compared: 316; correlation of our outs-above-expected with Savant infield OAA: **0.281** (Savant also covers air balls and uses each fielder's actual starting spot)
+- Infielders (primary 1B/2B/3B/SS) compared: 316; correlation of our ground-ball outs-above-expected with Savant infield OAA: **0.619** (185 with 100+ chances: 0.617)
+- Savant judges each fielder from where he actually stood; our model only knows the alignment type, so team positioning is still inside our fielders' numbers. Gap by team (ours - Savant, outs) shows it:
 
-| Position | Players | Correlation |
+| Position | Players (100+) | Correlation |
 |---|---|---|
-| 1B | 88 | 0.429 |
-| 2B | 86 | 0.239 |
-| 3B | 81 | 0.434 |
-| SS | 61 | 0.255 |
+| 1B | 31 | 0.770 |
+| 2B | 59 | 0.622 |
+| 3B | 51 | 0.786 |
+| SS | 44 | 0.406 |
+
+Gap by team (outs): STL -33, PHI -28, NYM -18, CLE -14, DET -14, HOU -12, CWS -11, COL -10, MIN -10, BAL -10, CIN -9, KC -8, AZ -7, SD -5, WSH -5, BOS -4, TOR +0, LAA +2, TEX +3, SF +5, NYY +8, ATH +8, MIA +9, MIL +10, ATL +17, LAD +19, CHC +19, PIT +21, TB +32, SEA +35
 
 League fielding credit by position (wins): 1B -18.1, 2B +6.7, 3B +12.0, C -12.4, CF +1.8, LF -10.8, P -10.6, RF -14.3, SS +33.8
 
