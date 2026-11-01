@@ -1,0 +1,83 @@
+name: pull-season
+
+# Pulls a season of raw data into the GitHub release `data-<season>`, then commits
+# a coverage report to reports/data_<season>.md.
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season (YYYY)"
+        default: "2025"
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  SEASON: ${{ inputs.season }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create release if missing
+        run: gh release view "data-$SEASON" || gh release create "data-$SEASON" --title "Raw data $SEASON" --notes "Raw pulls for $SEASON (Savant pitches, MLB game feeds, OF catch probability)."
+
+  savant:
+    needs: release
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: cd src/pull && python savant.py "$SEASON"
+        working-directory: .
+        env: { PYTHONUNBUFFERED: "1" }
+      - run: gh release upload "data-$SEASON" "src/pull/data/raw/savant_pitches_$SEASON.parquet" --clobber
+
+  feeds:
+    needs: release
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: cd src/pull && python feeds.py "$SEASON"
+      - run: gh release upload "data-$SEASON" "src/pull/data/raw/feeds_$SEASON.jsonl.gz" --clobber
+
+  catchprob:
+    needs: savant
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: gh release download "data-$SEASON" -p "savant_pitches_$SEASON.parquet" -D src/pull/data/raw
+      - run: cd src/pull && python catchprob.py "$SEASON"
+      - run: gh release upload "data-$SEASON" "src/pull/data/raw/of_catch_prob_$SEASON.parquet" --clobber
+
+  verify:
+    needs: [feeds, catchprob]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: gh release download "data-$SEASON" -D src/pull/data/raw
+      - run: cd src/pull && python verify.py "$SEASON" && mkdir -p ../../reports && cp reports/data_$SEASON.md ../../reports/
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git commit -m "Data coverage report for $SEASON" || echo "No changes"
+          git pull --rebase origin main && git push

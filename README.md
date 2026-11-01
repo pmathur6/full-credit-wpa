@@ -62,6 +62,13 @@ A GitHub Pages site:
 - **Player page**: game log by component; each game expands to every play he was involved in and his share. Fielding broken out by position.
 - **Game view**: win-probability chart with each play's split across all players, plus the zero-sum check.
 
+## Data sources
+
+- **Savant pitch-level search**: game state, all fielders, batted balls, xBA, MLB win-probability change per pitch.
+- **MLB Stats API game feed**: runner movements with putout/assist/error credits, non-pitch events, replay reviews.
+- **Savant `player-services/range`**: per-play outfield catch probability (from the fielder's actual starting spot).
+- **Infield**: no public per-play success probability, so we build our own and check it against Savant's infield OAA totals.
+
 ## How it runs
 
 Everything runs as GitHub Actions; nothing runs locally.
@@ -69,11 +76,14 @@ Everything runs as GitHub Actions; nothing runs locally.
 | Workflow | What it does |
 |---|---|
 | `probe` | Pulls one day of Savant pitch data and MLB game feeds and writes a field-coverage report to `probe/` |
+| `probe-fielding` | Checks Savant for per-play catch probability for one player |
+| `pull-season` | Pulls a full season (Savant pitches, MLB game feeds, outfield catch probability) into the `data-<season>` release and commits `reports/data_<season>.md` |
 
 ## Status
 
 - [x] Credit rules agreed
-- [ ] Confirm data fields (probe)
-- [ ] Data pull pipeline
+- [x] Confirm data fields (probe)
+- [ ] Data pull pipeline (2025 first)
+- [ ] Infield success-probability model
 - [ ] Credit engine
 - [ ] Site
