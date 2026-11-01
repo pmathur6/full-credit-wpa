@@ -1,0 +1,33 @@
+name: pipeline
+
+# Runs a whole season end to end: pull -> build -> credit -> external checks.
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season (YYYY)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pipeline-${{ inputs.season }}
+  cancel-in-progress: false
+
+jobs:
+  pull:
+    uses: ./.github/workflows/pull_season.yml
+    with: { season: "${{ inputs.season }}" }
+  build:
+    needs: pull
+    uses: ./.github/workflows/build_season.yml
+    with: { season: "${{ inputs.season }}" }
+  credit:
+    needs: build
+    uses: ./.github/workflows/credit_season.yml
+    with: { season: "${{ inputs.season }}" }
+  external:
+    needs: credit
+    uses: ./.github/workflows/external_checks.yml
+    with: { season: "${{ inputs.season }}" }

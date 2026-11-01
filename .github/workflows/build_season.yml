@@ -9,6 +9,11 @@ on:
         description: "Season (YYYY)"
         default: "2025"
         required: true
+  workflow_call:
+    inputs:
+      season:
+        type: string
+        required: true
 
 permissions:
   contents: write
@@ -44,4 +49,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports/
           git commit -m "Play table build report for $SEASON" || echo "No changes"
-          git pull --rebase origin main && git push
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push && break; sleep $((RANDOM % 20 + 5)); done

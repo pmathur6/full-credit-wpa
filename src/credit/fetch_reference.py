@@ -32,11 +32,14 @@ print(f"{len(rows)} players")
 
 url = ("https://baseballsavant.mlb.com/leaderboard/outs_above_average?type=Fielder"
        f"&startYear={season}&endYear={season}&split=no&team=&range=year&min=1&pos=&roles=&viz=hide&csv=true")
-r = requests.get(url, headers=H, timeout=120)
-r.raise_for_status()
-oaa = pd.read_csv(io.StringIO(r.content.decode("utf-8-sig")))
-oaa.to_csv(OUT / f"oaa_{season}.csv", index=False)
-print(f"{len(oaa)} OAA rows")
+try:
+    r = requests.get(url, headers=H, timeout=120)
+    r.raise_for_status()
+    oaa = pd.read_csv(io.StringIO(r.content.decode("utf-8-sig")))
+    oaa.to_csv(OUT / f"oaa_{season}.csv", index=False)
+    print(f"{len(oaa)} OAA rows")
+except Exception as e:  # optional: checks and infield positioning skip without it
+    print(f"OAA: FAILED {e!r}")
 
 
 S = "https://baseballsavant.mlb.com/leaderboard"
@@ -47,9 +50,15 @@ for name, url in {
     "pitcher_running": f"{S}/pitcher-running-game?game_type=Regular&n=1&season_start={season}&season_end={season}"
                        "&split=no&team=&pitch_hand=&runner_moved=&target_base=All&prior_pk=All&with_team_only=1&csv=true",
 }.items():
-    r = requests.get(url, headers=H, timeout=120)
-    r.raise_for_status()
-    df = pd.read_csv(io.StringIO(r.content.decode("utf-8-sig")))
+    try:
+        r = requests.get(url, headers=H, timeout=120)
+        r.raise_for_status()
+        df = pd.read_csv(io.StringIO(r.content.decode("utf-8-sig")))
+        if df.empty:
+            raise ValueError("empty leaderboard")
+    except Exception as e:  # optional: the engine falls back when a leaderboard is missing
+        print(f"{name}: FAILED {e!r}")
+        continue
     if name == "sprint_speed" and "player_id" not in df.columns:
         df = df.rename(columns={c: "player_id" for c in df.columns if c in ("runner_id", "entity_id")})
     df.to_csv(OUT / f"{name}_{season}.csv", index=False)

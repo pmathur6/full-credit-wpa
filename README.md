@@ -96,6 +96,7 @@ Everything runs as GitHub Actions; nothing runs locally.
 
 | Workflow | What it does |
 |---|---|
+| `pipeline` | Runs a whole season end to end (pull, build, credit, external checks). Use this to add a season. |
 | `probe` | Pulls one day of Savant pitch data and MLB game feeds and writes a field-coverage report to `probe/` |
 | `probe-fielding` | Checks Savant for per-play catch probability for one player |
 | `build-season` | Builds the master play tables (`events`, `runner_moves`, `we_lookup`) from a season's raw pulls into the same release and commits `reports/build_report_<season>.md` |
