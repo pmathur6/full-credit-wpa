@@ -12,11 +12,11 @@ Our numbers are wins weighted by game situation; Savant's are context-neutral ru
 | Baserunning vs Savant baserunning run value | 253 | 0.702 | Savant: extra bases + steals |
 |   ...vs Savant extra-base runs only | 253 | 0.594 |  |
 |   ...vs Savant stolen-base runs only | 253 | 0.537 |  |
-| Fielding vs Savant fielding run value (all non-pitchers) | 552 | 0.585 |  |
-|   Outfielders vs Savant range + arm | 210 | 0.762 |  |
-|   Infielders vs Savant range + arm + DP | 256 | 0.648 |  |
-|   Catchers vs Savant throwing + blocking | 86 | 0.663 | framing is not in our numbers |
-|   Catchers vs Savant total catching | 86 | 0.452 | includes framing |
+| Fielding vs Savant fielding run value (all non-pitchers) | 552 | 0.624 |  |
+|   Outfielders vs Savant range + arm | 210 | 0.698 |  |
+|   Infielders vs Savant range + arm + DP | 256 | 0.748 |  |
+|   Catchers vs Savant throwing + blocking | 86 | 0.627 | framing is not in our numbers |
+|   Catchers vs Savant total catching | 86 | 0.440 | includes framing |
 
 Biggest disagreements, baserunning (standardized; + = we rate higher):
 
@@ -33,23 +33,23 @@ Biggest disagreements, outfield (standardized; + = we rate higher):
 
 | Player | Pos | Ours | Savant |
 |---|---|---|---|
-| Lourdes Gurriel Jr. | LF/DH | +0.46 wins | -2.8 runs |
-| Brandon Marsh | CF/LF | +0.76 wins | +1.1 runs |
-| Brooks Baldwin | LF/CF/RF/3B/2B/SS | -0.42 wins | -10.4 runs |
-| Alek Thomas | CF | -1.65 wins | +0.0 runs |
-| Oneil Cruz | CF | -0.93 wins | +3.9 runs |
-| Kyle Tucker | RF/DH | -1.30 wins | -0.0 runs |
+| James Wood | LF/DH | +0.10 wins | -6.3 runs |
+| Lars Nootbaar | LF/RF/CF | +0.33 wins | -3.8 runs |
+| Brooks Baldwin | LF/CF/RF/3B/2B/SS | -0.47 wins | -10.4 runs |
+| Alek Thomas | CF | -1.94 wins | +0.0 runs |
+| Corbin Carroll | RF | -1.18 wins | +6.5 runs |
+| Victor Scott II | CF | -0.35 wins | +12.1 runs |
 
 Biggest disagreements, infield (standardized; + = we rate higher):
 
 | Player | Pos | Ours | Savant |
 |---|---|---|---|
-| Bo Bichette | SS | +1.22 wins | -10.3 runs |
-| Trevor Story | SS | +1.01 wins | -7.9 runs |
-| J.P. Crawford | SS | +0.32 wins | -8.7 runs |
-| Marcus Semien | 2B | -0.73 wins | +5.6 runs |
-| Ke'Bryan Hayes | 3B | +1.29 wins | +17.1 runs |
-| Jonathan Aranda | 1B/DH | -0.92 wins | +1.8 runs |
+| Bo Bichette | SS | +0.05 wins | -10.3 runs |
+| Matt Chapman | 3B | +1.79 wins | +4.1 runs |
+| Nick Gonzales | 2B/SS | +1.18 wins | +1.1 runs |
+| Marcus Semien | 2B | -1.08 wins | +5.6 runs |
+| Jonathan Aranda | 1B/DH | -0.62 wins | +1.8 runs |
+| Chase Meidroth | SS/2B | -0.29 wins | +4.2 runs |
 
 ## Sources
 
