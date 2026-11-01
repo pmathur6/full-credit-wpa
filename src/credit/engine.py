@@ -341,6 +341,7 @@ for row in pa.itertuples(index=False):
     err = credits_of(g, {"f_fielding_error", "f_throwing_error", "f_error_dropped_ball"})
     fid = fpos = None
     out_val = np.nan
+    v_hit = None
     of_air_no_cp = False  # kept for the advancement step below
 
     def v_hit_of(mix):
@@ -386,7 +387,7 @@ for row in pa.itertuples(index=False):
     if e_cp != e_x:
         add(row, None, deff, "def", "coaching", "positioning", -(e_cp - e_x))
     conv = -(e_evt - e_cp)
-    # outs above expected on this play (leverage-free), for comparison with Savant OAA
+    refine = 0.0
     if has_cp:
         p_conv = row.catch_prob
     elif row.bbt == "ground_ball" and (row.game_pk, row.at_bat_index) in IFP:
@@ -397,6 +398,13 @@ for row in pa.itertuples(index=False):
     oae = np.nan if p_conv is None else (1.0 if made_out else 0.0) - p_conv
     if has_cp and row.cp_out == row.cp_out:
         oae = row.cp_out - row.catch_prob
+        made_out = bool(row.cp_out)
+    # the fielder is credited for out-or-not only; what kind of out or hit it was is split
+    # off to the pitcher (see below). Errors stay whole with the fielder.
+    if p_conv is not None and v_hit is not None and v_out is not None and et != "field_error" and not err:
+        e_conv = v_out if made_out else v_hit
+        conv = -(e_conv - e_cp)
+        refine = -(e_evt - e_conv)
     if isinstance(fid, list):  # ground-ball hit shared across infielders
         shares = fid
         for sid, spos, w in shares:
@@ -406,6 +414,16 @@ for row in pa.itertuples(index=False):
         add(row, row.pitcher, deff, "def", "pitching", "pitcher", conv)
     else:
         add(row, fid, deff, "def", "fielding", fpos, conv, oae, 1.0, out_val)
+    if abs(refine) > 1e-12:
+        # double play vs single out, single vs double: mostly where and how the ball was hit,
+        # so it goes with the contact (a double-play model could later credit turning two)
+        add(row, row.pitcher, deff, "def", "pitching", "pitcher", refine,
+            note="type of out" if made_out else "type of hit")
+    # on a hit, runner advancement is on the fielder who picked up the ball (usually an outfielder)
+    if et in HITS:
+        fb = credits_of(g, {"f_fielded_ball"}, lambda m: m["is_batter"])
+        if fb:
+            fid, fpos = fb[0]["id"], fb[0]["pos"]
     adv_def = -R
     if abs(adv_def) > 1e-12:
         if adv_def > 0:
@@ -413,7 +431,8 @@ for row in pa.itertuples(index=False):
             def cut_down(m):
                 return m["is_out"] and ((not m["is_batter"] and m["reason"] != "r_force_out")
                                         or (m["is_batter"] and et in HITS))
-            cut = credits_of(g, {"f_putout", "f_assist", "f_assist_of"}, cut_down)
+            # the throw gets the credit (assists, incl. relays); the tag/catch only if no throw
+            cut = credits_of(g, {"f_assist", "f_assist_of"}, cut_down) or credits_of(g, {"f_putout"}, cut_down)
             if cut:
                 for c in cut:
                     add(row, c["id"], deff, "def", "fielding", c["pos"], adv_def / len(cut))
