@@ -96,6 +96,7 @@ Everything runs as GitHub Actions; nothing runs locally.
 
 | Workflow | What it does |
 |---|---|
+| `reliability` | Signal-vs-noise report across all seasons (`reports/reliability.md`) |
 | `pipeline` | Runs a whole season end to end (pull, build, credit, external checks). Use this to add a season. |
 | `probe` | Pulls one day of Savant pitch data and MLB game feeds and writes a field-coverage report to `probe/` |
 | `probe-fielding` | Checks Savant for per-play catch probability for one player |
@@ -112,6 +113,7 @@ Everything runs as GitHub Actions; nothing runs locally.
 - [ ] Infield success-probability model
 - [x] Credit engine v1 (2025; infield uses 1 - xBA as a stand-in)
 - [x] Infield model (ground balls)
-- [ ] Correlation checks vs FanGraphs / Savant (baserunning, catchers, fielding run value)
-- [ ] Split-half reliability per bucket
+- [x] Seasons 2023-2026
+- [x] Correlation checks vs Savant (FanGraphs blocks automated access)
+- [x] Split-half and year-to-year reliability
 - [ ] Site

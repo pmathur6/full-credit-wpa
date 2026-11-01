@@ -1,0 +1,34 @@
+name: reliability
+
+# Signal-vs-noise report across every season with credits in a release.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  reliability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Download credits for every season
+        run: |
+          mkdir -p data/credit
+          for tag in $(gh release list --limit 100 --json tagName --jq '.[].tagName' | grep '^data-'); do
+            gh release download "$tag" -D data/credit -p "credits_*.parquet" || true
+          done
+      - run: python src/analysis/reliability.py data/credit
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git commit -m "Reliability report" || echo "No changes"
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push && break; sleep $((RANDOM % 20 + 5)); done
