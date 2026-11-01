@@ -198,9 +198,10 @@ rows = []
 stats = Counter()
 
 
-def add(row, pid, team, side, bucket, role, credit, oae=np.nan):
+def add(row, pid, team, side, bucket, role, credit, oae=np.nan, chance=np.nan, out_val=np.nan, note=None):
     rows.append((row.game_pk, row.at_bat_index, row.play_index, row.kind, row.event_type,
-                 None if pid is None or pid != pid else int(pid), team, side, bucket, role, float(credit), oae))
+                 None if pid is None or pid != pid else int(pid), team, side, bucket, role, float(credit),
+                 oae, chance, out_val, note))
 
 
 def fielder_id(row, pos):
@@ -339,6 +340,7 @@ for row in pa.itertuples(index=False):
     v_out = expected([("out", row.bbt, row.r_mask, row.r_outs)], row)
     err = credits_of(g, {"f_fielding_error", "f_throwing_error", "f_error_dropped_ball"})
     fid = fpos = None
+    out_val = np.nan
     of_air_no_cp = False  # kept for the advancement step below
 
     def v_hit_of(mix):
@@ -362,6 +364,7 @@ for row in pa.itertuples(index=False):
         # infield model: conversion by an average infield, without and with the alignment
         px, ppos = IFP[(row.game_pk, row.at_bat_index)]
         v_hit = v_hit_of(hit_mix(row))
+        out_val = v_hit - v_out  # what converting this ball is worth to the defense
         e_x = px * v_out + (1 - px) * v_hit
         e_cp = ppos * v_out + (1 - ppos) * v_hit
         rg = responsible_ground(row, g, err)
@@ -397,12 +400,12 @@ for row in pa.itertuples(index=False):
     if isinstance(fid, list):  # ground-ball hit shared across infielders
         shares = fid
         for sid, spos, w in shares:
-            add(row, sid, deff, "def", "fielding", spos, conv * w, oae * w)
+            add(row, sid, deff, "def", "fielding", spos, conv * w, oae * w, w, out_val)
         fid, fpos, _ = max(shares, key=lambda t: t[2])
     elif fid is None:
         add(row, row.pitcher, deff, "def", "pitching", "pitcher", conv)
     else:
-        add(row, fid, deff, "def", "fielding", fpos, conv, oae)
+        add(row, fid, deff, "def", "fielding", fpos, conv, oae, 1.0, out_val)
     adv_def = -R
     if abs(adv_def) > 1e-12:
         if adv_def > 0:
@@ -544,8 +547,34 @@ for row in ev[ev.kind.eq("mid")].itertuples(index=False):
         else:
             add(row, row.pitcher, deff, "def", "pitching", "pitcher", -D)
 
-cr = pd.DataFrame(rows, columns=["game_pk", "at_bat_index", "play_index", "kind", "event_type", "player_id",
-                                 "team", "side", "bucket", "role", "credit", "oae"])
+COLS = ["game_pk", "at_bat_index", "play_index", "kind", "event_type", "player_id",
+        "team", "side", "bucket", "role", "credit", "oae", "chance", "out_val", "note"]
+cr = pd.DataFrame(rows, columns=COLS)
+
+# ---- infield positioning, calibrated to Savant OAA
+# Savant judges each infielder from where he actually stood; our model knows only the
+# alignment type. Per infielder: gap = our ground-ball outs above expected - his Savant OAA
+# = outs his positioning gave (or cost) him. Spread over his chances, valued at each play's
+# out value, and moved from his fielding to his team's coaching. Play totals are unchanged.
+IFR = ("1B", "2B", "3B", "SS")
+if (REF / f"oaa_{season}.csv").exists():
+    oaa = pd.read_csv(REF / f"oaa_{season}.csv")
+    oaa = oaa[oaa.primary_pos_formatted.isin(IFR)].groupby("player_id")["outs_above_average"].sum()
+    ch = cr[cr.oae.notna() & cr.role.isin(IFR) & cr.out_val.notna()]
+    agg = ch.groupby("player_id").agg(ours=("oae", "sum"), n=("chance", "sum"))
+    agg = agg.join(oaa.rename("savant"), how="inner")
+    per_chance = ((agg.ours - agg.savant) / agg.n).to_dict()
+    adj = ch[ch.player_id.isin(per_chance)].copy()
+    adj["a"] = adj.player_id.map(per_chance) * adj.chance
+    move = adj["a"] * adj["out_val"]
+    f_rows = adj.assign(credit=-move, oae=-adj["a"], chance=np.nan, out_val=np.nan, note="positioning transfer")
+    c_rows = adj.assign(credit=move, oae=np.nan, chance=np.nan, out_val=np.nan, note="positioning transfer",
+                        player_id=pd.NA, bucket="coaching", role="positioning")
+    cr = pd.concat([cr, f_rows[COLS], c_rows[COLS]], ignore_index=True)
+    stats["infielders calibrated to Savant OAA"] = len(per_chance)
+    stats["infield positioning moved to coaching (wins, net)"] = round(float(move.sum()), 2)
+else:
+    stats["infield positioning: no Savant OAA reference"] += 1
 cr["player_id"] = cr["player_id"].astype("Int64")
 cr.to_parquet(OUT / f"credits_{season}.parquet", index=False)
 print(f"credit rows: {len(cr):,}; notes: {dict(stats)}; win-prob fallbacks: {dict(WP.fallbacks)}")

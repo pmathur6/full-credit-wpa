@@ -96,7 +96,7 @@ else:
 IFR = ("1B", "2B", "3B", "SS")
 L += ["", "## 2a. Infield vs Savant OAA", ""]
 if "oae" in cr and (REF / f"oaa_{season}.csv").exists():
-    x = cr[cr.oae.notna() & cr.role.isin(IFR)]
+    x = cr[cr.oae.notna() & cr.role.isin(IFR) & cr.note.isna()]  # model only, before the positioning transfer
     ours_if = x.groupby("player_id").agg(ours=("oae", "sum"), n=("oae", "size"))
     oaa_if = pd.read_csv(REF / f"oaa_{season}.csv")
     oaa_if = oaa_if[oaa_if.primary_pos_formatted.isin(IFR)].set_index("player_id")
@@ -114,6 +114,13 @@ if "oae" in cr and (REF / f"oaa_{season}.csv").exists():
     team1 = x.groupby("player_id").team.agg(lambda t: t.mode().iloc[0])
     gap = (j.ours - j.outs_above_average).groupby(team1.reindex(j.index)).sum().sort_values()
     L += ["", "Gap by team (outs): " + ", ".join(f"{t} {v:+.0f}" for t, v in gap.items())]
+    xa = cr[cr.oae.notna() & cr.role.isin(IFR)].groupby("player_id")["oae"].sum()
+    ja = oaa_if.join(xa.rename("after"), how="inner")
+    tr = cr[cr.note.eq("positioning transfer") & cr.bucket.eq("coaching")].groupby("team")["credit"].sum().sort_values()
+    L += ["", f"- After moving positioning to coaching, infielders' outs above expected match Savant OAA: "
+          f"correlation {np.corrcoef(ja.outs_above_average, ja.after)[0, 1]:.3f}, max gap "
+          f"{(ja.after - ja.outs_above_average).abs().max():.2f} outs",
+          "- Infield positioning credit by team (wins): " + ", ".join(f"{t} {v:+.2f}" for t, v in tr.items())]
     fb = cr[(cr.bucket == "fielding")].groupby("role")["credit"].sum()
     L += ["", "League fielding credit by position (wins): " + ", ".join(f"{k} {v:+.1f}" for k, v in fb.round(1).items())]
 else:
