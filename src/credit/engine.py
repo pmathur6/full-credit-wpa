@@ -27,8 +27,10 @@ Plate appearance, with
   Coaching: intentional walks (defense), sacrifice bunts (offense gets E_evt - res).
   Catcher's interference: catcher gets the whole defensive share.
 
-Infield v1: no public per-play success probability yet, so infield p(out) = 1 - xBA and
-no infield positioning credit. Replaced by our own model later.
+Infield ground balls: our own model (src/model/infield.py) gives the probability an
+average infield converts the ball, without and with the infield alignment; the alignment's
+effect is infield positioning credit to coaching. Falls back to 1 - xBA if the model
+output is missing.
 """
 import json
 import sys
@@ -47,6 +49,10 @@ OUT = Path(sys.argv[3] if len(sys.argv) > 3 else "data/credit")
 OUT.mkdir(parents=True, exist_ok=True)
 
 ev = pd.read_parquet(BUILD / f"events_{season}.parquet")
+IFP = {}
+if (BUILD / f"infield_prob_{season}.parquet").exists():
+    _ifp = pd.read_parquet(BUILD / f"infield_prob_{season}.parquet")
+    IFP = {(g_, a_): (x_, p_) for g_, a_, x_, p_ in _ifp[["game_pk", "at_bat_index", "p_out_x", "p_out_pos"]].itertuples(index=False)}
 # a few events (e.g. a pickoff before any pitch) have no fielder ids: carry them from the
 # same team's neighbouring events
 FCOLS = [f"f{i}" for i in range(2, 10)]
@@ -208,28 +214,34 @@ def spray_angle(x, y):
     return np.degrees(np.arctan2(x - 125.42, 198.27 - y))
 
 
-# infield zones learned from the data: for each 2-degree spray-angle bin, the infielder who
-# most often makes the play on ground-ball outs there owns ground-ball hits there
+# infield zones learned from the data: for each 2-degree spray-angle bin, each infielder's
+# share of the ground-ball outs made there; a ground-ball hit through that bin is charged to
+# the infielders in those shares (so a fielder's expected hits charged match his outs made)
 _gb = pa[(pa.bbt == "ground_ball") & pa.event_type.isin(OUTS) & pa.hc_x.notna()]
 _zone_rows = []
 for r in _gb[["game_pk", "at_bat_index", "play_index", "hc_x", "hc_y"]].itertuples(index=False):
     c = [x["pos"] for m in groups.get((r.game_pk, r.at_bat_index, r.play_index), []) if m["is_batter"]
-         for x in m["credits"] if x["credit"] in ("f_assist", "f_putout") and x["pos"] in ("1B", "2B", "3B", "SS")]
+         for x in m["credits"] if x["credit"] in ("f_assist", "f_putout") and x["pos"] in ("P", "1B", "2B", "3B", "SS")]
     if c:
         _zone_rows.append((int(spray_angle(r.hc_x, r.hc_y) // 2 * 2), c[0]))
 _z = pd.DataFrame(_zone_rows, columns=["bin", "pos"])
-ZONE = _z.groupby("bin")["pos"].agg(lambda x: x.value_counts().index[0]).to_dict()
+_zc = _z.groupby(["bin", "pos"]).size().unstack(fill_value=0)
+_zc = _zc[_zc.sum(axis=1) >= 30]
+ZONE_SHARE = {b: {pos: n / row.sum() for pos, n in row.items() if n / row.sum() >= 0.05}
+              for b, row in _zc.iterrows()}
+ZONE_SHARE = {b: {k: v / sum(d.values()) for k, v in d.items()} for b, d in ZONE_SHARE.items()}
+ZONE = {b: max(d, key=d.get) for b, d in ZONE_SHARE.items()}
 ZBINS = np.array(sorted(ZONE))
-POS_NUM = {"1B": 3, "2B": 4, "3B": 5, "SS": 6}
+POS_NUM = {"P": 1, "1B": 3, "2B": 4, "3B": 5, "SS": 6}
 
 
-def spray_zone(row):
-    """Infielder whose zone a ground-ball hit went through (v1, until the infield model)."""
+def zone_shares(row):
+    """[(fielder id, position, share)] for a ground-ball hit, from the spray-angle bin."""
     if pd.isna(row.hc_x) or pd.isna(row.hc_y):
-        return None
+        return []
     b = int(spray_angle(row.hc_x, row.hc_y) // 2 * 2)
-    b = b if b in ZONE else int(ZBINS[np.abs(ZBINS - b).argmin()])
-    return POS_NUM[ZONE[b]]
+    b = b if b in ZONE_SHARE else int(ZBINS[np.abs(ZBINS - b).argmin()])
+    return [(fielder_id(row, POS_NUM[pos]), pos, sh) for pos, sh in ZONE_SHARE[b].items()]
 
 
 
@@ -255,9 +267,9 @@ def responsible_ground(row, g, err):
         c = [x for x in credits_of(g, kind) if x["pos"] in ("P", "C", "1B", "2B", "3B", "SS")]
         if c:
             return c[0]["id"], c[0]["pos"]
-    z = spray_zone(row)
-    if z:
-        return fielder_id(row, z), POS_NAME[z]
+    sh = zone_shares(row)
+    if sh:
+        return sh  # a hit: shared by the infielders who own this spray angle
     if row.hit_location == row.hit_location and row.hit_location is not None and int(row.hit_location) <= 6:
         hl = int(row.hit_location)
         return fielder_id(row, hl), POS_NAME[hl]
@@ -346,9 +358,19 @@ for row in pa.itertuples(index=False):
         e_cp = row.catch_prob * v_out + (1 - row.catch_prob) * v_hit
         fid, fpos = (err[0]["id"], err[0]["pos"]) if err else \
             (int(row.cp_player), POS_NAME.get(int(row.cp_pos), "OF") if row.cp_pos == row.cp_pos else "OF")
+    elif row.bbt == "ground_ball" and (row.game_pk, row.at_bat_index) in IFP and v_out is not None:
+        # infield model: conversion by an average infield, without and with the alignment
+        px, ppos = IFP[(row.game_pk, row.at_bat_index)]
+        v_hit = v_hit_of(hit_mix(row))
+        e_x = px * v_out + (1 - px) * v_hit
+        e_cp = ppos * v_out + (1 - ppos) * v_hit
+        rg = responsible_ground(row, g, err)
+        fid, fpos = (rg, None) if isinstance(rg, list) else rg
     elif row.bbt == "ground_ball" and has_xba and v_out is not None:
         e_x = e_cp = xba * v_hit_of(hit_mix(row)) + (1 - xba) * v_out
-        fid, fpos = responsible_ground(row, g, err)
+        rg = responsible_ground(row, g, err)
+        fid, fpos = (rg, None) if isinstance(rg, list) else rg
+        stats["ground ball without infield model: 1 - xBA"] += 1
     elif err:
         e_x = e_cp = (xba * v_hit_of(hit_mix(row)) + (1 - xba) * v_out) if (has_xba and v_out is not None) else e_evt
         fid, fpos = err[0]["id"], err[0]["pos"]
@@ -361,7 +383,12 @@ for row in pa.itertuples(index=False):
     if e_cp != e_x:
         add(row, None, deff, "def", "coaching", "positioning", -(e_cp - e_x))
     conv = -(e_evt - e_cp)
-    if fid is None:
+    if isinstance(fid, list):  # ground-ball hit shared across infielders
+        shares = fid
+        for sid, spos, w in shares:
+            add(row, sid, deff, "def", "fielding", spos, conv * w)
+        fid, fpos, _ = max(shares, key=lambda t: t[2])
+    elif fid is None:
         add(row, row.pitcher, deff, "def", "pitching", "pitcher", conv)
     else:
         add(row, fid, deff, "def", "fielding", fpos, conv)

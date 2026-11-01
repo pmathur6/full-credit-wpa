@@ -43,11 +43,14 @@ S = "https://baseballsavant.mlb.com/leaderboard"
 for name, url in {
     "catcher_throwing": f"{S}/catcher-throwing?game_type=Regular&n=1&season_start={season}&season_end={season}"
                         "&split=no&team=&type=Cat&with_team_only=1&csv=true",
+    "sprint_speed": f"{S}/sprint_speed?min_season={season}&max_season={season}&position=&team=&min=0&csv=true",
     "pitcher_running": f"{S}/pitcher-running-game?game_type=Regular&n=1&season_start={season}&season_end={season}"
                        "&split=no&team=&pitch_hand=&runner_moved=&target_base=All&prior_pk=All&with_team_only=1&csv=true",
 }.items():
     r = requests.get(url, headers=H, timeout=120)
     r.raise_for_status()
     df = pd.read_csv(io.StringIO(r.content.decode("utf-8-sig")))
+    if name == "sprint_speed" and "player_id" not in df.columns:
+        df = df.rename(columns={c: "player_id" for c in df.columns if c in ("runner_id", "entity_id")})
     df.to_csv(OUT / f"{name}_{season}.csv", index=False)
     print(f"{name}: {len(df)} rows")

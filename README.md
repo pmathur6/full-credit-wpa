@@ -84,9 +84,11 @@ Win probability is MLB's own model, which is a fixed function of inning, half, o
 
 `src/credit/engine.py` splits every event's change in win probability. Offense: the batter gets the value of his result at standard advancement; runners get advancement beyond (or short of) that. Defense on a ball in play: the pitcher gets the contact (league-average defense), coaching gets positioning (outfield: Savant catch probability vs the average catch probability for balls hit like it), and the responsible fielder gets the conversion; runners cut down by throws go to the fielders on those outs.
 
-v1 stand-ins, to be replaced by our infield model:
-- Infield ground balls use 1 - xBA as the out probability; the fielder is whoever made the play, or for a hit, the infielder who owns that spray angle (learned from where each infielder makes his plays).
-- Air balls with no tracked catch chance (infield liners and popups, outfield hits Savant doesn't count as chances) stay with the pitcher.
+Infield ground balls use our own model (`src/model/infield.py`, report in `reports/infield_model_<season>.md`): the probability an average infield converts the ball, from exit velocity, launch angle, spray angle, batter handedness and sprint speed, and the base/out state; fitted with and without the infield alignment, whose difference is infield positioning credit. Errors count as failed conversions. Outs go to the infielder who made the play; a hit is shared by the infielders in proportion to how often each makes the play at that spray angle.
+
+Stolen-base attempts: baseline league caught-stealing rate, then the pitcher's and the catcher's season effect (Savant pitcher running game and catcher throwing), each credited with their piece; the rest splits 50/50.
+
+Still simplified: air balls with no tracked catch chance (infield liners and popups, outfield hits Savant doesn't count as chances) stay with the pitcher.
 
 ## How it runs
 
@@ -108,6 +110,7 @@ Everything runs as GitHub Actions; nothing runs locally.
 - [x] Master play table (2025)
 - [ ] Infield success-probability model
 - [x] Credit engine v1 (2025; infield uses 1 - xBA as a stand-in)
+- [x] Infield model (ground balls)
 - [ ] Correlation checks vs FanGraphs / Savant (baserunning, catchers, fielding run value)
 - [ ] Split-half reliability per bucket
 - [ ] Site

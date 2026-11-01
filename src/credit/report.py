@@ -92,6 +92,32 @@ if (REF / f"oaa_{season}.csv").exists():
 else:
     L.append("- Savant OAA reference not available in this run")
 
+# ---------------------------------------------------------------- 2a. infield vs Savant OAA
+IFR = ("1B", "2B", "3B", "SS")
+ifp_f = BUILD / f"infield_prob_{season}.parquet"
+L += ["", "## 2a. Infield vs Savant OAA", ""]
+if ifp_f.exists() and (REF / f"oaa_{season}.csv").exists():
+    ifp = pd.read_parquet(ifp_f)
+    conv = cr[(cr.kind == "pa") & (cr.bucket == "fielding") & cr.role.isin(IFR)]
+    conv = conv.drop_duplicates(["game_pk", "at_bat_index"])[["game_pk", "at_bat_index", "player_id"]]
+    j0 = ifp.merge(conv, on=["game_pk", "at_bat_index"])
+    ours_if = (j0.out - j0.p_out_pos).groupby(j0.player_id).sum()
+    oaa_if = pd.read_csv(REF / f"oaa_{season}.csv")
+    oaa_if = oaa_if[oaa_if.primary_pos_formatted.isin(IFR)].set_index("player_id")
+    j = oaa_if.join(ours_if.rename("ours"), how="inner")
+    L += [f"- Ground balls with a responsible infielder: {len(j0):,} of {len(ifp):,}",
+          f"- Infielders (primary 1B/2B/3B/SS) compared: {len(j)}; correlation of our outs-above-expected "
+          f"with Savant infield OAA: **{np.corrcoef(j.outs_above_average, j.ours)[0, 1]:.3f}** "
+          f"(Savant also covers air balls and uses each fielder's actual starting spot)",
+          "", "| Position | Players | Correlation |", "|---|---|---|"]
+    for pos_, jj in j.groupby("primary_pos_formatted"):
+        if len(jj) >= 5:
+            L.append(f"| {pos_} | {len(jj)} | {np.corrcoef(jj.outs_above_average, jj.ours)[0, 1]:.3f} |")
+    fb = cr[(cr.bucket == "fielding")].groupby("role")["credit"].sum()
+    L += ["", "League fielding credit by position (wins): " + ", ".join(f"{k} {v:+.1f}" for k, v in fb.round(1).items())]
+else:
+    L.append("- Infield model output or OAA reference not available")
+
 # ---------------------------------------------------------------- 2b. steals vs Savant
 st = cr[cr.event_type.str.match(r"^(stolen_base|caught_stealing)_", na=False) & cr.side.eq("def")]
 L += ["", "## 2b. Stolen-base defense vs Savant", ""]
