@@ -1,0 +1,36 @@
+name: external-checks
+
+# Pulls FanGraphs and Savant leaderboards and compares them with our credits
+# (output/players_<season>.csv from credit-season). Commits reference/ and
+# reports/external_checks_<season>.md.
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season (YYYY)"
+        default: "2025"
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  SEASON: ${{ inputs.season }}
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: python src/credit/fetch_external.py "$SEASON"
+      - run: if [ -f src/credit/external_report.py ]; then python src/credit/external_report.py "$SEASON"; fi
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reference/ reports/
+          git commit -m "External checks for $SEASON" || echo "No changes"
+          git pull --rebase origin main && git push
