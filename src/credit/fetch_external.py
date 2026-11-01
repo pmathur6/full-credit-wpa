@@ -1,5 +1,6 @@
-"""Fetch outside metrics to compare against: FanGraphs (WPA, BsR, fielding, batting runs)
-and Savant (baserunning run value, fielding run value).
+"""Fetch outside metrics to compare against: Savant baserunning run value and fielding run
+value. (FanGraphs blocks automated requests from GitHub's servers; `fg()` is kept in case
+its CSVs are ever supplied another way.)
 
 Writes reference/{fg_bat,fg_pit,savant_brv,savant_frv}_<season>.csv plus
 reference/external_status_<season>.txt (which sources worked). Each source is optional.
@@ -38,8 +39,7 @@ def savant(url):
 
 S = "https://baseballsavant.mlb.com/leaderboard"
 sources = {
-    "fg_bat": lambda: fg("bat"),
-    "fg_pit": lambda: fg("pit"),
+    # FanGraphs blocks requests from GitHub's servers (403), so it is not fetched here.
     "savant_brv": lambda: savant(f"{S}/baserunning-run-value?game_type=Regular&season_start={season}&season_end={season}"
                                  "&sortColumn=runner_runs_tot&sortDirection=desc&split=no&n=0&team=&type=Run&with_team_only=1&csv=true"),
     "savant_frv": lambda: savant(f"{S}/fielding-run-value?gameType=Regular&seasonStart={season}&seasonEnd={season}"
