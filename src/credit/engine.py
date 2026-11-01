@@ -198,9 +198,9 @@ rows = []
 stats = Counter()
 
 
-def add(row, pid, team, side, bucket, role, credit):
+def add(row, pid, team, side, bucket, role, credit, oae=np.nan):
     rows.append((row.game_pk, row.at_bat_index, row.play_index, row.kind, row.event_type,
-                 None if pid is None or pid != pid else int(pid), team, side, bucket, role, float(credit)))
+                 None if pid is None or pid != pid else int(pid), team, side, bucket, role, float(credit), oae))
 
 
 def fielder_id(row, pos):
@@ -383,15 +383,26 @@ for row in pa.itertuples(index=False):
     if e_cp != e_x:
         add(row, None, deff, "def", "coaching", "positioning", -(e_cp - e_x))
     conv = -(e_evt - e_cp)
+    # outs above expected on this play (leverage-free), for comparison with Savant OAA
+    if has_cp:
+        p_conv = row.catch_prob
+    elif row.bbt == "ground_ball" and (row.game_pk, row.at_bat_index) in IFP:
+        p_conv = IFP[(row.game_pk, row.at_bat_index)][1]
+    else:
+        p_conv = None
+    made_out = (row.outs_after if row.outs_after < 3 else 3) - row.r_outs > 0
+    oae = np.nan if p_conv is None else (1.0 if made_out else 0.0) - p_conv
+    if has_cp and row.cp_out == row.cp_out:
+        oae = row.cp_out - row.catch_prob
     if isinstance(fid, list):  # ground-ball hit shared across infielders
         shares = fid
         for sid, spos, w in shares:
-            add(row, sid, deff, "def", "fielding", spos, conv * w)
+            add(row, sid, deff, "def", "fielding", spos, conv * w, oae * w)
         fid, fpos, _ = max(shares, key=lambda t: t[2])
     elif fid is None:
         add(row, row.pitcher, deff, "def", "pitching", "pitcher", conv)
     else:
-        add(row, fid, deff, "def", "fielding", fpos, conv)
+        add(row, fid, deff, "def", "fielding", fpos, conv, oae)
     adv_def = -R
     if abs(adv_def) > 1e-12:
         if adv_def > 0:
@@ -534,7 +545,7 @@ for row in ev[ev.kind.eq("mid")].itertuples(index=False):
             add(row, row.pitcher, deff, "def", "pitching", "pitcher", -D)
 
 cr = pd.DataFrame(rows, columns=["game_pk", "at_bat_index", "play_index", "kind", "event_type", "player_id",
-                                 "team", "side", "bucket", "role", "credit"])
+                                 "team", "side", "bucket", "role", "credit", "oae"])
 cr["player_id"] = cr["player_id"].astype("Int64")
 cr.to_parquet(OUT / f"credits_{season}.parquet", index=False)
 print(f"credit rows: {len(cr):,}; notes: {dict(stats)}; win-prob fallbacks: {dict(WP.fallbacks)}")
