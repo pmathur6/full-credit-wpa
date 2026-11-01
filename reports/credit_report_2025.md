@@ -4,8 +4,8 @@
 
 - Events: 189,735. Offense credits equal the event's change on 100.000%; defense credits equal minus the change on 100.000% (max gaps 3.33e-16 / 3.33e-16)
 - Events with no credit rows: 0; events with no change in win probability (decided games): 7,061
-- Teams whose total credit equals wins minus summed starting win probability: 30 of 30 (max gap 6.19e-15)
-- Credit rows with no player (coaching buckets): 36,487; non-coaching rows with no player: 0
+- Teams whose total credit equals wins minus summed starting win probability: 30 of 30 (max gap 6.30e-15)
+- Credit rows with no player (coaching buckets): 88,685; non-coaching rows with no player: 0
 
 | Team | W | G | Credited | Wins - starting WP |
 |---|---|---|---|---|
@@ -58,6 +58,20 @@ Largest differences (Savant OAA includes direction/arm adjustments and other pos
 | Sal Frelick | +7 | +3.8 |
 | Brenton Doyle | +6 | +2.8 |
 
+## 2a. Infield vs Savant OAA
+
+- Ground balls with a responsible infielder: 48,616 of 52,496
+- Infielders (primary 1B/2B/3B/SS) compared: 316; correlation of our outs-above-expected with Savant infield OAA: **0.281** (Savant also covers air balls and uses each fielder's actual starting spot)
+
+| Position | Players | Correlation |
+|---|---|---|
+| 1B | 88 | 0.429 |
+| 2B | 86 | 0.239 |
+| 3B | 81 | 0.434 |
+| SS | 61 | 0.255 |
+
+League fielding credit by position (wins): 1B -18.1, 2B +6.7, 3B +12.0, C -12.4, CF +1.8, LF -10.8, P -10.6, RF -14.3, SS +33.8
+
 ## 2b. Stolen-base defense vs Savant
 
 - catcher stealing runs: 100 players; correlation of our steal-attempt credit (wins, leverage-weighted) with Savant's (runs): **0.787**
@@ -71,61 +85,61 @@ Wins added. Hitters 300+ PA, pitchers 300+ batters faced. `trad` = traditional W
 
 | Player | Pos | Team | total | batting | baserunning | fielding | trad_bat |
 |---|---|---|---|---|---|---|---|
-| Shohei Ohtani | P/DH | LAD | +6.14 | +4.63 | +0.68 | +0.13 | +4.92 |
+| Shohei Ohtani | P/DH | LAD | +6.11 | +4.63 | +0.68 | +0.09 | +4.92 |
+| Geraldo Perdomo | SS | AZ | +5.93 | +3.15 | +0.90 | +1.88 | +2.90 |
+| Bobby Witt Jr. | SS | KC | +5.69 | +2.28 | +1.55 | +1.86 | +2.52 |
 | Aaron Judge | RF/DH | NYY | +5.58 | +5.18 | -0.02 | +0.41 | +5.11 |
-| Bobby Witt Jr. | SS | KC | +5.54 | +2.28 | +1.55 | +1.71 | +2.52 |
-| Geraldo Perdomo | SS | AZ | +5.27 | +3.15 | +0.90 | +1.22 | +2.90 |
-| Fernando Tatis Jr. | RF | SD | +5.17 | +2.60 | +1.79 | +0.78 | +2.38 |
+| Fernando Tatis Jr. | RF | SD | +5.20 | +2.60 | +1.79 | +0.81 | +2.38 |
+| José Ramírez | 3B/DH | CLE | +4.66 | +2.87 | +1.19 | +0.60 | +3.14 |
+| Bo Bichette | SS | TOR | +4.08 | +2.81 | -0.03 | +1.30 | +3.11 |
 | Byron Buxton | CF | MIN | +3.97 | +2.52 | +1.14 | +0.31 | +2.48 |
-| Corbin Carroll | RF | AZ | +3.78 | +2.62 | +0.75 | +0.41 | +1.98 |
-| Bo Bichette | SS | TOR | +3.41 | +2.81 | -0.03 | +0.64 | +3.11 |
-| Freddie Freeman | 1B | LAD | +3.31 | +3.93 | +0.20 | -0.82 | +4.64 |
-| Jeremy Peña | SS | HOU | +3.19 | +1.04 | +0.85 | +1.30 | +1.14 |
+| Corbin Carroll | RF | AZ | +3.77 | +2.62 | +0.75 | +0.40 | +1.98 |
+| Freddie Freeman | 1B | LAD | +3.66 | +3.93 | +0.20 | -0.47 | +4.64 |
 
 ### Hitters: bottom 10 total
 
 | Player | Pos | Team | total | batting | baserunning | fielding | trad_bat |
 |---|---|---|---|---|---|---|---|
-| Carlos Correa | SS/3B | MIN/HOU | -4.35 | -1.99 | +0.15 | -2.51 | -1.80 |
-| Austin Riley | 3B | ATL | -4.15 | -2.22 | -0.24 | -1.68 | -2.30 |
-| Eric Wagaman | 1B/LF/DH | MIA | -4.05 | -2.49 | -0.38 | -1.17 | -2.81 |
-| Willi Castro | 2B/RF/LF/3B | MIN/CHC | -3.94 | -2.20 | +0.22 | -1.97 | -2.19 |
-| Matt McLain | 2B | CIN | -3.70 | -4.13 | +0.77 | -0.34 | -4.24 |
-| Josh Jung | 3B | TEX | -3.69 | -2.29 | -0.32 | -1.08 | -2.10 |
+| Eric Wagaman | 1B/LF/DH | MIA | -3.73 | -2.49 | -0.38 | -0.85 | -2.81 |
 | Alek Thomas | CF | AZ | -3.68 | -1.85 | -0.18 | -1.65 | -1.99 |
 | Nick Castellanos | RF | PHI | -3.51 | -2.57 | -0.33 | -0.62 | -2.71 |
-| Lenyn Sosa | 2B/1B/DH | CWS | -3.50 | -2.90 | +0.34 | -0.94 | -2.70 |
-| Logan O'Hoppe | C/DH | LAA | -3.46 | -2.98 | -0.11 | -0.37 | -3.12 |
+| Logan O'Hoppe | C/DH | LAA | -3.45 | -2.98 | -0.11 | -0.36 | -3.12 |
+| Willi Castro | 2B/RF/LF/3B | MIN/CHC | -3.39 | -2.20 | +0.22 | -1.42 | -2.19 |
+| JJ Bleday | CF/RF/LF/DH | ATH | -3.35 | -2.68 | -0.03 | -0.64 | -2.63 |
+| Matt McLain | 2B | CIN | -3.23 | -4.13 | +0.77 | +0.12 | -4.24 |
+| Jordan Walker | RF | STL | -2.89 | -2.29 | +0.23 | -0.83 | -1.96 |
+| Edgar Quero | C/DH | CWS | -2.84 | -2.05 | -0.23 | -0.56 | -1.95 |
+| Lenyn Sosa | 2B/1B/DH | CWS | -2.81 | -2.90 | +0.34 | -0.25 | -2.70 |
 
 ### Fielding: top 10
 
 | Player | Pos | Team | fielding |
 |---|---|---|---|
-| Brayan Rocchio | SS/2B | CLE | +1.80 |
-| Xander Bogaerts | SS/DH | SD | +1.72 |
-| Bobby Witt Jr. | SS | KC | +1.71 |
-| Ceddanne Rafaela | CF/2B | BOS | +1.69 |
-| Pete Crow-Armstrong | CF | CHC | +1.59 |
-| Xavier Edwards | 2B/SS | MIA | +1.59 |
-| Mookie Betts | SS | LAD | +1.50 |
-| Steven Kwan | LF | CLE | +1.48 |
-| Corey Seager | SS | TEX | +1.39 |
-| Anthony Volpe | SS | NYY | +1.32 |
+| Xavier Edwards | 2B/SS | MIA | +2.49 |
+| Ryan McMahon | 3B | COL/NYY | +1.90 |
+| Geraldo Perdomo | SS | AZ | +1.88 |
+| Taylor Walls | SS | TB | +1.87 |
+| Bobby Witt Jr. | SS | KC | +1.86 |
+| Dansby Swanson | SS | CHC | +1.78 |
+| Anthony Volpe | SS | NYY | +1.78 |
+| Brayan Rocchio | SS/2B | CLE | +1.73 |
+| Xander Bogaerts | SS/DH | SD | +1.73 |
+| Nico Hoerner | 2B | CHC | +1.73 |
 
 ### Fielding: bottom 10
 
 | Player | Pos | Team | fielding |
 |---|---|---|---|
-| Eugenio Suárez | 3B | AZ/SEA | -4.01 |
-| Brendan Donovan | 2B/LF | STL | -2.57 |
-| Thomas Saggese | 2B/SS/3B | STL | -2.51 |
-| Carlos Correa | SS/3B | MIN/HOU | -2.51 |
-| Pete Alonso | 1B | NYM | -2.36 |
-| Manny Machado | 3B/DH | SD | -2.22 |
-| Brooks Lee | SS/3B/2B | MIN | -2.10 |
-| Yoán Moncada | 3B | LAA | -2.08 |
-| Willi Castro | 2B/RF/LF/3B | MIN/CHC | -1.97 |
-| Casey Schmitt | 2B/3B/1B | SF | -1.96 |
+| Pete Alonso | 1B | NYM | -1.90 |
+| Brendan Donovan | 2B/LF | STL | -1.70 |
+| Alek Thomas | CF | AZ | -1.65 |
+| Eugenio Suárez | 3B | AZ/SEA | -1.63 |
+| Juan Soto | RF | NYM | -1.62 |
+| Thomas Saggese | 2B/SS/3B | STL | -1.47 |
+| Willi Castro | 2B/RF/LF/3B | MIN/CHC | -1.42 |
+| Heliot Ramos | LF | SF | -1.42 |
+| Kristian Campbell | 2B | BOS | -1.37 |
+| Kyle Tucker | RF/DH | CHC | -1.30 |
 
 ### Baserunning: top 10
 
@@ -161,102 +175,102 @@ Wins added. Hitters 300+ PA, pitchers 300+ batters faced. `trad` = traditional W
 
 | Player | Pos | Team | pitching | fielding | trad_pit |
 |---|---|---|---|---|---|
-| Garrett Crochet | P | BOS | +5.59 | +0.15 | +5.00 |
-| Cristopher Sánchez | P | PHI | +5.00 | +0.26 | +4.65 |
-| Paul Skenes | P | PIT | +4.91 | +0.16 | +5.15 |
-| Tarik Skubal | P | DET | +4.06 | -0.10 | +4.24 |
-| Yoshinobu Yamamoto | P | LAD | +3.97 | +0.16 | +4.09 |
-| Cade Smith | P | CLE | +3.78 | -0.27 | +2.34 |
-| Max Fried | P | NYY | +3.42 | +0.21 | +2.40 |
-| Andrew Abbott | P | CIN | +3.34 | +0.08 | +2.74 |
-| Freddy Peralta | P | MIL | +3.34 | +0.09 | +3.74 |
-| Chris Sale | P | ATL | +3.17 | +0.10 | +2.79 |
+| Garrett Crochet | P | BOS | +5.36 | -0.04 | +5.00 |
+| Paul Skenes | P | PIT | +4.81 | +0.03 | +5.15 |
+| Cristopher Sánchez | P | PHI | +4.24 | +0.02 | +4.65 |
+| Tarik Skubal | P | DET | +3.76 | -0.19 | +4.24 |
+| Cade Smith | P | CLE | +3.75 | -0.35 | +2.34 |
+| Yoshinobu Yamamoto | P | LAD | +3.58 | +0.05 | +4.09 |
+| Max Fried | P | NYY | +3.05 | +0.12 | +2.40 |
+| Andrew Abbott | P | CIN | +2.97 | -0.06 | +2.74 |
+| Zack Wheeler | P | PHI | +2.95 | +0.03 | +3.29 |
+| Freddy Peralta | P | MIL | +2.87 | +0.01 | +3.74 |
 
 ### Pitchers: bottom 10
 
 | Player | Pos | Team | pitching | fielding | trad_pit |
 |---|---|---|---|---|---|
-| Jack Kochanowicz | P | LAA | -2.05 | +0.02 | -2.79 |
-| Germán Márquez | P | COL | -1.90 | +0.14 | -3.55 |
-| Charlie Morton | P | BAL/DET/ATL | -1.88 | +0.02 | -2.35 |
-| Tyler Alexander | P | CWS/MIL | -1.71 | +0.23 | -2.70 |
-| Antonio Senzatela | P | COL | -1.49 | +0.28 | -2.95 |
-| Jake Irvin | P | WSH | -1.48 | +0.09 | -2.81 |
-| Tanner Gordon | P | COL | -1.47 | +0.06 | -1.54 |
-| Mitchell Parker | P | WSH | -1.44 | +0.07 | -1.78 |
-| Erick Fedde | P | STL/ATL/MIL | -1.36 | +0.13 | -1.47 |
-| Bryce Miller | P | SEA | -1.32 | +0.01 | -1.27 |
+| Jack Kochanowicz | P | LAA | -2.48 | -0.10 | -2.79 |
+| Germán Márquez | P | COL | -2.37 | +0.04 | -3.55 |
+| Tyler Alexander | P | CWS/MIL | -2.31 | +0.15 | -2.70 |
+| Antonio Senzatela | P | COL | -2.22 | +0.25 | -2.95 |
+| Charlie Morton | P | BAL/DET/ATL | -1.98 | -0.19 | -2.35 |
+| Jake Irvin | P | WSH | -1.87 | -0.02 | -2.81 |
+| Tanner Gordon | P | COL | -1.63 | -0.04 | -1.54 |
+| Mitchell Parker | P | WSH | -1.63 | -0.07 | -1.78 |
+| Jordan Hicks | P | SF/BOS | -1.61 | -0.05 | -2.21 |
+| Bryce Miller | P | SEA | -1.56 | -0.00 | -1.27 |
 
 ### Pitchers hurt most by their defense (our pitching credit above traditional WPA: fielders took some blame)
 
 | Player | Pos | Team | gap | pitching | trad_pit |
 |---|---|---|---|---|---|
-| Andre Pallante | P | STL | +1.81 | -0.81 | -2.61 |
-| Dylan Cease | P | SD | +1.76 | +0.89 | -0.87 |
-| Germán Márquez | P | COL | +1.65 | -1.90 | -3.55 |
-| Eduardo Rodriguez | P | AZ | +1.46 | +0.07 | -1.39 |
-| Antonio Senzatela | P | COL | +1.46 | -1.49 | -2.95 |
-| Cade Smith | P | CLE | +1.44 | +3.78 | +2.34 |
-| Yusei Kikuchi | P | LAA | +1.40 | +1.51 | +0.11 |
-| Tylor Megill | P | NYM | +1.39 | +0.84 | -0.56 |
-| Logan Allen | P | CLE | +1.34 | +1.16 | -0.19 |
-| Kyle Freeland | P | COL | +1.33 | -0.23 | -1.56 |
+| Dylan Cease | P | SD | +1.66 | +0.79 | -0.87 |
+| Cade Smith | P | CLE | +1.41 | +3.75 | +2.34 |
+| Andre Pallante | P | STL | +1.41 | -1.21 | -2.61 |
+| Tylor Megill | P | NYM | +1.25 | +0.69 | -0.56 |
+| Germán Márquez | P | COL | +1.18 | -2.37 | -3.55 |
+| Casey Mize | P | DET | +1.07 | +1.33 | +0.25 |
+| Jesús Luzardo | P | PHI | +1.07 | +2.76 | +1.69 |
+| Eduardo Rodriguez | P | AZ | +1.02 | -0.37 | -1.39 |
+| Trevor Williams | P | WSH | +1.00 | -0.66 | -1.66 |
+| Kyle Hendricks | P | LAA | +0.94 | +0.49 | -0.45 |
 
 ### Pitchers helped most by their defense (our pitching credit below traditional WPA: fielders took some credit)
 
 | Player | Pos | Team | gap | pitching | trad_pit |
 |---|---|---|---|---|---|
-| Nathan Eovaldi | P | TEX | -1.55 | +2.57 | +4.13 |
-| Drew Rasmussen | P | TB | -1.40 | +1.46 | +2.85 |
-| Tyler Phillips | P | MIA | -1.38 | +0.98 | +2.36 |
-| Noah Cameron | P | KC | -1.33 | +1.01 | +2.34 |
-| Emerson Hancock | P | SEA | -1.09 | -0.85 | +0.23 |
-| Nick Martinez | P | CIN | -0.99 | -0.75 | +0.24 |
-| Seth Lugo | P | KC | -0.92 | -0.86 | +0.06 |
-| Grant Holmes | P | ATL | -0.85 | -0.46 | +0.39 |
-| Hunter Brown | P | HOU | -0.71 | +2.98 | +3.69 |
-| Scott Barlow | P | CIN | -0.69 | +0.90 | +1.59 |
+| Nathan Eovaldi | P | TEX | -1.65 | +2.47 | +4.13 |
+| Drew Rasmussen | P | TB | -1.61 | +1.25 | +2.85 |
+| Noah Cameron | P | KC | -1.60 | +0.74 | +2.34 |
+| Tyler Phillips | P | MIA | -1.54 | +0.82 | +2.36 |
+| Grant Holmes | P | ATL | -1.32 | -0.93 | +0.39 |
+| Nick Martinez | P | CIN | -1.21 | -0.97 | +0.24 |
+| Seth Lugo | P | KC | -1.17 | -1.11 | +0.06 |
+| Emerson Hancock | P | SEA | -1.10 | -0.87 | +0.23 |
+| Hunter Brown | P | HOU | -1.04 | +2.65 | +3.69 |
+| Adrian Houser | P | CWS/TB | -1.01 | +0.82 | +1.82 |
 
 ### Coaching (team)
 
 | Team | bunt call | defensive indifference | intentional walk | positioning | total |
 |---|---|---|---|---|---|
-| SEA | +0.34 | +0.05 | -0.35 | +2.30 | +2.33 |
-| CIN | +0.02 | -0.00 | -0.08 | +1.48 | +1.41 |
-| CHC | +0.09 | -0.01 | -0.08 | +1.00 | +1.00 |
-| TB | +0.19 | -0.02 | -0.09 | +0.77 | +0.85 |
-| STL | -0.03 | -0.01 | -0.16 | +0.77 | +0.57 |
-| CWS | +0.10 | -0.04 | -0.38 | +0.88 | +0.56 |
-| PIT | +0.19 | -0.00 | -0.27 | +0.59 | +0.51 |
-| HOU | +0.01 | -0.00 | -0.06 | +0.43 | +0.38 |
-| LAA | +0.08 | -0.02 | -0.58 | +0.90 | +0.38 |
-| CLE | -0.00 | -0.01 | -0.15 | +0.51 | +0.35 |
-| ATL | -0.02 | -0.01 | -0.35 | +0.54 | +0.16 |
-| MIN | +0.02 | -0.04 | -0.30 | +0.40 | +0.08 |
-| NYM | -0.05 | -0.00 | -0.11 | +0.18 | +0.02 |
-| SD | -0.05 | -0.01 | -0.34 | +0.10 | -0.30 |
+| SEA | +0.34 | +0.05 | -0.35 | +2.21 | +2.23 |
+| CIN | +0.02 | -0.00 | -0.08 | +1.46 | +1.39 |
+| CHC | +0.09 | -0.01 | -0.08 | +1.12 | +1.12 |
+| TB | +0.19 | -0.02 | -0.09 | +1.00 | +1.08 |
+| STL | -0.03 | -0.01 | -0.16 | +0.97 | +0.77 |
+| CWS | +0.10 | -0.04 | -0.38 | +0.89 | +0.56 |
+| HOU | +0.01 | -0.00 | -0.06 | +0.59 | +0.55 |
+| PIT | +0.19 | -0.00 | -0.27 | +0.62 | +0.54 |
+| LAA | +0.08 | -0.02 | -0.58 | +0.89 | +0.37 |
+| CLE | -0.00 | -0.01 | -0.15 | +0.42 | +0.26 |
+| NYM | -0.05 | -0.00 | -0.11 | +0.32 | +0.17 |
+| ATL | -0.02 | -0.01 | -0.35 | +0.47 | +0.09 |
+| MIN | +0.02 | -0.04 | -0.30 | +0.33 | +0.01 |
+| SD | -0.05 | -0.01 | -0.34 | +0.17 | -0.23 |
 | DET | -0.00 | -0.03 | -0.14 | -0.29 | -0.46 |
-| BOS | +0.11 | +0.00 | -0.16 | -0.51 | -0.56 |
-| MIA | -0.08 | -0.00 | -0.24 | -0.35 | -0.67 |
-| TEX | +0.12 | -0.01 | -0.34 | -0.46 | -0.69 |
-| SF | +0.35 | -0.04 | -0.23 | -0.81 | -0.73 |
-| WSH | +0.03 | -0.02 | -0.02 | -0.77 | -0.78 |
-| TOR | +0.06 | +0.00 | -0.55 | -0.34 | -0.83 |
-| BAL | +0.07 | -0.01 | -0.17 | -0.74 | -0.84 |
-| NYY | -0.03 | +0.03 | -0.07 | -0.98 | -1.04 |
-| KC | +0.05 | -0.01 | -0.14 | -0.99 | -1.10 |
-| LAD | +0.03 | -0.04 | -0.38 | -0.84 | -1.23 |
-| MIL | +0.05 | -0.02 | -0.36 | -0.99 | -1.31 |
-| ATH | +0.07 | +0.00 | -0.27 | -1.12 | -1.31 |
-| AZ | +0.13 | -0.01 | -0.29 | -1.28 | -1.46 |
-| PHI | -0.00 | +0.00 | -0.16 | -1.87 | -2.03 |
-| COL | -0.03 | +0.00 | -0.17 | -2.52 | -2.72 |
+| TEX | +0.12 | -0.01 | -0.34 | -0.38 | -0.61 |
+| SF | +0.35 | -0.04 | -0.23 | -0.74 | -0.66 |
+| MIA | -0.08 | -0.00 | -0.24 | -0.37 | -0.69 |
+| BOS | +0.11 | +0.00 | -0.16 | -0.66 | -0.71 |
+| WSH | +0.03 | -0.02 | -0.02 | -0.76 | -0.77 |
+| TOR | +0.06 | +0.00 | -0.55 | -0.31 | -0.79 |
+| BAL | +0.07 | -0.01 | -0.17 | -0.78 | -0.88 |
+| KC | +0.05 | -0.01 | -0.14 | -0.82 | -0.93 |
+| NYY | -0.03 | +0.03 | -0.07 | -0.89 | -0.95 |
+| LAD | +0.03 | -0.04 | -0.38 | -0.65 | -1.04 |
+| ATH | +0.07 | +0.00 | -0.27 | -1.06 | -1.25 |
+| MIL | +0.05 | -0.02 | -0.36 | -0.99 | -1.32 |
+| AZ | +0.13 | -0.01 | -0.29 | -1.17 | -1.34 |
+| PHI | -0.00 | +0.00 | -0.16 | -1.62 | -1.78 |
+| COL | -0.03 | +0.00 | -0.17 | -2.44 | -2.65 |
 
 ### Bucket totals (league)
 
-- def / coaching: -11.3
-- def / fielding: -100.0
-- def / pitching: +276.4
+- def / coaching: -9.8
+- def / fielding: -12.0
+- def / pitching: +186.9
 - off / baserunning: +61.0
 - off / batting: -227.9
 - off / coaching: +1.8

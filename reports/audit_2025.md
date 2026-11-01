@@ -7,30 +7,34 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 **9B, 2 out, MIA vs WSH** - Javier Sanoja reaches on a fielding error by third baseman Brady House. (change +0.030 for the offense; xBA 0.466)
   - Javier Sanoja (batter, batting): +0.0288
   - Javier Sanoja (batter, batting): +0.0012
-  - José A. Ferrer (pitcher, pitching): -0.0050
-  - Brady House (3B, fielding): -0.0238
+  - José A. Ferrer (pitcher, pitching): -0.0141
+  - WSH coaching (positioning, coaching): +0.0007
+  - Brady House (3B, fielding): -0.0155
   - Brady House (3B, fielding): -0.0012
 
 **5T, 2 out, MIN vs BOS** - Mickey Gasper reaches on a throwing error by second baseman David Hamilton. (change +0.016 for the offense; xBA 0.091)
   - Mickey Gasper (batter, batting): +0.0181
   - Mickey Gasper (batter-runner, baserunning): -0.0021
-  - Brayan Bello (pitcher, pitching): +0.0120
-  - David Hamilton (2B, fielding): -0.0301
+  - Brayan Bello (pitcher, pitching): +0.0123
+  - BOS coaching (positioning, coaching): -0.0001
+  - David Hamilton (2B, fielding): -0.0302
   - David Hamilton (2B, fielding): +0.0021
 
 **8B, 1 out, MIA vs LAD** - Ronny Simon reaches on a missed catch error by first baseman Freddie Freeman, assist to second baseman Hyeseong Kim. (change +0.032 for the offense; xBA 0.082)
   - Ronny Simon (batter, batting): +0.0335
   - Ronny Simon (batter-runner, baserunning): -0.0015
-  - Yoendrys Gómez (pitcher, pitching): +0.0129
-  - Freddie Freeman (1B, fielding): -0.0464
+  - Yoendrys Gómez (pitcher, pitching): +0.0135
+  - LAD coaching (positioning, coaching): +0.0005
+  - Freddie Freeman (1B, fielding): -0.0475
   - Freddie Freeman (1B, fielding): +0.0015
 
 **6B, 1 out, CLE vs LAA** - Nolan Jones reaches on a fielding error by shortstop Zach Neto. Bo Naylor to 2nd. (change +0.007 for the offense; xBA 0.069)
   - Nolan Jones (batter, batting): +0.0113
   - Bo Naylor (runner, baserunning): -0.0031
   - Nolan Jones (batter-runner, baserunning): -0.0012
-  - Hunter Strickland (pitcher, pitching): +0.0051
-  - Zach Neto (SS, fielding): -0.0164
+  - Hunter Strickland (pitcher, pitching): +0.0044
+  - LAA coaching (positioning, coaching): -0.0002
+  - Zach Neto (SS, fielding): -0.0155
   - Zach Neto (SS, fielding): +0.0043
 
 **9B, 2 out, DET vs HOU** - Spencer Torkelson reaches on a fielding error by right fielder Jesús Sánchez. Spencer Torkelson to 2nd. (change +0.074 for the offense; xBA 0.013; catch prob 0.99)
@@ -43,90 +47,105 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 **2T, 1 out, WSH vs MIL** - Luis García Jr. reaches on a fielding error by second baseman Brice Turang. Luis García Jr. to 2nd. (change +0.043 for the offense; xBA 0.151)
   - Luis García Jr. (batter, batting): +0.0283
   - Luis García Jr. (batter-runner, baserunning): +0.0147
-  - Freddy Peralta (pitcher, pitching): +0.0101
-  - Brice Turang (2B, fielding): -0.0384
+  - Freddy Peralta (pitcher, pitching): +0.0095
+  - MIL coaching (positioning, coaching): +0.0025
+  - Brice Turang (2B, fielding): -0.0403
   - Brice Turang (2B, fielding): -0.0147
 
 **3B, 1 out, HOU vs CHC** - Jake Meyers reaches on a throwing error by shortstop Dansby Swanson. (change +0.028 for the offense; xBA 0.054)
   - Jake Meyers (batter, batting): +0.0306
   - Jake Meyers (batter-runner, baserunning): -0.0026
-  - Jameson Taillon (pitcher, pitching): +0.0154
-  - Dansby Swanson (SS, fielding): -0.0460
+  - Jameson Taillon (pitcher, pitching): +0.0150
+  - CHC coaching (positioning, coaching): +0.0002
+  - Dansby Swanson (SS, fielding): -0.0457
   - Dansby Swanson (SS, fielding): +0.0026
 
 **3T, 0 out, WSH vs KC** - Nathaniel Lowe reaches on a fielding error by shortstop Bobby Witt Jr. (change +0.028 for the offense; xBA 0.308)
   - Nathaniel Lowe (batter, batting): +0.0301
   - Nathaniel Lowe (batter-runner, baserunning): -0.0021
-  - Seth Lugo (pitcher, pitching): +0.0035
-  - Bobby Witt Jr. (SS, fielding): -0.0336
+  - Seth Lugo (pitcher, pitching): -0.0099
+  - KC coaching (positioning, coaching): +0.0038
+  - Bobby Witt Jr. (SS, fielding): -0.0241
   - Bobby Witt Jr. (SS, fielding): +0.0021
 
 **3B, 1 out, LAA vs ATH** - Kevin Newman reaches on a fielding error by third baseman Max Muncy. (change +0.022 for the offense; xBA 0.139)
   - Kevin Newman (batter, batting): +0.0626
   - Scott Kingery (runner, baserunning): -0.0337
   - Kevin Newman (batter-runner, baserunning): -0.0069
-  - Jeffrey Springs (pitcher, pitching): +0.0210
-  - Max Muncy (3B, fielding): -0.0836
+  - Jeffrey Springs (pitcher, pitching): +0.0219
+  - ATH coaching (positioning, coaching): +0.0005
+  - Max Muncy (3B, fielding): -0.0850
   - Max Muncy (3B, fielding): +0.0406
 
 **4T, 0 out, PIT vs AZ** - Bryan Reynolds reaches on a fielding error by second baseman Jordan Lawlar. (change +0.036 for the offense; xBA 0.142)
   - Bryan Reynolds (batter, batting): +0.0388
   - Bryan Reynolds (batter-runner, baserunning): -0.0028
-  - Zac Gallen (pitcher, pitching): +0.0141
-  - Jordan Lawlar (2B, fielding): -0.0528
+  - Zac Gallen (pitcher, pitching): +0.0183
+  - AZ coaching (positioning, coaching): -0.0003
+  - Jordan Lawlar (2B, fielding): -0.0568
   - Jordan Lawlar (2B, fielding): +0.0028
 
 ## grounded_into_double_play (3,112 plays)
 
 **7B, 1 out, SD vs COL** - Brandon Lockridge grounds into a double play, second baseman Adael Amador to shortstop Ezequiel Tovar to first baseman Michael Toglia. Jose Iglesias out at 2nd. Brandon Lockridge out at 1st. (change -0.004 for the offense; xBA 0.137)
   - Brandon Lockridge (batter, batting): -0.0040
-  - Angel Chivilli (pitcher, pitching): +0.0009
-  - Adael Amador (2B, fielding): +0.0031
+  - Angel Chivilli (pitcher, pitching): -0.0005
+  - COL coaching (positioning, coaching): -0.0002
+  - Adael Amador (2B, fielding): +0.0046
 
 **8B, 1 out, LAA vs SEA** - Kevin Newman grounds into a double play, shortstop J.P. Crawford to second baseman Jorge Polanco to first baseman Josh Naylor. Taylor Ward out at 2nd. Kevin Newman out at 1st. (change -0.035 for the offense; xBA 0.205)
   - Kevin Newman (batter, batting): -0.0350
-  - Trent Thornton (pitcher, pitching): +0.0140
-  - J.P. Crawford (SS, fielding): +0.0210
+  - Trent Thornton (pitcher, pitching): +0.0015
+  - SEA coaching (positioning, coaching): -0.0028
+  - J.P. Crawford (SS, fielding): +0.0362
 
 **5T, 0 out, CIN vs STL** - Ke'Bryan Hayes grounds into a double play, pitcher Michael McGreevy to second baseman Brendan Donovan to first baseman Alec Burleson. Elly De La Cruz out at 2nd. Ke'Bryan Hayes out at 1st. (change -0.080 for the offense; xBA 0.179)
   - Ke'Bryan Hayes (batter, batting): -0.0800
-  - Michael McGreevy (pitcher, pitching): +0.0262
-  - Michael McGreevy (P, fielding): +0.0538
+  - Michael McGreevy (pitcher, pitching): +0.0338
+  - STL coaching (positioning, coaching): +0.0001
+  - Michael McGreevy (P, fielding): +0.0461
 
 **7T, 1 out, BOS vs ATH** - Jarren Duran grounds into a double play, second baseman Zack Gelof to shortstop Darell Hernaiz to first baseman Nick Kurtz. Carlos Narváez out at 2nd. Jarren Duran out at 1st. (change -0.007 for the offense; xBA 0.115)
   - Jarren Duran (batter, batting): -0.0070
-  - Brady Basso (pitcher, pitching): +0.0030
-  - Zack Gelof (2B, fielding): +0.0040
+  - Brady Basso (pitcher, pitching): +0.0033
+  - ATH coaching (positioning, coaching): -0.0000
+  - Zack Gelof (2B, fielding): +0.0038
 
 **6B, 0 out, MIL vs PHI** - Anthony Seigler grounds into a double play, shortstop Trea Turner to first baseman Bryce Harper. Jake Bauers out at 2nd. Anthony Seigler out at 1st. (change -0.008 for the offense; xBA 0.121)
   - Anthony Seigler (batter, batting): -0.0080
-  - Max Lazar (pitcher, pitching): +0.0028
-  - Trea Turner (SS, fielding): +0.0052
+  - Max Lazar (pitcher, pitching): +0.0029
+  - PHI coaching (positioning, coaching): -0.0002
+  - Trea Turner (SS, fielding): +0.0053
 
 **4B, 1 out, CIN vs PIT** - Santiago Espinal grounds into a double play, third baseman Ke'Bryan Hayes to first baseman Endy Rodríguez. Jeimer Candelario out at 3rd. Santiago Espinal out at 1st. (change -0.027 for the offense; xBA 0.072)
   - Santiago Espinal (batter, batting): -0.0270
-  - Andrew Heaney (pitcher, pitching): +0.0127
-  - Ke'Bryan Hayes (3B, fielding): +0.0143
+  - Andrew Heaney (pitcher, pitching): +0.0119
+  - PIT coaching (positioning, coaching): +0.0001
+  - Ke'Bryan Hayes (3B, fielding): +0.0151
 
 **9B, 1 out, STL vs MIL** - Yohel Pozo grounds into a double play, shortstop Joey Ortiz to second baseman Brice Turang to first baseman Andruw Monasterio. Jordan Walker out at 2nd. Yohel Pozo out at 1st. (change -0.135 for the offense; xBA 0.208)
   - Yohel Pozo (batter, batting): -0.1350
-  - Jared Koenig (pitcher, pitching): +0.0351
-  - Joey Ortiz (SS, fielding): +0.0999
+  - Jared Koenig (pitcher, pitching): +0.0560
+  - MIL coaching (positioning, coaching): -0.0000
+  - Joey Ortiz (SS, fielding): +0.0790
 
 **2T, 1 out, TEX vs PIT** - Ezequiel Duran grounds into a double play, third baseman Ke'Bryan Hayes to second baseman Nick Gonzales to first baseman Spencer Horwitz. Josh Jung out at 2nd. Ezequiel Duran out at 1st. (change -0.069 for the offense; xBA 0.054)
   - Ezequiel Duran (batter, batting): -0.0690
-  - Bailey Falter (pitcher, pitching): +0.0356
-  - Ke'Bryan Hayes (3B, fielding): +0.0334
+  - Bailey Falter (pitcher, pitching): +0.0339
+  - PIT coaching (positioning, coaching): +0.0009
+  - Ke'Bryan Hayes (3B, fielding): +0.0342
 
 **8B, 1 out, BOS vs COL** - Wilyer Abreu grounds into a double play, second baseman Kyle Farmer to shortstop Orlando Arcia to first baseman Michael Toglia. Roman Anthony out at 2nd. Wilyer Abreu out at 1st. (change +0.000 for the offense; xBA 0.134)
   - Wilyer Abreu (batter, batting): +0.0000
   - Jimmy Herget (pitcher, pitching): -0.0000
+  - COL coaching (positioning, coaching): -0.0000
   - Kyle Farmer (2B, fielding): +0.0000
 
 **4B, 0 out, LAA vs HOU** - Jo Adell grounds into a double play, third baseman Ramón Urías to second baseman Jose Altuve to first baseman Christian Walker. Taylor Ward out at 2nd. Jo Adell out at 1st. (change -0.097 for the offense; xBA 0.395)
   - Jo Adell (batter, batting): -0.0970
-  - Jason Alexander (pitcher, pitching): -0.0004
-  - Ramón Urías (3B, fielding): +0.0974
+  - Jason Alexander (pitcher, pitching): -0.0524
+  - HOU coaching (positioning, coaching): +0.0001
+  - Ramón Urías (3B, fielding): +0.1493
 
 ## strikeout_double_play (125 plays)
 
@@ -186,36 +205,40 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - TOR coaching (bunt call, coaching): +0.0014
   - Nathan Lukes (batter, batting): -0.0000
   - Ernie Clement (runner, baserunning): +0.0006
-  - Brandon Eisert (pitcher, pitching): -0.0014
-  - Brandon Eisert (pitcher, pitching): -0.0000
-  - Brandon Eisert (pitcher, pitching): -0.0006
+  - Brandon Eisert (pitcher, pitching): -0.0002
+  - CWS coaching (positioning, coaching): +0.0001
+  - Kyle Teel (C, fielding): -0.0014
+  - Kyle Teel (C, fielding): -0.0006
 
 **1T, 0 out, SD vs STL** - Luis Arraez out on a sacrifice bunt, pitcher Matthew Liberatore to first baseman Willson Contreras. Fernando Tatis Jr. to 2nd. (change -0.017 for the offense)
   - SD coaching (bunt call, coaching): -0.0133
   - Luis Arraez (batter, batting): +0.0000
   - Fernando Tatis Jr. (runner, baserunning): -0.0008
   - Luis Arraez (batter-runner, baserunning): -0.0028
-  - Matthew Liberatore (pitcher, pitching): +0.0133
-  - Matthew Liberatore (pitcher, pitching): -0.0000
-  - Matthew Liberatore (pitcher, pitching): +0.0037
+  - Matthew Liberatore (pitcher, pitching): +0.0109
+  - STL coaching (positioning, coaching): +0.0000
+  - Matthew Liberatore (P, fielding): +0.0024
+  - Matthew Liberatore (P, fielding): +0.0037
 
 **6T, 0 out, KC vs DET** - Luke Maile out on a sacrifice bunt, first baseman Spencer Torkelson to second baseman Javier Báez. Kyle Isbel to 3rd. (change -0.008 for the offense)
   - KC coaching (bunt call, coaching): +0.0003
   - Luke Maile (batter, batting): +0.0000
   - Kyle Isbel (runner, baserunning): -0.0020
   - Luke Maile (batter-runner, baserunning): -0.0063
-  - Tyler Holton (pitcher, pitching): -0.0003
-  - Tyler Holton (pitcher, pitching): -0.0000
-  - Tyler Holton (pitcher, pitching): +0.0083
+  - Tyler Holton (pitcher, pitching): +0.0126
+  - DET coaching (positioning, coaching): +0.0022
+  - Spencer Torkelson (1B, fielding): -0.0151
+  - Spencer Torkelson (1B, fielding): +0.0083
 
 **8T, 0 out, BOS vs KC** - Ceddanne Rafaela out on a sacrifice bunt, pitcher Daniel Lynch IV to first baseman Salvador Perez. Carlos Narváez to 3rd. (change -0.002 for the offense)
   - BOS coaching (bunt call, coaching): +0.0019
   - Ceddanne Rafaela (batter, batting): +0.0000
   - Carlos Narváez (runner, baserunning): -0.0009
   - Ceddanne Rafaela (batter-runner, baserunning): -0.0030
-  - Daniel Lynch IV (pitcher, pitching): -0.0019
-  - Daniel Lynch IV (pitcher, pitching): -0.0000
-  - Daniel Lynch IV (pitcher, pitching): +0.0039
+  - Daniel Lynch IV (pitcher, pitching): +0.0045
+  - KC coaching (positioning, coaching): +0.0001
+  - Daniel Lynch IV (P, fielding): -0.0066
+  - Daniel Lynch IV (P, fielding): +0.0039
 
 **2B, 0 out, BOS vs NYM** - David Hamilton out on a sacrifice bunt, catcher Francisco Alvarez to second baseman Jeff McNeil. Nick Sogard to 3rd. Trevor Story to 2nd. (change -0.003 for the offense)
   - BOS coaching (bunt call, coaching): +0.0060
@@ -223,25 +246,28 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Trevor Story (runner, baserunning): -0.0016
   - Nick Sogard (runner, baserunning): -0.0019
   - David Hamilton (batter-runner, baserunning): -0.0055
-  - Clay Holmes (pitcher, pitching): -0.0060
-  - Clay Holmes (pitcher, pitching): -0.0000
-  - Clay Holmes (pitcher, pitching): +0.0090
+  - Clay Holmes (pitcher, pitching): +0.0205
+  - NYM coaching (positioning, coaching): -0.0028
+  - Francisco Alvarez (C, fielding): -0.0238
+  - Francisco Alvarez (C, fielding): +0.0090
 
 **7B, 0 out, TOR vs CHC** - Ernie Clement out on a sacrifice bunt, pitcher Matthew Boyd to first baseman Michael Busch. Davis Schneider to 2nd. (change -0.032 for the offense)
   - TOR coaching (bunt call, coaching): -0.0245
   - Ernie Clement (batter, batting): +0.0000
   - Davis Schneider (runner, baserunning): -0.0017
   - Ernie Clement (batter-runner, baserunning): -0.0058
-  - Matthew Boyd (pitcher, pitching): +0.0245
-  - Matthew Boyd (pitcher, pitching): -0.0000
-  - Matthew Boyd (pitcher, pitching): +0.0075
+  - Matthew Boyd (pitcher, pitching): +0.0382
+  - CHC coaching (positioning, coaching): -0.0007
+  - Matthew Boyd (P, fielding): -0.0131
+  - Matthew Boyd (P, fielding): +0.0075
 
 **8B, 0 out, TOR vs WSH** - Will Wagner hits a sacrifice bunt. Fielding error by pitcher José A. Ferrer. George Springer to 2nd. Will Wagner to 1st. (change +0.088 for the offense)
   - TOR coaching (bunt call, coaching): -0.0082
   - Will Wagner (batter, batting): +0.0000
   - Will Wagner (batter-runner, baserunning): +0.0962
-  - José A. Ferrer (pitcher, pitching): +0.0082
-  - José A. Ferrer (P, fielding): -0.0000
+  - José A. Ferrer (pitcher, pitching): +0.0426
+  - WSH coaching (positioning, coaching): +0.0049
+  - José A. Ferrer (P, fielding): -0.0392
   - José A. Ferrer (P, fielding): -0.0962
 
 **5B, 0 out, SF vs CIN** - Tyler Fitzgerald out on a sacrifice bunt, pitcher Nick Lodolo to first baseman Christian Encarnacion-Strand. Casey Schmitt to 2nd. (change -0.026 for the offense)
@@ -249,26 +275,30 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Tyler Fitzgerald (batter, batting): +0.0000
   - Casey Schmitt (runner, baserunning): -0.0013
   - Tyler Fitzgerald (batter-runner, baserunning): -0.0043
-  - Nick Lodolo (pitcher, pitching): +0.0204
-  - Nick Lodolo (pitcher, pitching): -0.0000
-  - Nick Lodolo (pitcher, pitching): +0.0056
+  - Nick Lodolo (pitcher, pitching): +0.0227
+  - CIN coaching (positioning, coaching): -0.0079
+  - Nick Lodolo (P, fielding): +0.0057
+  - Nick Lodolo (P, fielding): +0.0056
 
 **12B, 0 out, KC vs BOS** - Cavan Biggio out on a sacrifice bunt, catcher Connor Wong to first baseman Abraham Toro. Michael Massey to 3rd. (change +0.028 for the offense)
   - KC coaching (bunt call, coaching): +0.0402
   - Cavan Biggio (batter, batting): +0.0000
   - Michael Massey (runner, baserunning): -0.0029
   - Cavan Biggio (batter-runner, baserunning): -0.0093
-  - Sean Newcomb (pitcher, pitching): -0.0402
-  - Sean Newcomb (pitcher, pitching): -0.0000
-  - Sean Newcomb (pitcher, pitching): +0.0122
+  - Sean Newcomb (pitcher, pitching): -0.0420
+  - BOS coaching (positioning, coaching): -0.0007
+  - Connor Wong (C, fielding): +0.0025
+  - Connor Wong (C, fielding): +0.0122
 
 **6T, 1 out, TEX vs CLE** - Michael Helman hits a sacrifice bunt. Billy McKinney scores. Michael Helman to 1st. (change +0.061 for the offense)
   - TEX coaching (bunt call, coaching): +0.0378
   - Michael Helman (batter, batting): -0.0000
   - Michael Helman (batter-runner, baserunning): +0.0232
-  - Matt Festa (pitcher, pitching): -0.0378
-  - Matt Festa (pitcher, pitching): -0.0000
-  - Matt Festa (pitcher, pitching): -0.0232
+  - Matt Festa (pitcher, pitching): +0.0042
+  - CLE coaching (positioning, coaching): +0.0029
+  - Jhonkensy Noel (1B, fielding): -0.0224
+  - Matt Festa (P, fielding): -0.0224
+  - Jhonkensy Noel (1B, fielding): -0.0232
 
 ## intent_walk (556 plays)
 
@@ -359,59 +389,73 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 **7T, 1 out, CHC vs CIN** - Matt Shaw reaches on a fielder's choice, fielded by second baseman Matt McLain. Nico Hoerner to 2nd. (change +0.032 for the offense; xBA 0.048)
   - Matt Shaw (batter, batting): +0.0255
   - Matt Shaw (batter, batting): +0.0065
-  - Ian Gibaut (pitcher, pitching): +0.0205
-  - Matt McLain (2B, fielding): -0.0460
+  - Ian Gibaut (pitcher, pitching): +0.0182
+  - CIN coaching (positioning, coaching): -0.0009
+  - Matt McLain (2B, fielding): -0.0342
+  - Ian Gibaut (P, fielding): -0.0038
+  - Elly De La Cruz (SS, fielding): -0.0048
   - Matt McLain (2B, fielding): -0.0065
 
 **8B, 1 out, LAD vs NYM** - Andy Pages reaches on a fielder's choice, fielded by third baseman Brett Baty. Will Smith scores. Throwing error by third baseman Brett Baty. (change +0.150 for the offense; xBA 0.211)
   - Andy Pages (batter, batting): +0.1584
   - Andy Pages (batter-runner, baserunning): -0.0084
-  - Reed Garrett (pitcher, pitching): +0.0335
-  - Brett Baty (3B, fielding): -0.1919
+  - Reed Garrett (pitcher, pitching): -0.0537
+  - NYM coaching (positioning, coaching): +0.0063
+  - Brett Baty (3B, fielding): -0.1110
   - Brett Baty (3B, fielding): +0.0084
 
 **5T, 1 out, CHC vs ATH** - Kyle Tucker reaches on a fielder's choice. Matt Shaw scores. Carson Kelly to 3rd. Kyle Tucker to 2nd. Throwing error by first baseman Tyler Soderstrom. (change +0.035 for the offense; xBA 0.129)
   - Kyle Tucker (batter, batting): +0.0248
   - Carson Kelly (runner, baserunning): +0.0050
   - Kyle Tucker (batter-runner, baserunning): +0.0052
-  - Mitch Spence (pitcher, pitching): +0.0086
-  - Tyler Soderstrom (1B, fielding): -0.0334
+  - Mitch Spence (pitcher, pitching): +0.0076
+  - ATH coaching (positioning, coaching): +0.0027
+  - Tyler Soderstrom (1B, fielding): -0.0352
   - Tyler Soderstrom (1B, fielding): -0.0102
 
 **7B, 0 out, LAD vs TOR** - Blue Jays challenged (tag play), call on the field was upheld: Mookie Betts reaches on a fielder's choice, fielded by shortstop Bo Bichette. Alex Freeland scores. Shohei Ohtani to 2nd. (change +0.037 for the offense; xBA 0.276)
   - Mookie Betts (batter, batting): +0.0347
   - Alex Freeland (runner, baserunning): +0.0023
-  - Brendon Little (pitcher, pitching): -0.0036
-  - Bo Bichette (SS, fielding): -0.0312
+  - Brendon Little (pitcher, pitching): -0.0019
+  - TOR coaching (positioning, coaching): -0.0033
+  - Ernie Clement (2B, fielding): -0.0024
+  - Addison Barger (3B, fielding): -0.0067
+  - Bo Bichette (SS, fielding): -0.0204
   - Bo Bichette (SS, fielding): -0.0023
 
 **1B, 1 out, TB vs BOS** - Nick Fortes reaches on a fielder's choice, fielded by third baseman Alex Bregman. Junior Caminero scores. Christopher Morel to 3rd. Throwing error by third baseman Alex Bregman. (change +0.049 for the offense; xBA 0.060)
   - Nick Fortes (batter, batting): +0.0487
   - Christopher Morel (runner, baserunning): +0.0002
   - Junior Caminero (runner, baserunning): +0.0002
-  - Connelly Early (pitcher, pitching): +0.0104
-  - Alex Bregman (3B, fielding): -0.0591
+  - Connelly Early (pitcher, pitching): +0.0069
+  - BOS coaching (positioning, coaching): -0.0042
+  - Alex Bregman (3B, fielding): -0.0513
   - Alex Bregman (3B, fielding): -0.0003
 
 **2T, 1 out, SF vs PHI** - Patrick Bailey reaches on a fielder's choice. LaMonte Wade Jr. scores. Wilmer Flores to 2nd. Throwing error by pitcher Taijuan Walker. (change +0.096 for the offense; xBA 0.227)
   - Patrick Bailey (batter, batting): +0.0806
   - LaMonte Wade Jr. (runner, baserunning): +0.0154
-  - Taijuan Walker (pitcher, pitching): +0.0218
-  - Taijuan Walker (P, fielding): -0.1024
+  - Taijuan Walker (pitcher, pitching): +0.0385
+  - PHI coaching (positioning, coaching): -0.0041
+  - Taijuan Walker (P, fielding): -0.1150
   - Taijuan Walker (P, fielding): -0.0154
 
 **6B, 1 out, TOR vs WSH** - Vladimir Guerrero Jr. reaches on a fielder's choice, fielded by shortstop CJ Abrams. Myles Straw scores. Vladimir Guerrero Jr. to 2nd. Throwing error by shortstop CJ Abrams. (change +0.040 for the offense; xBA 0.054)
   - Vladimir Guerrero Jr. (batter, batting): +0.0342
   - Vladimir Guerrero Jr. (batter-runner, baserunning): +0.0058
-  - Brad Lord (pitcher, pitching): +0.0146
-  - CJ Abrams (SS, fielding): -0.0487
+  - Brad Lord (pitcher, pitching): +0.0105
+  - WSH coaching (positioning, coaching): -0.0016
+  - CJ Abrams (SS, fielding): -0.0430
   - CJ Abrams (SS, fielding): -0.0058
 
 **3T, 1 out, BOS vs SD** - Masataka Yoshida reaches on a fielder's choice, fielded by pitcher Wandy Peralta. Trevor Story scores. (change +0.052 for the offense; xBA 0.237)
   - Masataka Yoshida (batter, batting): +0.0543
   - Masataka Yoshida (batter-runner, baserunning): -0.0023
-  - Wandy Peralta (pitcher, pitching): +0.0098
-  - Jake Cronenworth (2B, fielding): -0.0641
+  - Wandy Peralta (pitcher, pitching): +0.0127
+  - SD coaching (positioning, coaching): -0.0077
+  - Luis Arraez (1B, fielding): -0.0224
+  - Jake Cronenworth (2B, fielding): -0.0328
+  - Wandy Peralta (P, fielding): -0.0041
   - Jake Cronenworth (2B, fielding): +0.0023
 
 **10T, 1 out, LAA vs STL** - Nolan Schanuel reaches on a fielder's choice, fielded by second baseman Brendan Donovan. Luis Rengifo scores. Kyren Paris to 3rd. Taylor Ward to 2nd. (change +0.203 for the offense; xBA 0.078)
@@ -419,8 +463,11 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Taylor Ward (runner, baserunning): -0.0147
   - Kyren Paris (runner, baserunning): -0.0147
   - Nolan Schanuel (batter-runner, baserunning): -0.0073
-  - JoJo Romero (pitcher, pitching): +0.1147
-  - Brendan Donovan (2B, fielding): -0.3543
+  - JoJo Romero (pitcher, pitching): +0.0876
+  - STL coaching (positioning, coaching): +0.0126
+  - Brendan Donovan (2B, fielding): -0.2720
+  - JoJo Romero (P, fielding): -0.0389
+  - Masyn Winn (SS, fielding): -0.0291
   - Brendan Donovan (2B, fielding): +0.0367
 
 **8T, 0 out, TB vs AZ** - Kameron Misner reaches on a fielder's choice, fielded by first baseman Josh Naylor. Chandler Simpson to 2nd. (change +0.042 for the offense; xBA 0.468)
@@ -428,16 +475,18 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Chandler Simpson (runner, baserunning): -0.0030
   - Taylor Walls (runner, baserunning): -0.0335
   - Kameron Misner (batter-runner, baserunning): -0.0030
-  - Ryan Thompson (pitcher, pitching): -0.0335
-  - Josh Naylor (1B, fielding): -0.0480
+  - Ryan Thompson (pitcher, pitching): -0.0388
+  - AZ coaching (positioning, coaching): +0.0013
+  - Josh Naylor (1B, fielding): -0.0441
   - Josh Naylor (1B, fielding): +0.0396
 
 ## triple_play (3 plays)
 
 **2T, 0 out, ATH vs COL** - Jacob Wilson grounds into a triple play, third baseman Ryan McMahon to second baseman Kyle Farmer to first baseman Michael Toglia. Shea Langeliers out at 3rd. Tyler Soderstrom out at 2nd. Jacob Wilson out at 1st. (change -0.146 for the offense; xBA 0.043)
   - Jacob Wilson (batter, batting): -0.1460
-  - Germán Márquez (pitcher, pitching): +0.0347
-  - Ryan McMahon (3B, fielding): +0.1113
+  - Germán Márquez (pitcher, pitching): +0.0161
+  - COL coaching (positioning, coaching): -0.0021
+  - Ryan McMahon (3B, fielding): +0.1319
 
 **4T, 0 out, NYM vs WSH** - Jesse Winker lines into a triple play, first baseman Nathaniel Lowe to shortstop CJ Abrams. Brandon Nimmo out at 2nd. Mark Vientos out at 1st. (change -0.171 for the offense; xBA 0.635)
   - Jesse Winker (batter, batting): -0.1710
