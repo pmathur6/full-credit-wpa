@@ -1,0 +1,47 @@
+name: build-season
+
+# Builds the master play tables from the raw pulls in release `data-<season>`,
+# uploads them to the same release and commits reports/build_report_<season>.md.
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season (YYYY)"
+        default: "2025"
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  SEASON: ${{ inputs.season }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Download raw data
+        run: |
+          mkdir -p data/raw
+          gh release download "data-$SEASON" -D data/raw \
+            -p "savant_pitches_$SEASON.parquet" -p "feeds_$SEASON.jsonl.gz" -p "of_catch_prob_$SEASON.parquet"
+      - run: python src/build/plays.py "$SEASON" data/raw data/build
+      - name: Upload play tables
+        run: |
+          gh release upload "data-$SEASON" --clobber \
+            "data/build/events_$SEASON.parquet" \
+            "data/build/runner_moves_$SEASON.parquet" \
+            "data/build/we_lookup_$SEASON.parquet"
+      - name: Commit report
+        run: |
+          mkdir -p reports && cp "data/build/build_report_$SEASON.md" reports/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git commit -m "Play table build report for $SEASON" || echo "No changes"
+          git pull --rebase origin main && git push

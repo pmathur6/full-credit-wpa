@@ -69,6 +69,17 @@ A GitHub Pages site:
 - **Savant `player-services/range`**: per-play outfield catch probability (from the fielder's actual starting spot).
 - **Infield**: no public per-play success probability, so we build our own and check it against Savant's infield OAA totals.
 
+## Play table
+
+`events_<season>.parquet` has one row per win-probability-changing event:
+
+- `kind = pa`: every plate appearance, with the batted ball and outfield catch probability.
+- `kind = mid`: every event between pitches that moves a runner (steals, caught stealing, wild pitches, passed balls, pickoffs, balks, errors).
+
+Win probability is MLB's own model, which is a fixed function of inning, half, outs, bases, count and score; we rebuild it as a lookup so states between pitches have values too. A `mid` event is measured at the count when it happened; a `pa` row keeps everything else in that plate appearance (including count changes), so each game's changes sum exactly to the final result. Savant's own per-pitch changes drop some between-pitch events and add up correctly in only ~73% of games.
+
+`runner_moves_<season>.parquet` has one row per runner movement with the putout/assist/error credits.
+
 ## How it runs
 
 Everything runs as GitHub Actions; nothing runs locally.
@@ -77,13 +88,15 @@ Everything runs as GitHub Actions; nothing runs locally.
 |---|---|
 | `probe` | Pulls one day of Savant pitch data and MLB game feeds and writes a field-coverage report to `probe/` |
 | `probe-fielding` | Checks Savant for per-play catch probability for one player |
+| `build-season` | Builds the master play tables (`events`, `runner_moves`, `we_lookup`) from a season's raw pulls into the same release and commits `reports/build_report_<season>.md` |
 | `pull-season` | Pulls a full season (Savant pitches, MLB game feeds, outfield catch probability) into the `data-<season>` release and commits `reports/data_<season>.md` |
 
 ## Status
 
 - [x] Credit rules agreed
 - [x] Confirm data fields (probe)
-- [ ] Data pull pipeline (2025 first)
+- [x] Data pull pipeline (2025)
+- [x] Master play table (2025)
 - [ ] Infield success-probability model
 - [ ] Credit engine
 - [ ] Site
