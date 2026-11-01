@@ -80,6 +80,14 @@ Win probability is MLB's own model, which is a fixed function of inning, half, o
 
 `runner_moves_<season>.parquet` has one row per runner movement with the putout/assist/error credits.
 
+## Credit engine (v1)
+
+`src/credit/engine.py` splits every event's change in win probability. Offense: the batter gets the value of his result at standard advancement; runners get advancement beyond (or short of) that. Defense on a ball in play: the pitcher gets the contact (league-average defense), coaching gets positioning (outfield: Savant catch probability vs the average catch probability for balls hit like it), and the responsible fielder gets the conversion; runners cut down by throws go to the fielders on those outs.
+
+v1 stand-ins, to be replaced by our infield model:
+- Infield ground balls use 1 - xBA as the out probability; the fielder is whoever made the play, or for a hit, the infielder who owns that spray angle (learned from where each infielder makes his plays).
+- Air balls with no tracked catch chance (infield liners and popups, outfield hits Savant doesn't count as chances) stay with the pitcher.
+
 ## How it runs
 
 Everything runs as GitHub Actions; nothing runs locally.
@@ -89,6 +97,7 @@ Everything runs as GitHub Actions; nothing runs locally.
 | `probe` | Pulls one day of Savant pitch data and MLB game feeds and writes a field-coverage report to `probe/` |
 | `probe-fielding` | Checks Savant for per-play catch probability for one player |
 | `build-season` | Builds the master play tables (`events`, `runner_moves`, `we_lookup`) from a season's raw pulls into the same release and commits `reports/build_report_<season>.md` |
+| `credit-season` | Runs the credit engine, fetches names and Savant OAA, and commits `reports/credit_report_<season>.md`, `reports/audit_<season>.md` and `output/` (player and coaching tables) |
 | `pull-season` | Pulls a full season (Savant pitches, MLB game feeds, outfield catch probability) into the `data-<season>` release and commits `reports/data_<season>.md` |
 
 ## Status
@@ -98,5 +107,7 @@ Everything runs as GitHub Actions; nothing runs locally.
 - [x] Data pull pipeline (2025)
 - [x] Master play table (2025)
 - [ ] Infield success-probability model
-- [ ] Credit engine
+- [x] Credit engine v1 (2025; infield uses 1 - xBA as a stand-in)
+- [ ] Correlation checks vs FanGraphs / Savant (baserunning, catchers, fielding run value)
+- [ ] Split-half reliability per bucket
 - [ ] Site

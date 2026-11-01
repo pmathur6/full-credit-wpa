@@ -1,0 +1,44 @@
+name: credit-season
+
+# Runs the credit engine on a season's play tables (release `data-<season>`), fetches
+# reference data (names, Savant OAA), and commits the checks report, edge-case audit and
+# player/coaching outputs. Uploads credits_<season>.parquet to the release.
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season (YYYY)"
+        default: "2025"
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  SEASON: ${{ inputs.season }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  credit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Download play tables
+        run: |
+          mkdir -p data/build
+          gh release download "data-$SEASON" -D data/build \
+            -p "events_$SEASON.parquet" -p "runner_moves_$SEASON.parquet" -p "we_lookup_$SEASON.parquet"
+      - run: python src/credit/engine.py "$SEASON" data/build data/credit
+      - run: python src/credit/fetch_reference.py "$SEASON" data/credit
+      - run: python src/credit/report.py "$SEASON" data/build data/credit
+      - run: gh release upload "data-$SEASON" "data/credit/credits_$SEASON.parquet" --clobber
+      - name: Commit reports and outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/ output/ reference/
+          git commit -m "Credit report and outputs for $SEASON" || echo "No changes"
+          git pull --rebase origin main && git push

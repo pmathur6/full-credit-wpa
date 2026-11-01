@@ -26,6 +26,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).parent))
+from winprob import WinProb  # noqa: E402
+
 season = sys.argv[1]
 RAW = Path(sys.argv[2] if len(sys.argv) > 2 else "data/raw")
 OUT = Path(sys.argv[3] if len(sys.argv) > 3 else "data/build")
@@ -34,50 +37,19 @@ BASES = {"1B": 1, "2B": 2, "3B": 3}
 
 # ---------------------------------------------------------------- Savant pitches
 p = pd.read_parquet(RAW / f"savant_pitches_{season}.parquet")
-p["half"] = np.where(p["inning_topbot"] == "Top", "top", "bottom")
-p["bases"] = (p["on_1b"].notna().astype(int) + 2 * p["on_2b"].notna() + 4 * p["on_3b"].notna())
-p["diff"] = p["home_score"] - p["away_score"]
-
-KEY = ["inning", "half", "outs_when_up", "bases", "balls", "strikes", "diff"]
-we = p.groupby(KEY, as_index=False)["home_win_exp"].first()
+we = WinProb.build(p)
 we.to_parquet(OUT / f"we_lookup_{season}.parquet", index=False)
-WE = {tuple(r[:-1]): r[-1] for r in we.itertuples(index=False)}
-WE00 = we[(we.balls == 0) & (we.strikes == 0)].set_index(
-    ["inning", "half", "outs_when_up", "bases", "diff"])["home_win_exp"].to_dict()
-MAX_INN = int(we["inning"].max())
-fallbacks = Counter()
+WP = WinProb(we)
+fallbacks = WP.fallbacks
 
 
-def lookup(inning, half, outs, bases, balls, strikes, diff):
-    """MLB home win probability for a state; fallbacks for states never seen in Savant."""
-    balls, strikes = min(balls, 3), min(strikes, 2)
-    k = (inning, half, outs, bases, balls, strikes, diff)
-    if k in WE:
-        return WE[k]
-    for inn in dict.fromkeys((inning, min(inning, MAX_INN), 10 if inning > 10 else inning)):
-        for dd in dict.fromkeys((diff, max(min(diff, 10), -10))):
-            if (inn, half, outs, bases, balls, strikes, dd) in WE:
-                fallbacks["clamped inning/score"] += 1
-                return WE[(inn, half, outs, bases, balls, strikes, dd)]
-            if (inn, half, outs, bases, dd) in WE00:
-                fallbacks["count 0-0"] += 1
-                return WE00[(inn, half, outs, bases, dd)]
-    fallbacks["unresolved (decided game)"] += 1
-    return 1.0 if diff > 0 else 0.0 if diff < 0 else 0.5
+def mask(st):
+    return sum(1 << (b - 1) for b, rid in st["bases"].items() if rid)
 
 
 def state_we(st, balls=0, strikes=0):
     """Home win probability for a tracked state; 3 outs = start of the next half-inning."""
-    diff = st["home"] - st["away"]
-    if st["outs"] >= 3:
-        inn, half = (st["inning"], "bottom") if st["half"] == "top" else (st["inning"] + 1, "top")
-        if half == "bottom" and inn >= 9 and diff > 0:
-            return 1.0  # home leads after top 9+: game over
-        if half == "top" and inn >= 10 and diff != 0:
-            return 1.0 if diff > 0 else 0.0
-        return lookup(inn, half, 0, 2 if inn >= 10 else 0, 0, 0, diff)
-    bases = sum(1 << (b - 1) for b, rid in st["bases"].items() if rid)
-    return lookup(st["inning"], st["half"], st["outs"], bases, balls, strikes, diff)
+    return WP.state(st["inning"], st["half"], st["outs"], mask(st), st["home"], st["away"], balls, strikes)
 
 
 def num(v):
@@ -189,6 +161,7 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
             pa_state = {"outs_before": st["outs"], "on_1b": st["bases"][1], "on_2b": st["bases"][2],
                         "on_3b": st["bases"][3], "home_before": st["home"], "away_before": st["away"]}
             mid_sum = 0.0
+            res_snap = None
             checked = False
             for idx in sorted(set(by_idx) | set(evs)):
                 if first_pitch is not None and idx >= first_pitch and not checked:
@@ -201,6 +174,10 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
                 rs = by_idx[idx]
                 is_pa = idx == pa_idx
                 ev = evs.get(idx, {})
+                if is_pa:  # state the result is judged from (after any earlier mid-PA events)
+                    res_snap = {"r_outs": st["outs"], "r_on_1b": st["bases"][1], "r_on_2b": st["bases"][2],
+                                "r_on_3b": st["bases"][3], "r_home": st["home"], "r_away": st["away"],
+                                "we_res": state_we(st)}
                 if not is_pa:
                     cnt = ev.get("count", {})
                     balls, strikes = cnt.get("balls", 0), cnt.get("strikes", 0)
@@ -274,6 +251,10 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
                 "balls": 0, "strikes": 0, "batter": batter, "pitcher": pitcher,
                 **fielders_at(gpk, abn, pitch_no.get(final_pitch, 0) if final_pitch is not None else 1),
                 "we_before": pa_start, "we_after": None, "mid_sum": mid_sum,
+                **(res_snap or {"r_outs": st["outs"], "r_on_1b": st["bases"][1], "r_on_2b": st["bases"][2],
+                                "r_on_3b": st["bases"][3], "r_home": st["home"], "r_away": st["away"],
+                                "we_res": state_we(st)}),
+                "a_on_1b": st["bases"][1], "a_on_2b": st["bases"][2], "a_on_3b": st["bases"][3],
                 "play_id": fp_play,
                 "has_review": bool(review), "review_type": review.get("reviewType"),
                 "review_overturned": review.get("isOverturned"),
