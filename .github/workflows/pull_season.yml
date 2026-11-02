@@ -9,11 +9,18 @@ on:
         description: "Season (YYYY)"
         default: "2025"
         required: true
+      update:
+        description: "Only pull games not already in the release"
+        type: boolean
+        default: false
   workflow_call:
     inputs:
       season:
         type: string
         required: true
+      update:
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -39,7 +46,10 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt
-      - run: cd src/pull && python savant.py "$SEASON"
+      - name: Previous pull (update mode)
+        if: ${{ inputs.update }}
+        run: gh release download "data-$SEASON" -p "savant_pitches_$SEASON.parquet" -D src/pull/data/raw || echo "none yet"
+      - run: cd src/pull && python savant.py "$SEASON" ${{ inputs.update && '--update' || '' }}
         working-directory: .
         env: { PYTHONUNBUFFERED: "1" }
       - run: gh release upload "data-$SEASON" "src/pull/data/raw/savant_pitches_$SEASON.parquet" --clobber
@@ -53,7 +63,10 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt
-      - run: cd src/pull && python feeds.py "$SEASON"
+      - name: Previous pull (update mode)
+        if: ${{ inputs.update }}
+        run: gh release download "data-$SEASON" -p "feeds_$SEASON.jsonl.gz" -D src/pull/data/raw || echo "none yet"
+      - run: cd src/pull && python feeds.py "$SEASON" ${{ inputs.update && '--update' || '' }}
       - run: gh release upload "data-$SEASON" "src/pull/data/raw/feeds_$SEASON.jsonl.gz" --clobber
 
   catchprob:

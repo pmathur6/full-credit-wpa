@@ -2,6 +2,7 @@
 
 Keeps only liveData.plays (all plays, runners, credits, play events, reviews) plus
 game info and boxscore positions, gzipped as one JSON line per game.
+Usage: python feeds.py <season> [--update]   (--update keeps games already pulled)
 Output: data/raw/feeds_{season}.jsonl.gz
 """
 import gzip
@@ -30,10 +31,20 @@ def fetch(pk):
 
 
 season = sys.argv[1]
+path = DATA / f"feeds_{season}.jsonl.gz"
 games = final_games(season)
 print(f"{len(games)} final games", flush=True)
+kept = []
+if "--update" in sys.argv and path.exists():
+    final = {g["game_pk"] for g in games}
+    with gzip.open(path, "rt") as fh:
+        kept = [ln for ln in fh if json.loads(ln)["game_pk"] in final]
+    have = {json.loads(ln)["game_pk"] for ln in kept}
+    games = [g for g in games if g["game_pk"] not in have]
+    print(f"update: keeping {len(kept)} games, pulling {len(games)}", flush=True)
 failed = []
-with gzip.open(DATA / f"feeds_{season}.jsonl.gz", "wt") as fh, ThreadPoolExecutor(6) as pool:
+with gzip.open(path, "wt") as fh, ThreadPoolExecutor(6) as pool:
+    fh.writelines(kept)
     futures = {pool.submit(fetch, g["game_pk"]): g["game_pk"] for g in games}
     for i, (fut, pk) in enumerate(futures.items(), 1):
         try:

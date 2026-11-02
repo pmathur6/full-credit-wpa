@@ -104,6 +104,8 @@ Everything runs as GitHub Actions; nothing runs locally.
 | Workflow | What it does |
 |---|---|
 | `reliability` | Signal-vs-noise report across all seasons (`reports/reliability.md`) |
+| `nightly` | During the season (March–October), every morning: pulls new games for the current season (update mode), rebuilds, re-credits, re-exports and republishes the site. Can also be run by hand for any season. |
+| `site` | Publishes the website to GitHub Pages from `site/` and every season's exported data. Runs on changes to `site/` and after each export. |
 | `pipeline` | Runs a whole season end to end (pull, build, credit, external checks, site export). Use this to add a season; tick *skip pull* to rebuild from the data already pulled. |
 | `probe` | Pulls one day of Savant pitch data and MLB game feeds and writes a field-coverage report to `probe/` |
 | `probe-fielding` | Checks Savant for per-play catch probability for one player |

@@ -1,0 +1,55 @@
+name: nightly
+
+# During the season, every morning: pull yesterday's games (and anything missing) for the
+# current season, rebuild, re-credit, re-export and republish the site.
+on:
+  schedule:
+    - cron: "17 10 * 3-10 *"   # 10:17 UTC = early morning US time, March through October
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season (YYYY); blank = current year"
+        required: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: pipeline-nightly
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      season: ${{ steps.s.outputs.season }}
+      games: ${{ steps.s.outputs.games }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests
+      - id: s
+        run: |
+          season="${{ inputs.season }}"; season="${season:-$(date -u +%Y)}"
+          games=$(cd src/pull && python -c "from common import final_games; print(len(final_games('$season')))")
+          echo "season=$season" >> "$GITHUB_OUTPUT"; echo "games=$games" >> "$GITHUB_OUTPUT"
+          echo "$season: $games final regular-season games"
+  pull:
+    needs: check
+    if: ${{ needs.check.outputs.games != '0' }}
+    uses: ./.github/workflows/pull_season.yml
+    with: { season: "${{ needs.check.outputs.season }}", update: true }
+  build:
+    needs: [check, pull]
+    uses: ./.github/workflows/build_season.yml
+    with: { season: "${{ needs.check.outputs.season }}" }
+  credit:
+    needs: [check, build]
+    uses: ./.github/workflows/credit_season.yml
+    with: { season: "${{ needs.check.outputs.season }}" }
+  export:
+    needs: [check, credit]
+    uses: ./.github/workflows/export_season.yml
+    with: { season: "${{ needs.check.outputs.season }}" }
