@@ -29,7 +29,10 @@
         <option value="">All positions</option><option>P</option><option>C</option><option>1B</option><option>2B</option>
         <option>3B</option><option>SS</option><option value="OF">OF</option><option>DH</option></select></label>
       <label class="field" id="min-wrap"><span id="min-label">Min PA or BF</span><input type="number" id="min" min="0" step="50" inputmode="numeric"></label>
-      <label class="field grow" id="q-wrap">Player<input type="search" id="q" placeholder="Search players" autocomplete="off"></label>
+      <div class="field grow" id="q-wrap"><label for="q">Player</label>
+        <div class="search"><input type="search" id="q" placeholder="Search players" autocomplete="off">
+        <button type="button" id="q-clear" class="clear" aria-label="Clear search" hidden>×</button></div></div>
+      <button type="button" class="btn" id="reset" hidden>Reset filters</button>
     </section>
     <p class="note" id="unit-note" hidden></p>
     <section id="body" aria-live="polite"></section>
@@ -209,6 +212,8 @@
       ? 'Wins added, weighted by game situation. Traditional WPA gives the batter or pitcher the whole play; "vs trad." is the difference. Players with 10+ games; positions with 10+ appearances, most games first.'
       : 'Runs added, every play weighted equally. RE24 gives the batter or pitcher the whole play; "vs trad." is the difference. Players with 10+ games; positions with 10+ appearances, most games first.';
     $('foot-src').textContent = `Data: MLB Stats API, Baseball Savant · ${S.season} regular season${meta.updated ? ' · updated ' + meta.updated : ''}`;
+    $('q-clear').hidden = !S.q;
+    $('reset').hidden = !(S.team || S.pos || S.min !== '' || S.q || S.board !== DEFAULTS.board || S.unit !== DEFAULTS.unit || S.sort !== DEFAULTS.sort || S.dir !== DEFAULTS.dir);
     FC.setParams({ season: S.season, board: S.board, unit: S.unit, team: S.team, pos: S.pos, min: S.min, q: S.q, sort: S.sort, dir: S.dir },
       { ...DEFAULTS, season: String(meta.seasons[0]) });
     coaching ? coachingView() : playersView();
@@ -218,6 +223,12 @@
   $('team').onchange = e => { S.team = e.target.value; S.shown = PAGE; render(); };
   $('pos').onchange = e => { S.pos = e.target.value; S.shown = PAGE; render(); };
   $('min').oninput = e => { S.min = e.target.value; S.shown = PAGE; render(); };
+  $('q-clear').onclick = () => { $('q').value = ''; S.q = ''; S.shown = PAGE; render(); $('q').focus(); };
+  $('reset').onclick = () => {
+    Object.assign(S, { board: DEFAULTS.board, unit: DEFAULTS.unit, team: '', pos: '', min: '', q: '', sort: DEFAULTS.sort, dir: DEFAULTS.dir, shown: PAGE });
+    $('team').value = ''; $('pos').value = ''; $('min').value = ''; $('q').value = '';
+    render();
+  };
   let t; $('q').oninput = e => { clearTimeout(t); t = setTimeout(() => { S.q = e.target.value; S.shown = PAGE; render(); }, 150); };
 
   try { await load(); render(); } catch (e) {

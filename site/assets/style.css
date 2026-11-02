@@ -81,3 +81,10 @@ table.board td.strong { font-weight: 600; }
 .site-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; font-size: 13px; color: var(--ink-2); }
 .site-foot p { margin: 0; max-width: 760px; }
 .loading { padding: 48px 16px; text-align: center; color: var(--ink-2); }
+
+/* search with clear button */
+.search { position: relative; display: flex; }
+.search input { flex: 1; width: 100%; padding-right: 44px; }
+.search input::-webkit-search-cancel-button { display: none; }
+.clear { position: absolute; right: 0; top: 0; width: 44px; height: 44px; border: 0; background: transparent; font-size: 22px; line-height: 1; color: var(--ink-2); cursor: pointer; border-radius: 8px; }
+.clear:hover { color: var(--ink); }
