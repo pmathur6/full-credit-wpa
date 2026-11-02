@@ -92,6 +92,16 @@ for season in SEASONS:
                 rows.append([season, src, grp, len(sub), sub[ours].corr(sub[theirs]), diff.mean(), diff.abs().mean()])
         h = j[j.pa >= 300].assign(gap=lambda x: x.warbat - x.bat)
         detail.append((season, src, h.sort_values("gap").head(5), h.sort_values("gap").tail(5)))
+    # benchmark: how closely the two published versions agree with each other on the same players
+    if len(refs) == 2:
+        bb, ff = refs["bWAR"], refs["fWAR"]
+        j = d.join(bb, how="inner").join(ff, how="inner", rsuffix="_f")
+        for grp, sub, x, y in (("Hitters (300+ PA)", j[j.pa >= 300], "bat", "bat_f"),
+                               ("Pitchers (300+ BF)", j[j.bf >= 300], "pit", "pit_f"),
+                               ("All players (10+ games)", j, None, None)):
+            xs = sub[x] if x else sub.bat + sub.pit
+            ys = sub[y] if y else sub.bat_f + sub.pit_f
+            rows.append([season, "bWAR vs fWAR (benchmark)", grp, len(sub), xs.corr(ys), (xs - ys).mean(), (xs - ys).abs().mean()])
 status.append(fg_status or "fWAR: not tried")
 
 t = pd.DataFrame(rows, columns=["season", "source", "group", "n", "r", "mean_diff", "mean_abs_diff"])
