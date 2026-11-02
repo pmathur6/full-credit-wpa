@@ -107,21 +107,21 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **7B, 1 out, SD vs COL** - Brandon Lockridge grounds into a double play, second baseman Adael Amador to shortstop Ezequiel Tovar to first baseman Michael Toglia. Jose Iglesias out at 2nd. Brandon Lockridge out at 1st. (change -0.004 for the offense; xBA 0.137)
   - Brandon Lockridge (batter, batting): -0.0040
-  - Angel Chivilli (pitcher, pitching): -0.0005
-  - COL coaching (positioning, coaching): -0.0002
-  - Adael Amador (2B, fielding): +0.0020
+  - Angel Chivilli (pitcher, pitching): -0.0003
+  - COL coaching (positioning, coaching): -0.0001
+  - Adael Amador (2B, fielding): +0.0019
   - Angel Chivilli (pitcher, pitching): +0.0026
   - Adael Amador (2B, fielding): +0.0001
   - COL coaching (positioning, coaching): -0.0001
 
 **8B, 1 out, LAA vs SEA** - Kevin Newman grounds into a double play, shortstop J.P. Crawford to second baseman Jorge Polanco to first baseman Josh Naylor. Taylor Ward out at 2nd. Kevin Newman out at 1st. (change -0.035 for the offense; xBA 0.205)
   - Kevin Newman (batter, batting): -0.0350
-  - Trent Thornton (pitcher, pitching): +0.0015
-  - SEA coaching (positioning, coaching): -0.0028
-  - J.P. Crawford (SS, fielding): +0.0305
-  - Trent Thornton (pitcher, pitching): +0.0057
-  - J.P. Crawford (SS, fielding): -0.0018
-  - SEA coaching (positioning, coaching): +0.0018
+  - Trent Thornton (pitcher, pitching): -0.0015
+  - SEA coaching (positioning, coaching): -0.0026
+  - J.P. Crawford (SS, fielding): +0.0286
+  - Trent Thornton (pitcher, pitching): +0.0105
+  - J.P. Crawford (SS, fielding): -0.0017
+  - SEA coaching (positioning, coaching): +0.0017
 
 **5T, 0 out, CIN vs STL** - Ke'Bryan Hayes grounds into a double play, pitcher Michael McGreevy to second baseman Brendan Donovan to first baseman Alec Burleson. Elly De La Cruz out at 2nd. Ke'Bryan Hayes out at 1st. (change -0.080 for the offense; xBA 0.179)
   - Ke'Bryan Hayes (batter, batting): -0.0800
@@ -444,18 +444,19 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 ## fielders_choice (387 plays)
 
 **7T, 1 out, CHC vs CIN** - Matt Shaw reaches on a fielder's choice, fielded by second baseman Matt McLain. Nico Hoerner to 2nd. (change +0.032 for the offense; xBA 0.048)
-  - Matt Shaw (batter, batting): +0.0255
-  - Matt Shaw (batter, batting): +0.0065
-  - Ian Gibaut (pitcher, pitching): +0.0182
-  - CIN coaching (positioning, coaching): -0.0009
-  - Matt McLain (2B, fielding): -0.0364
-  - Ian Gibaut (P, fielding): -0.0040
-  - Elly De La Cruz (SS, fielding): -0.0051
-  - Ian Gibaut (pitcher, pitching): +0.0027
-  - Matt McLain (2B, fielding): -0.0065
-  - Matt McLain (2B, fielding): +0.0008
+  - Matt Shaw (batter, batting): +0.0365
+  - Nico Hoerner (runner, baserunning): -0.0032
+  - Matt Shaw (batter-runner, baserunning): -0.0013
+  - Ian Gibaut (pitcher, pitching): +0.0171
+  - CIN coaching (positioning, coaching): -0.0011
+  - Matt McLain (2B, fielding): -0.0424
+  - Ian Gibaut (P, fielding): -0.0047
+  - Elly De La Cruz (SS, fielding): -0.0059
+  - Ian Gibaut (pitcher, pitching): +0.0005
+  - Matt McLain (2B, fielding): +0.0045
+  - Matt McLain (2B, fielding): +0.0009
   - Elly De La Cruz (SS, fielding): +0.0001
-  - CIN coaching (positioning, coaching): -0.0008
+  - CIN coaching (positioning, coaching): -0.0009
   - CIN coaching (positioning, coaching): -0.0001
 
 **8B, 1 out, LAD vs NYM** - Andy Pages reaches on a fielder's choice, fielded by third baseman Brett Baty. Will Smith scores. Throwing error by third baseman Brett Baty. (change +0.150 for the offense; xBA 0.211)
@@ -583,11 +584,13 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Jesse Winker (batter, batting): -0.1710
   - Jake Irvin (pitcher, pitching): +0.1710
   - Jake Irvin (pitcher, pitching): -0.0000
+  - Nathaniel Lowe (1B, fielding): +0.0000
 
 **6T, 0 out, LAD vs LAA** - Shohei Ohtani lines into a triple play, shortstop Zach Neto to first baseman Nolan Schanuel. Miguel Rojas out at 2nd. Dalton Rushing out at 1st. (change -0.205 for the offense; xBA 0.461)
   - Shohei Ohtani (batter, batting): -0.2050
   - Brock Burke (pitcher, pitching): +0.2050
   - Brock Burke (pitcher, pitching): -0.0000
+  - Zach Neto (SS, fielding): +0.0000
 
 ## stolen_base_home (4 plays)
 
@@ -1015,9 +1018,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **7T, 0 out, MIN vs TOR** - Brooks Lee flies into a sacrifice double play, right fielder Addison Barger to second baseman Andrés Giménez to shortstop Bo Bichette. Mickey Gasper scores. Austin Martin out at 2nd. (change -0.206 for the offense; catch prob 0.25)
   - Brooks Lee (batter, batting): -0.2060
-  - Brendon Little (pitcher, pitching): +0.0256
-  - TOR coaching (positioning, coaching): -0.1103
-  - Addison Barger (RF, fielding): +0.1897
+  - Brendon Little (pitcher, pitching): +0.0149
+  - TOR coaching (positioning, coaching): -0.1252
+  - Addison Barger (RF, fielding): +0.2153
   - Brendon Little (pitcher, pitching): +0.1010
 
 **1T, 2 out, AZ vs MIA** - Lourdes Gurriel Jr. flies out to left fielder Griffin Conine. (change -0.048 for the offense; xBA 0.122; catch prob 0.05)
@@ -1028,9 +1031,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **9B, 0 out, CLE vs MIL** - Nolan Jones lines out sharply to center fielder Jackson Chourio. (change -0.012 for the offense; xBA 0.478; catch prob 0.20)
   - Nolan Jones (batter, batting): -0.0120
-  - Trevor Megill (pitcher, pitching): +0.0018
-  - MIL coaching (positioning, coaching): -0.0184
-  - Jackson Chourio (CF, fielding): +0.0286
+  - Trevor Megill (pitcher, pitching): +0.0011
+  - MIL coaching (positioning, coaching): -0.0196
+  - Jackson Chourio (CF, fielding): +0.0305
 
 **7B, 1 out, NYY vs CLE** - DJ LeMahieu lines out sharply to left fielder Steven Kwan. (change -0.008 for the offense; xBA 0.377; catch prob 0.25)
   - DJ LeMahieu (batter, batting): -0.0080
@@ -1040,9 +1043,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **4T, 0 out, BOS vs MIL** - Wilyer Abreu lines out to left fielder Isaac Collins. (change -0.029 for the offense; xBA 0.770; catch prob 0.25)
   - Wilyer Abreu (batter, batting): -0.0290
-  - Chad Patrick (pitcher, pitching): +0.0053
-  - MIL coaching (positioning, coaching): -0.0329
-  - Isaac Collins (LF, fielding): +0.0566
+  - Chad Patrick (pitcher, pitching): +0.0031
+  - MIL coaching (positioning, coaching): -0.0361
+  - Isaac Collins (LF, fielding): +0.0620
 
 **5B, 1 out, MIN vs MIL** - Ryan Jeffers lines out sharply to left fielder Isaac Collins. (change -0.025 for the offense; xBA 0.641; catch prob 0.25)
   - Ryan Jeffers (batter, batting): -0.0250
@@ -1090,13 +1093,13 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - JJ Bleday (LF, fielding): -0.0011
 
 **7B, 0 out, COL vs MIL** - Mickey Moniak doubles (1) on a fly ball to center fielder Garrett Mitchell. (change +0.017 for the offense; xBA 0.018; catch prob 0.99)
-  - Mickey Moniak (batter, batting): +0.0166
-  - Mickey Moniak (batter-runner, baserunning): +0.0004
+  - Mickey Moniak (batter, batting): +0.0168
+  - Mickey Moniak (batter-runner, baserunning): +0.0002
   - Joel Payamps (pitcher, pitching): +0.0058
   - MIL coaching (positioning, coaching): +0.0000
-  - Sal Frelick (RF, fielding): -0.0180
-  - Joel Payamps (pitcher, pitching): -0.0043
-  - Garrett Mitchell (CF, fielding): -0.0004
+  - Sal Frelick (RF, fielding): -0.0206
+  - Joel Payamps (pitcher, pitching): -0.0020
+  - Garrett Mitchell (CF, fielding): -0.0002
 
 **2T, 0 out, CIN vs ATH** - Will Benson triples (2) on a sharp fly ball to right fielder JJ Bleday. (change +0.089 for the offense; xBA 0.219; catch prob 0.95)
   - Will Benson (batter, batting): +0.0892
@@ -1136,9 +1139,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Jesús Sánchez (batter, batting): +0.0009
   - Xavier Edwards (runner, baserunning): -0.0009
   - Jesús Sánchez (batter-runner, baserunning): -0.0000
-  - Yennier Cano (pitcher, pitching): -0.0007
-  - BAL coaching (positioning, coaching): +0.0000
-  - Ramón Laureano (RF, fielding): -0.0003
+  - Yennier Cano (pitcher, pitching): +0.0001
+  - BAL coaching (positioning, coaching): +0.0001
+  - Ramón Laureano (RF, fielding): -0.0012
   - Yennier Cano (pitcher, pitching): +0.0000
   - Ramón Laureano (RF, fielding): +0.0009
 
