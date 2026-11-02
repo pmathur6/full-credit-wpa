@@ -6,7 +6,7 @@
   const gid = p.get('id');
   let meta;
   try { meta = await FC.seasons(); } catch (e) { app.innerHTML = '<div class="empty">Couldn\'t load the data.</div>'; return; }
-  const S = { season: p.get('season') || String(meta.seasons[0]), unit: p.get('unit') || 'w', player: p.get('player') ? +p.get('player') : null, sel: null };
+  const S = { closed: new Set(), season: p.get('season') || String(meta.seasons[0]), unit: p.get('unit') || 'w', player: p.get('player') ? +p.get('player') : null, sel: null };
   const $ = x => document.getElementById(x);
   if (!gid) { app.innerHTML = '<div class="empty">No game chosen. <a href="games.html">Browse games</a></div>'; return; }
   let G;
@@ -46,14 +46,9 @@
 
   function teamCard(team) {
     const T = teamTotals(team), U = S.unit;
-    const start = team === G.home ? E[0].wpb : 1 - E[0].wpb;
-    const note = U === 'w'
-      ? `Started the game at ${(start * 100).toFixed(0)}% to win; credit adds up to the ${team === winner ? 'win' : 'loss'} minus that.`
-      : `Runs above what an average inning would produce, from every play, split across the team.`;
     const pl = (pid, v) => `<div class="r"><a href="player.html?id=${pid}&season=${S.season}&game=${gid}${U === 'r' ? '&unit=r' : ''}">${esc(nameOf(pid))}</a><span style="color:${v >= 0 ? 'var(--link)' : 'var(--neg)'}">${fmt(v, U, D)}</span></div>`;
     return `<div class="teamcard">
-      <div class="top"><span class="nm">${esc(FC.TEAMS[team] || team)}</span><span class="big" style="color:${T.total >= 0 ? 'var(--link)' : 'var(--neg)'}">${fmt(T.total, U)}</span></div>
-      <p class="small">${note}</p>
+      <div class="top"><span class="nm">${esc(FC.TEAMS[team] || team)}</span>${U === 'r' ? `<span class="big" style="color:${T.total >= 0 ? 'var(--link)' : 'var(--neg)'}">${fmt(T.total, U)}</span>` : ''}</div>
       <div class="chips" style="gap:6px">${['batting', 'baserunning', 'fielding', 'pitching', 'coaching'].map(b => `<span class="pill"><span class="dot" style="background:${COLORS[b] || '#8A93A1'}"></span>${b === 'coaching' ? 'Coaching' : LABEL[b]} <b>${fmt(T.by[b] || 0, U)}</b></span>`).join('')}</div>
       <div class="leaders"><div><div class="h">Most added</div>${T.top.map(x => pl(...x)).join('') || '<div class="small">—</div>'}</div>
         <div><div class="h">Most cost</div>${T.bottom.map(x => pl(...x)).join('') || '<div class="small">—</div>'}</div></div>
@@ -146,17 +141,22 @@
       halves[halves.length - 1].items.push(i);
     });
     const U = S.unit;
-    return `<section class="block" aria-label="Play by play"><h2>Play by play</h2>
+    S.halves = halves.map(h => h.k);
+    const allClosed = halves.every(h => S.closed.has(h.k));
+    return `<section class="block" aria-label="Play by play">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px"><h2>Play by play</h2>
+        <button type="button" class="btn" id="toggle-all">${allClosed ? 'Expand all innings' : 'Collapse all innings'}</button></div>
       ${S.player ? `<p class="small"><span style="color:var(--fld)">●</span> marks plays ${esc(nameOf(S.player))} was part of.</p>` : ''}
       <div style="display:flex;flex-direction:column;gap:12px">
       ${halves.map(h => {
         const last = E[h.items[h.items.length - 1]];
         const runs = h.e.half === 'top' ? (lastScore(h.items).away - h.e.away) : (lastScore(h.items).home - h.e.home);
-        return `<div class="half"><div class="ht"><span>${h.e.half === 'top' ? 'Top' : 'Bottom'} ${ordinal(h.e.inning)} · ${esc(NICK[h.e.bat] || h.e.bat)} batting</span><span>${runs ? `${runs} run${runs > 1 ? 's' : ''}` : ''}</span></div>
+        const open = !S.closed.has(h.k) || h.items.includes(S.sel);
+        return `<details class="half" data-k="${h.k}"${open ? ' open' : ''}><summary class="ht"><span>${h.e.half === 'top' ? 'Top' : 'Bottom'} ${ordinal(h.e.inning)} · ${esc(NICK[h.e.bat] || h.e.bat)} batting</span><span>${runs ? `${runs} run${runs > 1 ? 's' : ''} · ` : ''}${h.items.length} play${h.items.length > 1 ? 's' : ''}</span></summary>
           ${h.items.map(i => {
             const e = E[i], v = swing(e, focus), mine = S.player && (e.batter === S.player || e.pitcher === S.player || e.credits.some(c => c.pid === S.player && Math.abs(cv(c)) > 0));
             return `<a href="#selected-play" class="pl${i === S.sel ? ' on' : ''}${mine ? ' mine' : ''}" data-i="${i}"><span class="d">${esc(e.desc)}</span><span class="s" style="color:${v >= 0 ? 'var(--link)' : 'var(--neg)'}">${fmt(v, U, D)}</span></a>`;
-          }).join('')}</div>`;
+          }).join('')}</details>`;
       }).join('')}
       </div>
       <p class="small">Numbers are each play's swing in ${esc(NICK[focus] || focus)} ${U === 'w' ? 'win probability' : 'expected runs'}. Tap a play to see the split.</p></section>`;
@@ -209,6 +209,14 @@
     $('hits').onclick = ev => { const b = ev.target.closest('button'); if (!b) return; S.sel = +b.dataset.i; render(); };
     $('prev').onclick = () => { S.sel = Math.max(0, S.sel - 1); render(); $('selected-play').scrollIntoView({ block: 'nearest' }); };
     $('next').onclick = () => { S.sel = Math.min(E.length - 1, S.sel + 1); render(); $('selected-play').scrollIntoView({ block: 'nearest' }); };
+    document.querySelectorAll('details.half').forEach(d => { d.ontoggle = () => { d.open ? S.closed.delete(d.dataset.k) : S.closed.add(d.dataset.k); }; });
+    $('toggle-all').onclick = () => {
+      const close = !S.halves.every(k => S.closed.has(k));
+      S.closed = new Set(close ? S.halves : []);
+      document.querySelectorAll('details.half').forEach(d => { d.ontoggle = null; d.open = !close; });
+      $('toggle-all').textContent = close ? 'Expand all innings' : 'Collapse all innings';
+      document.querySelectorAll('details.half').forEach(d => { d.ontoggle = () => { d.open ? S.closed.delete(d.dataset.k) : S.closed.add(d.dataset.k); }; });
+    };
     document.querySelectorAll('a.pl').forEach(a => { a.onclick = ev => { ev.preventDefault(); S.sel = +a.dataset.i; render(); $('selected-play').scrollIntoView({ behavior: 'smooth' }); }; });
   }
   render();
