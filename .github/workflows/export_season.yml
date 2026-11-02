@@ -1,0 +1,52 @@
+name: export-season
+
+# Turns a season's credits into the site's JSON files and uploads them to the season's
+# release as site_<season>.tar.gz (the site deploy assembles these from every season).
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season (YYYY)"
+        required: true
+  workflow_call:
+    inputs:
+      season:
+        type: string
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  SEASON: ${{ inputs.season }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Download tables
+        run: |
+          mkdir -p data/build data/credit data/raw
+          gh release download "data-$SEASON" -D data/build -p "events_$SEASON.parquet"
+          gh release download "data-$SEASON" -D data/credit -p "credits_$SEASON.parquet" -p "credits_runs_$SEASON.parquet"
+          gh release download "data-$SEASON" -D data/raw -p "savant_pitches_$SEASON.parquet"
+      - run: python src/site/export.py "$SEASON" data/build data/credit data/raw site_data
+      - name: Check and upload
+        run: |
+          python src/site/check_export.py "$SEASON" site_data | tee "reports/site_export_$SEASON.md"
+          tar -czf "site_$SEASON.tar.gz" -C site_data "$SEASON"
+          ls -la "site_$SEASON.tar.gz"
+          gh release upload "data-$SEASON" "site_$SEASON.tar.gz" --clobber
+      - name: Commit check report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git commit -m "Site export check for $SEASON" || echo "No changes"
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push && break; sleep $((RANDOM % 20 + 5)); done

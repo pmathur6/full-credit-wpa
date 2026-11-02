@@ -103,10 +103,11 @@ Everything runs as GitHub Actions; nothing runs locally.
 | Workflow | What it does |
 |---|---|
 | `reliability` | Signal-vs-noise report across all seasons (`reports/reliability.md`) |
-| `pipeline` | Runs a whole season end to end (pull, build, credit, external checks). Use this to add a season. |
+| `pipeline` | Runs a whole season end to end (pull, build, credit, external checks, site export). Use this to add a season; tick *skip pull* to rebuild from the data already pulled. |
 | `probe` | Pulls one day of Savant pitch data and MLB game feeds and writes a field-coverage report to `probe/` |
 | `probe-fielding` | Checks Savant for per-play catch probability for one player |
 | `build-season` | Builds the master play tables (`events`, `runner_moves`, `we_lookup`) from a season's raw pulls into the same release and commits `reports/build_report_<season>.md` |
+| `export-season` | Writes the site's JSON (leaderboard, one file per player and per game, wins and runs) with `src/site/export.py`, checks it against the credit outputs (`reports/site_export_<season>.md`) and uploads `site_<season>.tar.gz` to the release |
 | `credit-season` | Runs the credit engine, fetches names and Savant OAA, and commits `reports/credit_report_<season>.md`, `reports/audit_<season>.md` and `output/` (player and coaching tables) |
 | `pull-season` | Pulls a full season (Savant pitches, MLB game feeds, outfield catch probability) into the `data-<season>` release and commits `reports/data_<season>.md` |
 

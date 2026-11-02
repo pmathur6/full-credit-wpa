@@ -1,6 +1,6 @@
 name: pipeline
 
-# Runs a whole season end to end: pull -> build -> credit -> external checks.
+# Runs a whole season end to end: pull -> build -> credit -> external checks + site export.
 on:
   workflow_dispatch:
     inputs:
@@ -38,4 +38,9 @@ jobs:
     needs: credit
     if: ${{ always() && needs.credit.result == 'success' }}
     uses: ./.github/workflows/external_checks.yml
+    with: { season: "${{ inputs.season }}" }
+  export:
+    needs: credit
+    if: ${{ always() && needs.credit.result == 'success' }}
+    uses: ./.github/workflows/export_season.yml
     with: { season: "${{ inputs.season }}" }
