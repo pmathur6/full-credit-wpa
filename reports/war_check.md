@@ -12,24 +12,36 @@ pitching WAR (300+ batters faced). All: hitting + pitching vs total, players wit
 | 2023 | fWAR | Hitters (300+ PA) | 293 | 0.912 | -0.00 | 0.64 |
 | 2023 | fWAR | Pitchers (300+ BF) | 199 | 0.842 | -0.30 | 0.65 |
 | 2023 | fWAR | All players (10+ games) | 1177 | 0.905 | +0.01 | 0.47 |
+| 2023 | bWAR vs fWAR (benchmark) | Hitters (300+ PA) | 293 | 0.926 | +0.07 | 0.57 |
+| 2023 | bWAR vs fWAR (benchmark) | Pitchers (300+ BF) | 199 | 0.824 | -0.13 | 0.73 |
+| 2023 | bWAR vs fWAR (benchmark) | All players (10+ games) | 1177 | 0.912 | +0.01 | 0.46 |
 | 2024 | bWAR | Hitters (300+ PA) | 286 | 0.900 | -0.02 | 0.72 |
 | 2024 | bWAR | Pitchers (300+ BF) | 186 | 0.869 | -0.14 | 0.64 |
 | 2024 | bWAR | All players (10+ games) | 1137 | 0.907 | +0.00 | 0.49 |
 | 2024 | fWAR | Hitters (300+ PA) | 286 | 0.928 | +0.01 | 0.61 |
 | 2024 | fWAR | Pitchers (300+ BF) | 186 | 0.844 | -0.30 | 0.66 |
 | 2024 | fWAR | All players (10+ games) | 1137 | 0.915 | +0.02 | 0.46 |
+| 2024 | bWAR vs fWAR (benchmark) | Hitters (300+ PA) | 286 | 0.934 | +0.03 | 0.55 |
+| 2024 | bWAR vs fWAR (benchmark) | Pitchers (300+ BF) | 186 | 0.791 | -0.16 | 0.80 |
+| 2024 | bWAR vs fWAR (benchmark) | All players (10+ games) | 1137 | 0.907 | +0.01 | 0.48 |
 | 2025 | bWAR | Hitters (300+ PA) | 277 | 0.887 | -0.04 | 0.71 |
 | 2025 | bWAR | Pitchers (300+ BF) | 187 | 0.907 | -0.16 | 0.63 |
 | 2025 | bWAR | All players (10+ games) | 1174 | 0.910 | +0.00 | 0.48 |
 | 2025 | fWAR | Hitters (300+ PA) | 277 | 0.923 | +0.01 | 0.60 |
 | 2025 | fWAR | Pitchers (300+ BF) | 187 | 0.845 | -0.27 | 0.68 |
 | 2025 | fWAR | All players (10+ games) | 1174 | 0.910 | +0.01 | 0.48 |
+| 2025 | bWAR vs fWAR (benchmark) | Hitters (300+ PA) | 277 | 0.924 | +0.05 | 0.57 |
+| 2025 | bWAR vs fWAR (benchmark) | Pitchers (300+ BF) | 187 | 0.810 | -0.11 | 0.83 |
+| 2025 | bWAR vs fWAR (benchmark) | All players (10+ games) | 1174 | 0.906 | +0.01 | 0.48 |
 | 2026 | bWAR | Hitters (300+ PA) | 268 | 0.863 | -0.02 | 0.78 |
 | 2026 | bWAR | Pitchers (300+ BF) | 207 | 0.877 | -0.15 | 0.64 |
 | 2026 | bWAR | All players (10+ games) | 1155 | 0.900 | +0.00 | 0.49 |
 | 2026 | fWAR | Hitters (300+ PA) | 268 | 0.906 | +0.06 | 0.64 |
 | 2026 | fWAR | Pitchers (300+ BF) | 207 | 0.820 | -0.25 | 0.71 |
 | 2026 | fWAR | All players (10+ games) | 1155 | 0.898 | +0.02 | 0.49 |
+| 2026 | bWAR vs fWAR (benchmark) | Hitters (300+ PA) | 268 | 0.921 | +0.07 | 0.54 |
+| 2026 | bWAR vs fWAR (benchmark) | Pitchers (300+ BF) | 207 | 0.823 | -0.10 | 0.79 |
+| 2026 | bWAR vs fWAR (benchmark) | All players (10+ games) | 1155 | 0.912 | +0.01 | 0.45 |
 
 Pooled across seasons:
 
@@ -38,6 +50,9 @@ Pooled across seasons:
 | bWAR | All players (10+ games) | 4643 | 0.907 (n-weighted) |
 | bWAR | Hitters (300+ PA) | 1124 | 0.886 (n-weighted) |
 | bWAR | Pitchers (300+ BF) | 779 | 0.888 (n-weighted) |
+| bWAR vs fWAR (benchmark) | All players (10+ games) | 4643 | 0.909 (n-weighted) |
+| bWAR vs fWAR (benchmark) | Hitters (300+ PA) | 1124 | 0.927 (n-weighted) |
+| bWAR vs fWAR (benchmark) | Pitchers (300+ BF) | 779 | 0.812 (n-weighted) |
 | fWAR | All players (10+ games) | 4643 | 0.907 (n-weighted) |
 | fWAR | Hitters (300+ PA) | 1124 | 0.917 (n-weighted) |
 | fWAR | Pitchers (300+ BF) | 779 | 0.838 (n-weighted) |
