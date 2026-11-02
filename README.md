@@ -70,6 +70,7 @@ For a pitcher, *pitching + his own fielding + the defense behind him* (other fie
 - Infield line drives and popups have no public catch probability, so the pitcher keeps the play; the fielder who caught it is recorded with zero credit.
 - Turning a double play is credited to the pitcher (type of out) until a pivot/relay model exists.
 - Outfield catch probability is measured from where the fielder started: his jump and route are his, his starting spot is coaching, even when he positioned himself.
+- No pitch framing, by design: credit follows plate-appearance outcomes (and events between pitches), so a framed strike counts only through the PA's result, which goes to the batter and pitcher. This is the main source of catcher gaps vs fWAR (`reports/war_check.md`).
 - Win-weighted numbers are noisy (see `reports/reliability.md`); the runs view is better for judging skill.
 
 ## Wins vs runs

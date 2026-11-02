@@ -174,6 +174,7 @@
   <li><b>Infield line drives and popups</b> have no public catch probability, so the pitcher keeps the whole play. The fielder who caught it is still shown, with negligible credit.</li>
   <li><b>Turning double plays</b> is credited to the pitcher for now; a model for the pivot and relay is planned.</li>
   <li><b>Fielder jumps vs positioning.</b> Outfield catch probability is measured from where the fielder started, so his jump and route are his, and his starting spot is coaching. A fielder who positions himself well gets that credited to coaching.</li>
+  <li><b>No pitch framing</b>, by design. Credit is assigned on what happens to the plate appearance (and the events between pitches), not pitch by pitch, so a stolen strike shows up only through the PA's result, which goes to the batter and pitcher. Catchers who frame well will look lower here than in fWAR, which counts framing.</li>
   <li><b>Intentional walks</b> can't be untangled from what happens next, so coaching takes the defense's whole share of the walk itself.</li>
   <li><b>Wins are noisy.</b> Like any WPA, this records what happened and how much it mattered, not true talent. Use the runs view for skill.</li>
   <li><b>Regular season only</b>, 2023 to the present.</li>
