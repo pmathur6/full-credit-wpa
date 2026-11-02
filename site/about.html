@@ -44,6 +44,7 @@
   <a href="#coaching">Coaching</a>
   <a href="#special">Special plays</a>
   <a href="#runs">Wins vs runs</a>
+  <a href="#war">Comparing with WAR</a>
   <a href="#checks">How we check it</a>
   <a href="#limits">Limitations</a>
   <a href="#data">Data</a>
@@ -137,6 +138,17 @@
 <p>The <b>Wins</b> view weights every play by the game situation: a two-out hit in a tie game in the 9th can be worth many times more than the same hit in a blowout. That's what actually decided games, but it's noisy and depends on opportunity.</p>
 <p>The <b>Runs (context-neutral)</b> view runs the exact same split on <b>run expectancy</b>: how many runs a team expects to score from each base, out and count situation, built from that season's games. Score and inning don't matter, so every play counts the same. Traditional run value (RE24) is the comparison column there. Runs are better for judging skill; wins for judging impact.</p>
 <p>The same player can look different in the two views. A fielder who makes a routine-looking play in a tie game late gets more wins than runs; a player who piles up value in lopsided games gets more runs than wins.</p>
+
+<h2 id="war">Comparing with WAR</h2>
+<p>WAR and this site measure from different zeros. WPA, ours included, compares a player with an <b>average</b> player and, in the Wins view, counts when things happened. WAR compares with a <b>replacement-level</b> player (roughly a AAA call-up), ignores game situation, and adjusts for position.</p>
+<p>Tick <b>WAR scale</b> on the leaderboard to add a column on WAR's footing. It starts from the Runs view, which already ignores game situation, and:</p>
+<ul>
+  <li>re-centers each bucket on the league average (as WAR's components are);</li>
+  <li>adds replacement level: about 18 runs per 600 PA for hitters and 16 per 700 batters faced for pitchers, which gives the usual 1,000 WAR per season, 570 to position players and 430 to pitchers;</li>
+  <li>adds FanGraphs' positional adjustments (catcher +12.5 runs a season down to DH −17.5), pro-rated by time at each position, with a league adjustment so they net to zero;</li>
+  <li>divides by runs per win for that season (about 9.8 in 2026).</li>
+</ul>
+<p>Pete Crow-Armstrong's 2026: +77 runs above average, plus 22 for replacement level and 4 for playing center field, comes to about 10.8 wins, in line with his published WAR. His Wins number (+6.4) is lower because less of that value came in high-leverage moments. The WAR scale has no park adjustment and uses one replacement level for starters and relievers, so expect small differences from FanGraphs and Baseball-Reference, which also differ from each other.</p>
 
 <h2 id="checks">How we check it</h2>
 <ul>

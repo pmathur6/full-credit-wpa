@@ -7,7 +7,7 @@
   let meta;
   try { meta = await FC.seasons(); } catch (e) { app.innerHTML = `<div class="empty">Couldn't load the data.</div>`; return; }
   const S = {
-    season: p.get('season') || String(meta.seasons[0]), unit: p.get('unit') || 'w', role: p.get('role') || '',
+    season: p.get('season') || String(meta.seasons[0]), unit: p.get('unit') || 'w', role: p.get('role') || '', war: p.get('war') === '1',
     order: 'impact', open: p.get('game') ? Number(p.get('game')) : null, pinned: p.get('game') ? Number(p.get('game')) : null,
     sel: null, shown: 30,
   };
@@ -77,6 +77,17 @@
     };
   }
 
+  // optional: the runs view on WAR's footing (replacement level + positional adjustment)
+  function warTile() {
+    const W = P.war_scale;
+    if (!S.war || !W) return '';
+    const v = P.two ? (S.role === 'pitching' ? W.pitching : W.hitting) : W.hitting + W.pitching;
+    const pit = P.two ? S.role === 'pitching' : W.pitching !== 0 && Math.abs(W.pitching) >= Math.abs(W.hitting);
+    const rep = pit ? W.rep_runs_pit : W.rep_runs_hit;
+    const sub = `runs vs average + ${rep.toFixed(0)} replacement${!pit && W.pos_runs ? ` ${W.pos_runs >= 0 ? '+' : '−'} ${Math.abs(W.pos_runs).toFixed(0)} position` : ''}, ÷ ${W.runs_per_win.toFixed(1)}${P.two ? ` · ${S.role} only` : ''}`;
+    return `<div class="tile" style="background:#F4F6FB"><span class="lab">WAR scale</span><span class="val"${v < 0 ? ' style="color:var(--neg)"' : ''}>${v.toFixed(1)}</span><span class="sub">${sub}</span></div>`;
+  }
+
   function tilesHTML() {
     const T = totals(), A = P.totals[S.unit], U = S.unit, R = ranks();
     const rk = ([n, of]) => (n > 0 ? `${ordinal(n)} of ${of}` : 'not ranked (under 10 games)');
@@ -96,6 +107,7 @@
         tile(tradName, T.trad_pit, 'pitcher gets the whole play'),
         tile('Defense behind him', T.behind, 'fielders and coaching on his plays', COLORS.behind),
         tile('vs traditional', tot - T.trad_pit, 'pitching + fielding minus traditional'),
+        warTile(),
       ].join('');
     }
     const tot = T.batting + T.baserunning + T.fielding;
@@ -106,6 +118,7 @@
       tile('Fielding', T.fielding, P.pos.split('/').filter(x => x !== 'P' && x !== 'DH').join('/') || (P.pos.includes('DH') ? 'DH, no fielding' : 'in the field'), COLORS.fielding),
       tile(tradName, T.trad_bat, 'batter gets the whole play'),
       tile('vs traditional', tot - T.trad_bat, U === 'w' ? 'value WPA leaves out' : 'value RE24 leaves out'),
+      warTile(),
     ].join('');
   }
 
@@ -337,7 +350,7 @@
       ${logHTML()}
       <footer class="site-foot"><p>${U === 'w' ? 'Wins added, weighted by game situation.' : 'Runs added, every play weighted equally.'} Data: MLB Stats API, Baseball Savant · ${S.season} regular season</p>
         <p><a href="about.html">How it works</a></p></footer>`;
-    FC.setParams({ id, season: S.season, unit: S.unit, role: P.two ? S.role : '', game: S.pinned ?? '' }, { unit: 'w', season: String(meta.seasons[0]) });
+    FC.setParams({ id, season: S.season, unit: S.unit, role: P.two ? S.role : '', game: S.pinned ?? '', war: S.war ? 1 : '' }, { unit: 'w', season: String(meta.seasons[0]) });
     wire();
     if (S.open != null) fillPlays(S.open);
   }

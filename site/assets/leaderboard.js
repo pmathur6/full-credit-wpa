@@ -3,7 +3,7 @@
   const { fmt, esc, bar, BUCKETS, COLORS, LABEL } = FC;
   const app = document.getElementById('app');
   const PAGE = 50;
-  const DEFAULTS = { board: 'all', unit: 'w', team: '', pos: '', min: '', q: '', sort: 'total', dir: 'desc' };
+  const DEFAULTS = { board: 'all', unit: 'w', team: '', pos: '', min: '', q: '', sort: 'total', dir: 'desc', war: '' };
 
   let meta;
   try { meta = await FC.seasons(); } catch (e) {
@@ -14,7 +14,7 @@
     season: p.get('season') || String(meta.seasons[0]),
     board: p.get('board') || DEFAULTS.board, unit: p.get('unit') || DEFAULTS.unit,
     team: p.get('team') || '', pos: p.get('pos') || '', min: p.get('min') ?? '', q: p.get('q') || '',
-    sort: p.get('sort') || DEFAULTS.sort, dir: p.get('dir') || DEFAULTS.dir, shown: PAGE,
+    sort: p.get('sort') || DEFAULTS.sort, dir: p.get('dir') || DEFAULTS.dir, war: p.get('war') === '1' ? '1' : '', shown: PAGE,
   };
 
   app.innerHTML = `
@@ -29,6 +29,8 @@
         <option value="">All positions</option><option>P</option><option>C</option><option>1B</option><option>2B</option>
         <option>3B</option><option>SS</option><option value="OF">OF</option><option>DH</option></select></label>
       <label class="field" id="min-wrap"><span id="min-label">Min PA or BF</span><input type="number" id="min" min="0" step="50" inputmode="numeric"></label>
+      <label class="field check" id="war-wrap" title="Add a column on WAR's scale: the runs view measured against replacement level, with positional adjustments"><span>Compare to WAR</span>
+        <span class="checkline"><input type="checkbox" id="war"> WAR scale</span></label>
       <div class="field grow" id="q-wrap"><label for="q">Player</label>
         <div class="search"><input type="search" id="q" placeholder="Search players" autocomplete="off">
         <button type="button" id="q-clear" class="clear" aria-label="Clear search" hidden>×</button></div></div>
@@ -79,7 +81,8 @@
     const parts = boardBuckets().map(b => [b, val(r, b)]);
     const total = parts.reduce((s, x) => s + x[1], 0);
     const trad = (S.board !== 'pitchers' ? r[`tradbat_${S.unit}`] || 0 : 0) + (S.board !== 'hitters' ? r[`tradpit_${S.unit}`] || 0 : 0);
-    return { parts, total, trad, diff: total - trad };
+    const war = (S.board !== 'pitchers' ? r.warbat || 0 : 0) + (S.board !== 'hitters' ? r.warpit || 0 : 0);
+    return { parts, total, trad, diff: total - trad, war };
   }
   function posMatch(r) {
     if (!S.pos) return true;
@@ -102,7 +105,7 @@
       return true;
     }).map(r => ({ ...r, ...derived(r) }));
     const key = {
-      total: r => r.total, pa: r => r.pa, bf: r => r.bf, trad: r => r.trad, diff: r => r.diff, name: r => r.name,
+      total: r => r.total, pa: r => r.pa, bf: r => r.bf, trad: r => r.trad, diff: r => r.diff, name: r => r.name, war: r => r.war,
       batting: r => val(r, 'batting'), baserunning: r => val(r, 'baserunning'), fielding: r => val(r, 'fielding'), pitching: r => val(r, 'pitching'),
     }[S.sort] || (r => r.total);
     const sgn = S.dir === 'asc' ? 1 : -1;
@@ -129,7 +132,7 @@
       ['total', 'Total', '', true], ['bar', 'Breakdown', 'l', false],
       ...(!isPit ? [['batting', 'Batting', '', true], ['baserunning', 'Baserunning', '', true]] : []),
       ['fielding', 'Fielding', '', true], ...(!isHit ? [['pitching', 'Pitching', '', true]] : []),
-      ['trad', tradName, '', true], ['diff', 'vs trad.', '', true],
+      ['trad', tradName, '', true], ['diff', 'vs trad.', '', true], ...(S.war ? [['war', 'WAR scale', '', true]] : []),
     ];
     const th = cols.map(([k, l, cls, sortable]) => {
       const sorted = S.sort === k;
@@ -141,7 +144,7 @@
     const body = shown.map((r, i) => {
       const cells = {
         rank: `<td class="rank">${i + 1}</td>`,
-        name: `<td class="name"><a href="player.html?id=${r.id}&season=${S.season}${S.board === 'pitchers' ? '&role=pitching' : S.board === 'hitters' ? '&role=hitting' : ''}${S.unit === 'r' ? '&unit=r' : ''}">${esc(r.name)}</a><div class="sub">${esc(r.pos)} · ${esc(r.team)}</div></td>`,
+        name: `<td class="name"><a href="player.html?id=${r.id}&season=${S.season}${S.board === 'pitchers' ? '&role=pitching' : S.board === 'hitters' ? '&role=hitting' : ''}${S.unit === 'r' ? '&unit=r' : ''}${S.war ? '&war=1' : ''}">${esc(r.name)}</a><div class="sub">${esc(r.pos)} · ${esc(r.team)}</div></td>`,
         pa: `<td class="dim">${r.pa || '–'}</td>`, bf: `<td class="dim">${r.bf || '–'}</td>`,
         total: `<td class="strong${r.total < 0 ? ' neg' : ''}">${fmt(r.total, u)}</td>`,
         bar: `<td class="l"><div role="img" aria-label="${r.parts.map(([b, v]) => `${LABEL[b]} ${fmt(v, u)}`).join(', ')}">${bar(r.parts, scale, zero, W)}</div></td>`,
@@ -151,6 +154,7 @@
         pitching: `<td>${r.bf ? fmt(val(r, 'pitching'), u) : '–'}</td>`,
         trad: `<td class="dim">${fmt(r.trad, u)}</td>`,
         diff: `<td class="strong" style="color:${r.diff >= 0 ? 'var(--link)' : 'var(--neg)'}">${fmt(r.diff, u)}</td>`,
+        war: `<td class="strong war">${fmt(r.war, 'w', 1).replace('+', '')}</td>`,
       };
       return `<tr>${cols.map(c => cells[c[0]]).join('')}</tr>`;
     }).join('');
@@ -202,7 +206,9 @@
     seg($('board'), [['all', 'All players'], ['hitters', 'Hitters'], ['pitchers', 'Pitchers'], ['coaching', 'Coaching']], 'board', 'tab');
     seg($('unit'), [['w', 'Wins'], ['r', 'Runs (context-neutral)']], 'unit', 'radio');
     const coaching = S.board === 'coaching';
-    $('pos-wrap').hidden = coaching; $('min-wrap').hidden = coaching; $('q-wrap').hidden = coaching;
+    $('pos-wrap').hidden = coaching; $('min-wrap').hidden = coaching; $('q-wrap').hidden = coaching; $('war-wrap').hidden = coaching;
+    $('war').checked = !!S.war;
+    if (!S.war && S.sort === 'war') { S.sort = 'total'; S.dir = 'desc'; }
     $('min-label').textContent = S.board === 'pitchers' ? 'Min BF' : S.board === 'hitters' ? 'Min PA' : 'Min PA or BF';
     $('min').placeholder = S.board === 'all' ? '0' : '100';
     const note = $('unit-note');
@@ -211,10 +217,14 @@
     $('foot-note').textContent = S.unit === 'w'
       ? 'Wins added, weighted by game situation. Traditional WPA gives the batter or pitcher the whole play; "vs trad." is the difference. Players with 10+ games; positions with 10+ appearances, most games first.'
       : 'Runs added, every play weighted equally. RE24 gives the batter or pitcher the whole play; "vs trad." is the difference. Players with 10+ games; positions with 10+ appearances, most games first.';
+    if (S.war && data.war_scale) {
+      const w = data.war_scale;
+      $('foot-note').textContent += ` WAR scale = the runs view measured against the league average, plus replacement level (${w.rep_runs_per_600_pa.toFixed(1)} runs per 600 PA for hitters, ${w.rep_runs_per_700_bf.toFixed(1)} per 700 batters faced for pitchers) and FanGraphs' positional adjustments, divided by ${w.runs_per_win.toFixed(2)} runs per win. Same footing as fWAR, before park adjustments; coaching isn't included.`;
+    }
     $('foot-src').textContent = `Data: MLB Stats API, Baseball Savant · ${S.season} regular season${meta.updated ? ' · updated ' + meta.updated : ''}`;
     $('q-clear').hidden = !S.q;
-    $('reset').hidden = !(S.team || S.pos || S.min !== '' || S.q || S.board !== DEFAULTS.board || S.unit !== DEFAULTS.unit || S.sort !== DEFAULTS.sort || S.dir !== DEFAULTS.dir);
-    FC.setParams({ season: S.season, board: S.board, unit: S.unit, team: S.team, pos: S.pos, min: S.min, q: S.q, sort: S.sort, dir: S.dir },
+    $('reset').hidden = !(S.team || S.pos || S.min !== '' || S.q || S.board !== DEFAULTS.board || S.unit !== DEFAULTS.unit || S.sort !== DEFAULTS.sort || S.dir !== DEFAULTS.dir || S.war);
+    FC.setParams({ season: S.season, board: S.board, unit: S.unit, team: S.team, pos: S.pos, min: S.min, q: S.q, sort: S.sort, dir: S.dir, war: S.war },
       { ...DEFAULTS, season: String(meta.seasons[0]) });
     coaching ? coachingView() : playersView();
   }
@@ -223,9 +233,10 @@
   $('team').onchange = e => { S.team = e.target.value; S.shown = PAGE; render(); };
   $('pos').onchange = e => { S.pos = e.target.value; S.shown = PAGE; render(); };
   $('min').oninput = e => { S.min = e.target.value; S.shown = PAGE; render(); };
+  $('war').onchange = e => { S.war = e.target.checked ? '1' : ''; if (S.war) { S.sort = 'war'; S.dir = 'desc'; } render(); };
   $('q-clear').onclick = () => { $('q').value = ''; S.q = ''; S.shown = PAGE; render(); $('q').focus(); };
   $('reset').onclick = () => {
-    Object.assign(S, { board: DEFAULTS.board, unit: DEFAULTS.unit, team: '', pos: '', min: '', q: '', sort: DEFAULTS.sort, dir: DEFAULTS.dir, shown: PAGE });
+    Object.assign(S, { board: DEFAULTS.board, unit: DEFAULTS.unit, team: '', pos: '', min: '', q: '', sort: DEFAULTS.sort, dir: DEFAULTS.dir, war: '', shown: PAGE });
     $('team').value = ''; $('pos').value = ''; $('min').value = ''; $('q').value = '';
     render();
   };

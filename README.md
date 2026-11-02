@@ -79,11 +79,15 @@ Every credit is computed twice:
 - **Wins**: MLB's win-probability model (Savant `home_win_exp`), rebuilt as a lookup by inning, half, outs, bases, count and score. Rare lopsided states missing from a season's table (e.g. down 5 in the 12th) are interpolated across score margins in log-odds.
 - **Runs (context-neutral)**: run expectancy by outs, bases and count (innings 1–8 of the same season) plus runs scored. Score and inning don't matter. Each half-inning is valued on its own (three outs = 0). The traditional comparison is RE24.
 
+### WAR scale
+
+An optional leaderboard column (and player-page tile) puts the runs view on WAR's footing, computed in `src/site/export.py`: each bucket re-centered on the league average (offense per PA, pitching per batter faced, fielding per defensive PA), plus replacement level (1,000 WAR a season: 570 to hitters per PA, 430 to pitchers per batter faced), plus FanGraphs positional adjustments pro-rated by defensive PAs (DH by PAs in games without fielding) with a league adjustment, divided by runs per win (9 × league runs per inning × 1.5 + 3). No park adjustment; one replacement level for starters and relievers; coaching excluded.
+
 ## Website
 
 Plain HTML/JS (no build step) in `site/`, published to GitHub Pages by the `site` workflow together with each season's exported data.
 
-- **Leaderboard** (`index.html`): hitters and pitchers on one board or separately (Hitters total = batting + baserunning + fielding; Pitchers total = pitching + fielding), plus team coaching. Wins or runs; season, team, position (OF = LF/CF/RF), minimum PA/BF, accent-insensitive search, clear and reset buttons; sortable columns; every view is a shareable URL. Players with 10+ games; positions with 10+ appearances, most games first, plus DH for 10+ games batting without fielding.
+- **Leaderboard** (`index.html`): hitters and pitchers on one board or separately (Hitters total = batting + baserunning + fielding; Pitchers total = pitching + fielding), plus team coaching. Wins or runs; season, team, position (OF = LF/CF/RF), minimum PA/BF, accent-insensitive search, clear and reset buttons, optional WAR-scale column; sortable columns; every view is a shareable URL. Players with 10+ games; positions with 10+ appearances, most games first, plus DH for 10+ games batting without fielding.
 - **Player page** (`player.html?id=&season=`): summary tiles with ranks, cumulative chart (tap a game), fielding by position, game log (best / worst / recent / all) where each game expands to every play he was part of and his share. Pitchers also see the defense behind him per play. Two-way players switch between hitting and pitching.
 - **Game page** (`game.html?id=&season=`): team bucket totals and top/bottom players, win-probability (or expected-run) chart, the split of any play across every player with the two-team cancellation check, collapsible play-by-play by half-inning.
 - **Games index** (`games.html`): every game by date; filter by team, month, extra innings, one-run games.

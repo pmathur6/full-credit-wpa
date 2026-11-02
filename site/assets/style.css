@@ -205,3 +205,7 @@ section.block { display: flex; flex-direction: column; gap: 10px; }
 .gamecard .x { font-size: 12px; color: var(--ink-3); }
 
 @media (max-width: 560px) { .leaders { grid-template-columns: 1fr; } }
+
+.field.check .checkline { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer; }
+.field.check input { width: 18px; height: 18px; margin: 0; }
+table.board td.war { background: #F4F6FB; }
