@@ -1,0 +1,52 @@
+name: site
+
+# Builds and publishes the website (GitHub Pages): the static pages in site/ plus each
+# season's exported data (site_<season>.tar.gz from the data-<season> releases).
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/site.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble site with every season's data
+        run: |
+          mkdir -p site/data
+          seasons=()
+          for tag in $(gh release list --limit 100 --json tagName --jq '.[].tagName' | grep -E '^data-[0-9]{4}$' | sort -r); do
+            y=${tag#data-}
+            if gh release download "$tag" -p "site_$y.tar.gz" -D /tmp/site_dl --clobber 2>/dev/null; then
+              tar -xzf "/tmp/site_dl/site_$y.tar.gz" -C site/data
+              seasons+=("$y")
+            fi
+          done
+          printf '%s\n' "${seasons[@]}" | python3 -c "import sys, json, datetime; s=[int(x) for x in sys.stdin.read().split()]; json.dump({'seasons': s, 'updated': datetime.date.today().isoformat()}, open('site/data/seasons.json', 'w'))"
+          cat site/data/seasons.json
+          du -sh site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

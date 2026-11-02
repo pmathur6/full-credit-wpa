@@ -123,13 +123,22 @@ games_played = pd.concat([app[["pid", "game_pk"]], pa[["batter", "game_pk"]].ren
                          ).drop_duplicates().groupby("pid").size()
 
 
+# DH: 10+ games batting without playing the field that game
+_bat_g = pa[["game_pk", "batter"]].drop_duplicates().rename(columns={"batter": "pid"})
+_fld_g = app[app.pos.ne("P")][["game_pk", "pid"]].drop_duplicates()
+_dh = _bat_g.merge(_fld_g, how="left", indicator=True).query("_merge == 'left_only'").groupby("pid").size()
+DH = set(_dh[_dh >= 10].index.astype(int))
+
+
 def positions(pid):
     s = gp.get(pid)
-    if s is None:
-        return "-"
-    s = s.sort_values(ascending=False)
-    ok = [p for p, n in s.items() if n >= 10] or [s.index[0]]
-    return "/".join(ok)
+    ok = []
+    if s is not None:
+        s = s.sort_values(ascending=False)
+        ok = [p for p, n in s.items() if n >= 10] or [s.index[0]]
+    if pid in DH:
+        ok.append("DH")
+    return "/".join(ok) or "-"
 
 
 fld_pos = c[c.bucket.eq("fielding")].dropna(subset=["player_id"]).groupby(["player_id", "role"])[["w", "r"]].sum()

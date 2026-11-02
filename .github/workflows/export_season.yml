@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 env:
   SEASON: ${{ inputs.season }}
@@ -50,3 +51,5 @@ jobs:
           git add reports/
           git commit -m "Site export check for $SEASON" || echo "No changes"
           for i in 1 2 3 4 5; do git pull --rebase origin main && git push && break; sleep $((RANDOM % 20 + 5)); done
+      - name: Republish the site
+        run: gh workflow run site.yml --ref main || echo "site workflow not available"
