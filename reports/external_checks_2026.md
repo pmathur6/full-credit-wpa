@@ -7,49 +7,49 @@ Our numbers are wins weighted by game situation; Savant's are context-neutral ru
 | Comparison | Players | Correlation | Note |
 |---|---|---|---|
 | Batting vs traditional batter WPA (200+ PA) | 361 | 0.984 | same plays, runners' share removed |
-| Batting + baserunning vs traditional batter WPA | 361 | 0.958 |  |
-| Pitching vs traditional pitcher WPA (200+ BF) | 343 | 0.914 | fielders' share removed |
-| Baserunning vs Savant baserunning run value | 234 | 0.642 | Savant: extra bases + steals |
-|   ...vs Savant extra-base runs only | 234 | 0.521 |  |
-|   ...vs Savant stolen-base runs only | 234 | 0.526 |  |
-| Fielding vs Savant fielding run value (all non-pitchers) | 543 | 0.673 |  |
-|   Outfielders vs Savant range + arm | 209 | 0.727 |  |
-|   Infielders vs Savant range + arm + DP | 235 | 0.791 |  |
-|   Catchers vs Savant throwing + blocking | 99 | 0.489 | framing is not in our numbers |
-|   Catchers vs Savant total catching | 99 | 0.093 | includes framing |
+| Batting + baserunning vs traditional batter WPA | 361 | 0.961 |  |
+| Pitching vs traditional pitcher WPA (200+ BF) | 343 | 0.913 | fielders' share removed |
+| Baserunning vs Savant baserunning run value | 234 | 0.658 | Savant: extra bases + steals |
+|   ...vs Savant extra-base runs only | 234 | 0.526 |  |
+|   ...vs Savant stolen-base runs only | 234 | 0.550 |  |
+| Fielding vs Savant fielding run value (all non-pitchers) | 543 | 0.678 |  |
+|   Outfielders vs Savant range + arm | 209 | 0.735 |  |
+|   Infielders vs Savant range + arm + DP | 235 | 0.793 |  |
+|   Catchers vs Savant throwing + blocking | 99 | 0.492 | framing is not in our numbers |
+|   Catchers vs Savant total catching | 99 | 0.099 | includes framing |
 
 Biggest disagreements, baserunning (standardized; + = we rate higher):
 
 | Player | Pos | Ours | Savant |
 |---|---|---|---|
-| Seiya Suzuki | RF/DH | +0.52 wins | -3.2 runs |
-| Jakob Marsee | CF | +1.01 wins | +0.6 runs |
-| Mauricio Dubón | LF/SS/CF | +0.69 wins | -1.0 runs |
+| Seiya Suzuki | RF/DH | +0.48 wins | -3.2 runs |
+| Mauricio Dubón | LF/SS/CF | +0.68 wins | -1.0 runs |
+| Yandy Díaz | DH | +0.50 wins | -2.4 runs |
 | Nico Hoerner | 2B/SS | +0.25 wins | +5.6 runs |
 | Zach Neto | SS | -0.32 wins | +1.0 runs |
-| Jake McCarthy | LF/CF/RF/DH | +0.50 wins | +7.2 runs |
+| Willi Castro | 2B/3B/SS/1B | -0.39 wins | +0.5 runs |
 
 Biggest disagreements, outfield (standardized; + = we rate higher):
 
 | Player | Pos | Ours | Savant |
 |---|---|---|---|
-| Daniel Schneemann | CF/3B/2B | +1.27 wins | +5.5 runs |
-| Davis Schneider | LF/2B | +0.27 wins | -3.2 runs |
-| Isaac Collins | LF | +0.57 wins | -0.4 runs |
-| Pete Crow-Armstrong | CF | +0.68 wins | +26.3 runs |
-| Lane Thomas | CF/LF/RF | -2.01 wins | -3.4 runs |
-| Mike Trout | CF/DH | -1.76 wins | -3.8 runs |
+| Isaac Collins | LF | +0.66 wins | -0.4 runs |
+| Daniel Schneemann | CF/3B/2B | +1.28 wins | +5.5 runs |
+| Davis Schneider | LF/2B | +0.24 wins | -3.2 runs |
+| Pete Crow-Armstrong | CF | +0.76 wins | +26.3 runs |
+| Lane Thomas | CF/LF/RF | -2.03 wins | -3.4 runs |
+| Dane Myers | CF/DH | -1.35 wins | -0.7 runs |
 
 Biggest disagreements, infield (standardized; + = we rate higher):
 
 | Player | Pos | Ours | Savant |
 |---|---|---|---|
-| Mookie Betts | SS | +1.99 wins | +5.9 runs |
-| Alex Bregman | 3B/DH | +2.06 wins | +6.7 runs |
-| Gunnar Henderson | SS | +1.20 wins | +0.4 runs |
-| Nasim Nuñez | 2B/SS | -0.21 wins | +7.8 runs |
-| JJ Wetherholt | 2B/SS | +1.61 wins | +23.4 runs |
-| Luke Keaschall | 2B/RF/CF | -2.31 wins | -11.4 runs |
+| Alex Bregman | 3B/DH | +2.15 wins | +6.7 runs |
+| Mookie Betts | SS | +2.00 wins | +5.9 runs |
+| Willy Adames | SS | -0.40 wins | -13.8 runs |
+| JJ Wetherholt | 2B/SS | +1.62 wins | +23.4 runs |
+| Nasim Nuñez | 2B/SS | -0.12 wins | +7.8 runs |
+| Alex Freeland | 2B | -0.73 wins | +1.5 runs |
 
 ## Sources
 
