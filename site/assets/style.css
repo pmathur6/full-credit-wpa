@@ -150,3 +150,52 @@ section.block { display: flex; flex-direction: column; gap: 10px; }
 .fieldpos .p { font-weight: 600; min-width: 40px; }
 .splitrow { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; }
 .splitrow span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* game page */
+.backs { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.teams { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.teamcard { display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; }
+.teamcard .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.teamcard .nm { font-size: 18px; font-weight: 700; }
+.teamcard .big { font-family: var(--mono); font-size: 24px; font-weight: 500; }
+.leaders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; font-size: 14px; }
+.leaders .h { font-size: 12px; font-weight: 600; color: var(--ink-2); margin-bottom: 4px; }
+.leaders .r { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; }
+.leaders .r a { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); text-decoration: none; }
+.leaders .r a:hover { text-decoration: underline; }
+.leaders .r span { font-family: var(--mono); }
+.wpbg { position: absolute; left: 0; right: 0; top: 0; height: 50%; background: #F4F6FB; }
+.fav { position: absolute; left: 6px; font-size: 11px; font-weight: 600; color: var(--ink-2); pointer-events: none; }
+.innline { position: absolute; top: 0; bottom: 0; width: 1px; background: #E3E6EA; }
+.selplay { display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 2px solid var(--ink); border-radius: 12px; scroll-margin-top: 16px; }
+.selplay .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.split .hdr, .split .ln { display: grid; grid-template-columns: minmax(0, 1fr) 118px minmax(90px, 2fr) 72px; gap: 10px; align-items: center; }
+.split .hdr { padding: 6px 0; font-size: 12px; font-weight: 600; color: var(--ink-2); border-bottom: 1px solid var(--line); }
+.split .ln { min-height: 36px; border-bottom: 1px solid #F1F3F5; font-size: 14px; }
+.split .ln a { font-weight: 600; color: var(--ink); text-decoration: none; }
+.split .ln a:hover { text-decoration: underline; }
+.split .track { position: relative; height: 14px; background: var(--bg-2); border-radius: 3px; }
+.split .track .mid { position: absolute; left: 50%; top: -3px; width: 1px; height: 20px; background: var(--ink); }
+.split .track .fill { position: absolute; top: 0; height: 14px; border-radius: 2px; }
+.split .v { font-family: var(--mono); font-weight: 500; text-align: right; }
+@media (max-width: 560px) { .split .hdr, .split .ln { grid-template-columns: minmax(0, 1fr) 92px 64px; } .split .track, .split .hdr .tr { display: none; } }
+.half { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.half .ht { display: flex; justify-content: space-between; gap: 8px; padding: 8px 14px; background: var(--bg-2); font-size: 13px; font-weight: 600; }
+.half .ht span:last-child { font-family: var(--mono); font-weight: 500; color: var(--ink-2); }
+.half a.pl { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 14px; border-top: 1px solid var(--line); text-decoration: none; font-size: 14px; }
+.half a.pl:first-of-type { border-top: 0; }
+.half a.pl:hover { background: #FAFBFC; }
+.half a.pl.on { background: #EEF2FB; box-shadow: inset 3px 0 0 var(--link); }
+.half a.pl .d { min-width: 0; color: var(--ink); }
+.half a.pl .s { flex: 0 0 auto; font-family: var(--mono); font-size: 13px; font-weight: 500; }
+.half a.pl.mine .d::before { content: '●'; color: var(--fld); margin-right: 6px; font-size: 10px; vertical-align: 2px; }
+/* games index */
+.daylist { display: flex; flex-direction: column; gap: 16px; }
+.day h3 { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.gamegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; }
+.gamecard { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; text-decoration: none; color: var(--ink); min-height: 44px; }
+.gamecard:hover { border-color: var(--line-2); background: #FAFBFC; }
+.gamecard .ln { display: flex; justify-content: space-between; font-size: 14px; }
+.gamecard .ln.w { font-weight: 700; }
+.gamecard .ln span:last-child { font-family: var(--mono); }
+.gamecard .x { font-size: 12px; color: var(--ink-3); }

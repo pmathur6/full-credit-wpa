@@ -11,6 +11,10 @@ const FC = (() => {
     OAK: 'Oakland Athletics', PHI: 'Philadelphia Phillies', PIT: 'Pittsburgh Pirates', SD: 'San Diego Padres', SEA: 'Seattle Mariners',
     SF: 'San Francisco Giants', STL: 'St. Louis Cardinals', TB: 'Tampa Bay Rays', TEX: 'Texas Rangers', TOR: 'Toronto Blue Jays',
     WSH: 'Washington Nationals' };
+  const NICK = { ATH: 'Athletics', ATL: 'Braves', AZ: 'Diamondbacks', BAL: 'Orioles', BOS: 'Red Sox', CHC: 'Cubs', CIN: 'Reds',
+    CLE: 'Guardians', COL: 'Rockies', CWS: 'White Sox', DET: 'Tigers', HOU: 'Astros', KC: 'Royals', LAA: 'Angels', LAD: 'Dodgers',
+    MIA: 'Marlins', MIL: 'Brewers', MIN: 'Twins', NYM: 'Mets', NYY: 'Yankees', OAK: 'Athletics', PHI: 'Phillies', PIT: 'Pirates',
+    SD: 'Padres', SEA: 'Mariners', SF: 'Giants', STL: 'Cardinals', TB: 'Rays', TEX: 'Rangers', TOR: 'Blue Jays', WSH: 'Nationals' };
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   // '2026-05-22' -> 'May 22'
   function shortDate(d) { const [, m, day] = d.split('-'); return `${MONTHS[+m - 1]} ${+day}`; }
@@ -89,5 +93,5 @@ const FC = (() => {
     return `<div class="bar" style="width:${width}px">${html}<span class="zero" style="left:${zero - 1}px"></span></div>`;
   }
 
-  return { COLORS, BUCKETS, LABEL, TEAMS, MONTHS, BASES, shortDate, ordinal, getJSON, fmt, rowsToObjects, params, setParams, esc, seasons, header, bar };
+  return { COLORS, BUCKETS, LABEL, TEAMS, NICK, MONTHS, BASES, shortDate, ordinal, getJSON, fmt, rowsToObjects, params, setParams, esc, seasons, header, bar };
 })();
