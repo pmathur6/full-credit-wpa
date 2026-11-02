@@ -4,6 +4,7 @@
 - Tracked state vs Savant at the first pitch (179,195 PAs; 4,675 skipped where Savant lists one runner on two bases): bases 100.00%, outs 100.00%, score 100.00%
 - Games whose deltas sum to the final result (within .001): 100.00% of 2,429; max gap 0.0000
 - Win-prob lookups needing a fallback: {'count 0-0': 255, 'interpolated score margin': 129, 'clamped inning/score': 16}
+- Runs version: half-innings whose deltas telescope (within 1e-9): 100.00% of 43,203; run-expectancy fallbacks: {}
 - PAs with a batted ball: 124,614; with outfield catch probability: 35,894
 - PAs with a Savant final pitch: 99.92%; truncated PAs: 478
 
