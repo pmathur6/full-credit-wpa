@@ -19,8 +19,12 @@
     wpb: e[ci.wp_before], wpa: e[ci.wp_after], dw: e[ci.d_w], dr: e[ci.d_r],
     credits: e[ci.credits].map(c => ({ pid: c[0], team: c[1], bucket: c[2], role: c[3], w: c[4], r: c[5], note: c[6] })),
   }));
-  E.forEach(e => { e.bat = e.half === 'bottom' ? G.home : G.away; });
   const nameOf = pid => G.names[String(pid)] || String(pid);
+  E.forEach(e => {
+    e.bat = e.half === 'bottom' ? G.home : G.away;
+    const run = e.credits.find(c => c.bucket === 'baserunning' && c.pid);
+    e.desc = FC.eventText(e.kind, e.type, e.desc, run ? nameOf(run.pid) : '');
+  });
   const playerTeam = S.player ? (E.flatMap(e => e.credits).find(c => c.pid === S.player) || {}).team : null;
   const focus = playerTeam || G.home;                 // chart and swings from this team's side
   const other = focus === G.home ? G.away : G.home;
@@ -72,7 +76,7 @@
     const H = 240, X = j => j / n * 1000, Y = v => H - (v - lo) / (hi - lo) * H, pct = v => ((hi - v) / (hi - lo) * 100).toFixed(2);
     const s = S.sel, x = ((s + 1) / n * 100).toFixed(2);
     const inns = []; E.forEach((e, i) => { if (e.half === 'top' && (i === 0 || E[i - 1].inning !== e.inning)) inns.push([i, e.inning]); });
-    const step = inns.length > 12 ? 2 : 1;
+    const step = inns.length > 12 || (inns.length > 9 && window.innerWidth < 600) ? 2 : 1;
     const label = U === 'w' ? `${NICK[focus] || focus} win probability` : `${NICK[focus] || focus} run margin (expected)`;
     return `<section class="block" aria-label="Chart">
       <h2>${U === 'w' ? 'Win probability, play by play' : 'Expected-run margin, play by play'}</h2>
@@ -142,6 +146,7 @@
     });
     const U = S.unit;
     S.halves = halves.map(h => h.k);
+    for (const h of halves) if (h.items.includes(S.sel)) S.closed.delete(h.k);
     const allClosed = halves.every(h => S.closed.has(h.k));
     return `<section class="block" aria-label="Play by play">
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px"><h2>Play by play</h2>
@@ -151,7 +156,7 @@
       ${halves.map(h => {
         const last = E[h.items[h.items.length - 1]];
         const runs = h.e.half === 'top' ? (lastScore(h.items).away - h.e.away) : (lastScore(h.items).home - h.e.home);
-        const open = !S.closed.has(h.k) || h.items.includes(S.sel);
+        const open = !S.closed.has(h.k);
         return `<details class="half" data-k="${h.k}"${open ? ' open' : ''}><summary class="ht"><span>${h.e.half === 'top' ? 'Top' : 'Bottom'} ${ordinal(h.e.inning)} · ${esc(NICK[h.e.bat] || h.e.bat)} batting</span><span>${runs ? `${runs} run${runs > 1 ? 's' : ''} · ` : ''}${h.items.length} play${h.items.length > 1 ? 's' : ''}</span></summary>
           ${h.items.map(i => {
             const e = E[i], v = swing(e, focus), mine = S.player && (e.batter === S.player || e.pitcher === S.player || e.credits.some(c => c.pid === S.player && Math.abs(cv(c)) > 0));

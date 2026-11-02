@@ -93,5 +93,22 @@ const FC = (() => {
     return `<div class="bar" style="width:${width}px">${html}<span class="zero" style="left:${zero - 1}px"></span></div>`;
   }
 
-  return { COLORS, BUCKETS, LABEL, TEAMS, NICK, MONTHS, BASES, shortDate, ordinal, getJSON, fmt, rowsToObjects, params, setParams, esc, seasons, header, bar };
+  // between-pitch plays whose feed text is just a pitch call ("Ball", "Caught Stealing 2B"):
+  // build a readable line from the play type and the runner involved
+  const BASE = { '2b': '2nd', '3b': '3rd', home: 'home', '1b': '1st' };
+  function eventText(kind, type, desc, runnerName) {
+    desc = desc || '';
+    if (kind !== 'mid' || /\.\s*$/.test(desc)) return desc || type;
+    const m = (type || '').match(/^(.*?)_(1b|2b|3b|home)$/);
+    const base = m ? BASE[m[2]] : '';
+    const what = {
+      stolen_base: `steals ${base}`, caught_stealing: `caught stealing ${base}`, pickoff: `picked off at ${base}`,
+      pickoff_caught_stealing: `picked off, caught stealing ${base}`, pickoff_error: `pickoff error at ${base}`,
+      wild_pitch: 'advances on a wild pitch', passed_ball: 'advances on a passed ball', balk: 'advances on a balk',
+      defensive_indiff: 'takes a base on defensive indifference', other_advance: 'advances', error: 'advances on an error',
+    }[m ? m[1] : type] || (type || '').replace(/_/g, ' ');
+    return runnerName ? `${runnerName} ${what}.` : `${what.charAt(0).toUpperCase() + what.slice(1)}.`;
+  }
+
+  return { eventText, COLORS, BUCKETS, LABEL, TEAMS, NICK, MONTHS, BASES, shortDate, ordinal, getJSON, fmt, rowsToObjects, params, setParams, esc, seasons, header, bar };
 })();

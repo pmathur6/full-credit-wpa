@@ -12,7 +12,7 @@
 <style>
   .doc { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; }
   .toc { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
-  .toc a { color: var(--ink-2); text-decoration: none; padding: 6px 0; }
+  .toc a { color: var(--ink-2); text-decoration: none; padding: 6px 0; min-height: 44px; display: inline-flex; align-items: center; }
   .toc a:hover { color: var(--ink); }
   .prose { max-width: 720px; display: flex; flex-direction: column; gap: 14px; }
   .prose h2 { font-size: 22px; margin-top: 18px; scroll-margin-top: 16px; }
@@ -151,7 +151,7 @@
         <tr><td>Infield fielding vs Statcast fielding run value</td><td class="n oc">0.79</td></tr>
         <tr><td>Outfield fielding vs Statcast fielding run value</td><td class="n oc">0.74</td></tr>
         <tr><td>Baserunning vs Statcast baserunning run value</td><td class="n oc">0.66</td></tr>
-        <tr><td>Outfield outs above expected vs Statcast OAA</td><td class="n">~0.97</td></tr>
+        <tr><td>Outfield outs above expected vs Statcast OAA</td><td class="n">~0.98</td></tr>
       </tbody></table></div>
     Batting and pitching track traditional WPA closely by design, minus what we hand to runners and fielders. Fielding and baserunning agree with Statcast's run values but aren't identical, because ours are weighted by game situation.</li>
   <li><b>Signal vs noise.</b> Splitting each season into alternating games, baserunning and fielding become reliable faster than batting does in wins: a season of win-weighted batting is about as much luck as skill. Outfield outs above expected stabilize in about 35 games.</li>

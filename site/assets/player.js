@@ -27,7 +27,7 @@
     log = FC.rowsToObjects(P.log.cols, P.log.rows);
     const hit = P.pa > 0, pit = P.bf > 0;
     const two = P.pa >= 50 && P.bf >= 50;
-    if (!two) S.role = pit && !hit ? 'pitching' : 'hitting';
+    if (!two) S.role = pit && P.bf >= P.pa ? 'pitching' : 'hitting';
     else if (!['hitting', 'pitching'].includes(S.role)) S.role = P.pa >= P.bf ? 'hitting' : 'pitching';
     P.two = two;
     if (S.sel === null) S.sel = null;
@@ -45,7 +45,23 @@
     if (!P.two) return log;
     return S.role === 'pitching' ? log.filter(r => r.bf > 0) : log.filter(r => r.bf === 0 || r.pa > 0);
   }
-  function gameTotal(r) { return roleBuckets().reduce((s, b) => s + g_(r, b), 0); }
+  // a bucket's value in a game for the current role. Two-way players: fielding in games he
+  // pitched belongs to the pitching role, otherwise to hitting.
+  function rv(r, b) {
+    if (P.two && b === 'fielding' && (S.role === 'pitching') !== (r.bf > 0)) return 0;
+    return g_(r, b);
+  }
+  // one-role players: the game total is everything (matches the leaderboard); two-way: the role's buckets
+  function gameTotal(r) {
+    return (P.two ? roleBuckets() : FC.BUCKETS).reduce((s, b) => s + rv(r, b), 0);
+  }
+  // season totals for the view: the file's totals, or (two-way) sums over the role's games
+  function totals() {
+    const T = { ...P.totals[S.unit] };
+    if (!P.two) return T;
+    for (const b of FC.BUCKETS) T[b] = roleGames().reduce((s, r) => s + rv(r, b), 0);
+    return T;
+  }
 
   function ranks() {
     const rows = LB.rows, U = S.unit;
@@ -62,16 +78,19 @@
   }
 
   function tilesHTML() {
-    const T = P.totals[S.unit], U = S.unit, R = ranks();
+    const T = totals(), A = P.totals[S.unit], U = S.unit, R = ranks();
     const rk = ([n, of]) => (n > 0 ? `${ordinal(n)} of ${of}` : 'not ranked (under 10 games)');
     const tile = (label, v, sub, color, key) => `<div class="tile${key ? ' key' : ''}"><span class="lab">${color ? `<span class="dot" style="background:${color}"></span>` : ''}${label}</span>
       <span class="val"${v < 0 ? ' style="color:var(--neg)"' : ''}>${fmt(v, U)}</span><span class="sub">${sub}</span></div>`;
-    const all = T.batting + T.baserunning + T.fielding + T.pitching;
+    const all = A.batting + A.baserunning + A.fielding + A.pitching;
+    const pl = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+    // the total always matches the leaderboard; note the other side when a player did a little of both
+    const extra = (b, w) => (Math.abs(A[b]) >= (U === 'w' ? 0.005 : 0.05) ? ` · includes ${fmt(A[b], U)} ${w}` : '');
     const tradName = U === 'w' ? 'Traditional WPA' : 'RE24';
     if (S.role === 'pitching') {
       const tot = T.pitching + T.fielding;
       return [
-        P.two ? tile('Total (hitting + pitching)', all, rk(R.overall) + ' players', null, true) : tile('Total', tot, rk(R.overall) + ' players', null, true),
+        P.two ? tile('Total (hitting + pitching)', all, rk(R.overall) + ' players', null, true) : tile('Total', all, rk(R.overall) + ' players' + extra('batting', 'batting') , null, true),
         tile('Pitching', T.pitching, `${rk(R.pitching)} pitchers${P.bf >= 300 ? ' with 300+ BF' : ''}`, COLORS.pitching),
         tile('Fielding', T.fielding, 'his own plays in the field', COLORS.fielding),
         tile(tradName, T.trad_pit, 'pitcher gets the whole play'),
@@ -81,17 +100,17 @@
     }
     const tot = T.batting + T.baserunning + T.fielding;
     return [
-      P.two ? tile('Total (hitting + pitching)', all, rk(R.overall) + ' players', null, true) : tile('Total', tot, rk(R.overall) + ' players', null, true),
-      tile('Batting', T.batting, `${P.pa} plate appearances`, COLORS.batting),
+      P.two ? tile('Total (hitting + pitching)', all, rk(R.overall) + ' players', null, true) : tile('Total', all, rk(R.overall) + ' players' + extra('pitching', 'pitching'), null, true),
+      tile('Batting', T.batting, pl(P.pa, 'plate appearance'), COLORS.batting),
       tile('Baserunning', T.baserunning, rk(R.baserunning) + ' hitters', COLORS.baserunning),
-      tile('Fielding', T.fielding, P.pos.replace('/DH', '').replace(/^DH$/, 'DH, no fielding'), COLORS.fielding),
+      tile('Fielding', T.fielding, P.pos.split('/').filter(x => x !== 'P' && x !== 'DH').join('/') || (P.pos.includes('DH') ? 'DH, no fielding' : 'in the field'), COLORS.fielding),
       tile(tradName, T.trad_bat, 'batter gets the whole play'),
       tile('vs traditional', tot - T.trad_bat, U === 'w' ? 'value WPA leaves out' : 'value RE24 leaves out'),
     ].join('');
   }
 
   function headline() {
-    const T = P.totals[S.unit], R = ranks();
+    const T = totals(), R = ranks();
     const parts = [];
     if (R.overall[0] > 0) parts.push(`${ordinal(R.overall[0])} of ${R.overall[1]} players in ${S.season}`);
     else parts.push(`${P.g} games in ${S.season} (under the 10-game minimum for the leaderboard)`);
@@ -108,7 +127,7 @@
 
   function splitPanel() {
     if (S.role !== 'pitching') return '';
-    const T = P.totals[S.unit], U = S.unit, name = U === 'w' ? 'traditional WPA' : 'RE24';
+    const T = totals(), U = S.unit, name = U === 'w' ? 'traditional WPA' : 'RE24';
     return `<section class="block panel" aria-label="How traditional value splits">
       <h2 style="font-size:16px">How ${name} splits for him</h2>
       <p class="small" style="font-size:14px">${U === 'w' ? 'Traditional WPA' : 'RE24'} gives a pitcher everything the defense did on his plays. Here's where his ${fmt(T.trad_pit, U)} actually went:</p>
@@ -283,7 +302,7 @@
       const big = Math.abs(d) >= (U === 'w' ? 0.1 : 0.75);
       items.push(`<div class="play${big ? ' bigplay' : ''}">
         <div class="sit"><b>${e[ci.half] === 'top' ? 'T' : 'B'}${e[ci.inning]}</b><span>${e[ci.outs]} out · ${BASES[e[ci.bases]]} · ${myTeam} ${usScore}–${themScore} ${opp}</span>${e[ci.kind] === 'mid' ? '<span>between pitches</span>' : ''}</div>
-        <div class="desc">${esc(e[ci.desc] || e[ci.type])}</div>
+        <div class="desc">${esc(FC.eventText(e[ci.kind], e[ci.type], e[ci.desc], (() => { const c = cr.find(c => c[2] === 'baserunning' && c[0]); return c ? G.names[String(c[0])] || '' : ''; })()))}</div>
         <div class="foot"><div class="chips">${chips.join('') || '<span class="small">no credit on this play</span>'}</div><span class="whole">Whole play ${fmt(d, U, U === 'w' ? 3 : 2)}</span></div>
       </div>`);
     }
