@@ -7,6 +7,10 @@ on:
       season:
         description: "Season (YYYY)"
         required: true
+      skip_pull:
+        description: "Reuse the raw data already in the release (rebuild only)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -17,17 +21,21 @@ concurrency:
 
 jobs:
   pull:
+    if: ${{ !inputs.skip_pull }}
     uses: ./.github/workflows/pull_season.yml
     with: { season: "${{ inputs.season }}" }
   build:
     needs: pull
+    if: ${{ always() && (needs.pull.result == 'success' || needs.pull.result == 'skipped') }}
     uses: ./.github/workflows/build_season.yml
     with: { season: "${{ inputs.season }}" }
   credit:
     needs: build
+    if: ${{ always() && needs.build.result == 'success' }}
     uses: ./.github/workflows/credit_season.yml
     with: { season: "${{ inputs.season }}" }
   external:
     needs: credit
+    if: ${{ always() && needs.credit.result == 'success' }}
     uses: ./.github/workflows/external_checks.yml
     with: { season: "${{ inputs.season }}" }

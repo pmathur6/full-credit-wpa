@@ -342,6 +342,7 @@ for row in pa.itertuples(index=False):
     fid = fpos = None
     out_val = np.nan
     v_hit = None
+    involved = None
     of_air_no_cp = False  # kept for the advancement step below
 
     def v_hit_of(mix):
@@ -383,6 +384,11 @@ for row in pa.itertuples(index=False):
         # hits): no fielder is credited in v1, the pitcher keeps the whole play
         e_x = e_cp = e_evt
         stats["air ball without catch chance: all to pitcher"] += 1
+        # still record who handled the ball (zero credit) so the site can show them
+        inv = credits_of(g, {"f_putout"}, lambda m: m["is_batter"]) or \
+            credits_of(g, {"f_fielded_ball"}, lambda m: m["is_batter"])
+        if inv and inv[0]["id"] != row.pitcher:
+            involved = (inv[0]["id"], inv[0]["pos"])
     add(row, row.pitcher, deff, "def", "pitching", "pitcher", -(e_x - res) - drift)
     if e_cp != e_x:
         add(row, None, deff, "def", "coaching", "positioning", -(e_cp - e_x))
@@ -412,6 +418,8 @@ for row in pa.itertuples(index=False):
         fid, fpos, _ = max(shares, key=lambda t: t[2])
     elif fid is None:
         add(row, row.pitcher, deff, "def", "pitching", "pitcher", conv)
+        if involved:
+            add(row, involved[0], deff, "def", "fielding", involved[1], 0.0, note="handled, not modeled")
     else:
         add(row, fid, deff, "def", "fielding", fpos, conv, oae, 1.0, out_val)
     if abs(refine) > 1e-12:
