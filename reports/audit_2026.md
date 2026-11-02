@@ -27,9 +27,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 **11B, 0 out, CHC vs PIT** - Nico Hoerner reaches on a throwing error by pitcher Yohan Ramírez. Dansby Swanson to 3rd. Nico Hoerner to 2nd. (change +0.270 for the offense; xBA 0.042)
   - Nico Hoerner (batter, batting): +0.2058
   - Nico Hoerner (batter-runner, baserunning): +0.0642
-  - Yohan Ramírez (pitcher, pitching): +0.0483
+  - Yohan Ramírez (pitcher, pitching): +0.0476
   - PIT coaching (positioning, coaching): +0.0029
-  - Yohan Ramírez (P, fielding): -0.2570
+  - Yohan Ramírez (P, fielding): -0.2563
   - Yohan Ramírez (P, fielding): -0.0642
 
 **9T, 1 out, BOS vs TB** - Nick Sogard reaches on a fielding error by second baseman Ryan Vilade. (change +0.004 for the offense; xBA 0.052)
@@ -49,12 +49,12 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Noah Schultz (P, fielding): +0.0018
 
 **5B, 0 out, MIN vs DET** - Luke Keaschall reaches on a fielding error by third baseman Hao-Yu Lee. (change +0.022 for the offense; xBA 0.261)
-  - Luke Keaschall (batter, batting): +0.0256
-  - Luke Keaschall (batter-runner, baserunning): -0.0036
+  - Luke Keaschall (batter, batting): +0.0242
+  - Luke Keaschall (batter-runner, baserunning): -0.0022
   - Jackson Jobe (pitcher, pitching): +0.0097
   - DET coaching (positioning, coaching): -0.0001
-  - Hao-Yu Lee (3B, fielding): -0.0353
-  - Hao-Yu Lee (3B, fielding): +0.0036
+  - Hao-Yu Lee (3B, fielding): -0.0338
+  - Hao-Yu Lee (3B, fielding): +0.0022
   - Hao-Yu Lee (3B, fielding): -0.0017
   - DET coaching (positioning, coaching): +0.0017
 
@@ -79,14 +79,16 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - MIL coaching (positioning, coaching): +0.0020
 
 **2T, 2 out, BOS vs CLE** - Isiah Kiner-Falefa reaches on a fielding error by shortstop Brayan Rocchio. Mickey Gasper out at home on the throw, left fielder Angel Martínez to catcher Patrick Bailey. (change -0.022 for the offense; xBA 0.314)
-  - Isiah Kiner-Falefa (batter, batting): -0.0359
-  - Isiah Kiner-Falefa (batter, batting): +0.0139
-  - Slade Cecconi (pitcher, pitching): +0.0151
-  - CLE coaching (positioning, coaching): +0.0008
-  - Brayan Rocchio (SS, fielding): +0.0199
-  - Brayan Rocchio (SS, fielding): -0.0139
-  - Brayan Rocchio (SS, fielding): +0.0003
-  - CLE coaching (positioning, coaching): -0.0003
+  - Isiah Kiner-Falefa (batter, batting): +0.0355
+  - Mickey Gasper (runner, baserunning): -0.0541
+  - Isiah Kiner-Falefa (batter-runner, baserunning): -0.0034
+  - Slade Cecconi (pitcher, pitching): -0.0015
+  - CLE coaching (positioning, coaching): +0.0029
+  - Brayan Rocchio (SS, fielding): -0.0369
+  - Angel Martínez (LF, fielding): +0.0288
+  - Angel Martínez (LF, fielding): +0.0288
+  - Brayan Rocchio (SS, fielding): +0.0010
+  - CLE coaching (positioning, coaching): -0.0010
 
 **2T, 1 out, DET vs NYY** - Matt Vierling reaches on a throwing error by third baseman José Caballero. Zach McKinstry scores. James Outman to 3rd. (change +0.084 for the offense; xBA 0.053)
   - Matt Vierling (batter, batting): +0.0840
@@ -179,12 +181,12 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **6B, 0 out, CLE vs PIT** - Brayan Rocchio grounds into a double play, second baseman Brandon Lowe to first baseman Ryan O'Hearn. Travis Bazzana out at 2nd. Brayan Rocchio out at 1st. (change -0.094 for the offense; xBA 0.162)
   - Brayan Rocchio (batter, batting): -0.0940
-  - Khristian Curtis (pitcher, pitching): +0.0445
-  - PIT coaching (positioning, coaching): +0.0017
-  - Brandon Lowe (2B, fielding): +0.0098
-  - Khristian Curtis (pitcher, pitching): +0.0380
-  - Brandon Lowe (2B, fielding): +0.0010
-  - PIT coaching (positioning, coaching): -0.0010
+  - Khristian Curtis (pitcher, pitching): +0.0407
+  - PIT coaching (positioning, coaching): +0.0021
+  - Brandon Lowe (2B, fielding): +0.0121
+  - Khristian Curtis (pitcher, pitching): +0.0391
+  - Brandon Lowe (2B, fielding): +0.0013
+  - PIT coaching (positioning, coaching): -0.0013
 
 ## strikeout_double_play (100 plays)
 
@@ -305,15 +307,15 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - TOR coaching (positioning, coaching): +0.0031
 
 **8B, 0 out, NYM vs SF** - Luis Torrens out on a sacrifice bunt to first baseman Bryce Eldridge. A.J. Ewing to 2nd. (change -0.038 for the offense)
-  - NYM coaching (bunt call, coaching): -0.0272
+  - NYM coaching (bunt call, coaching): -0.0259
   - Luis Torrens (batter, batting): +0.0000
-  - A.J. Ewing (runner, baserunning): -0.0033
-  - Luis Torrens (batter-runner, baserunning): -0.0075
-  - Carson Seymour (pitcher, pitching): +0.0794
+  - A.J. Ewing (runner, baserunning): -0.0037
+  - Luis Torrens (batter-runner, baserunning): -0.0084
+  - Carson Seymour (pitcher, pitching): +0.0791
   - SF coaching (positioning, coaching): +0.0033
-  - Bryce Eldridge (1B, fielding): +0.0312
-  - Carson Seymour (pitcher, pitching): -0.0867
-  - Bryce Eldridge (1B, fielding): +0.0108
+  - Bryce Eldridge (1B, fielding): +0.0314
+  - Carson Seymour (pitcher, pitching): -0.0879
+  - Bryce Eldridge (1B, fielding): +0.0121
   - Bryce Eldridge (1B, fielding): +0.0084
   - SF coaching (positioning, coaching): -0.0084
 
@@ -461,24 +463,25 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 ## fielders_choice (408 plays)
 
 **8T, 0 out, CHC vs LAD** - Moisés Ballesteros reaches on a fielder's choice. Seiya Suzuki to 2nd. Seiya Suzuki advances to 2nd, on a missed catch error by second baseman Alex Freeland, assist to shortstop Hyeseong Kim. (change +0.004 for the offense; xBA 0.191)
-  - Moisés Ballesteros (batter, batting): +0.0027
-  - Moisés Ballesteros (batter, batting): +0.0013
-  - Kyle Hurt (pitcher, pitching): +0.0010
-  - LAD coaching (positioning, coaching): -0.0000
-  - Alex Freeland (2B, fielding): -0.0036
-  - Alex Freeland (2B, fielding): -0.0013
+  - Moisés Ballesteros (batter, batting): +0.0041
+  - Seiya Suzuki (runner, baserunning): -0.0001
+  - Moisés Ballesteros (batter-runner, baserunning): -0.0000
+  - Kyle Hurt (pitcher, pitching): +0.0004
+  - LAD coaching (positioning, coaching): -0.0001
+  - Alex Freeland (2B, fielding): -0.0044
+  - Alex Freeland (2B, fielding): +0.0001
   - Alex Freeland (2B, fielding): -0.0001
   - LAD coaching (positioning, coaching): +0.0001
 
 **6T, 0 out, WSH vs CLE** - Drew Millas reaches on a fielder's choice, fielded by third baseman José Ramírez. Daylen Lile to 3rd. Jacob Young to 2nd. Fielding error by third baseman José Ramírez. (change +0.006 for the offense; xBA 0.290)
-  - Drew Millas (batter, batting): +0.0086
-  - Jacob Young (runner, baserunning): -0.0011
-  - Daylen Lile (runner, baserunning): -0.0011
-  - Drew Millas (batter-runner, baserunning): -0.0004
-  - Logan Allen (pitcher, pitching): +0.0006
+  - Drew Millas (batter, batting): +0.0072
+  - Jacob Young (runner, baserunning): -0.0005
+  - Daylen Lile (runner, baserunning): -0.0005
+  - Drew Millas (batter-runner, baserunning): -0.0002
+  - Logan Allen (pitcher, pitching): +0.0010
   - CLE coaching (positioning, coaching): +0.0000
-  - José Ramírez (3B, fielding): -0.0092
-  - José Ramírez (3B, fielding): +0.0026
+  - José Ramírez (3B, fielding): -0.0082
+  - José Ramírez (3B, fielding): +0.0012
   - José Ramírez (3B, fielding): +0.0001
   - CLE coaching (positioning, coaching): -0.0001
 
@@ -553,27 +556,27 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - CIN coaching (positioning, coaching): -0.0035
 
 **7B, 1 out, TOR vs SEA** - Kazuma Okamoto reaches on a fielder's choice, fielded by third baseman J.P. Crawford. George Springer scores. Myles Straw to 2nd. Fielding error by third baseman J.P. Crawford. (change +0.002 for the offense; xBA 0.049)
-  - Kazuma Okamoto (batter, batting): +0.0023
+  - Kazuma Okamoto (batter, batting): +0.0022
   - Myles Straw (runner, baserunning): -0.0002
   - Kazuma Okamoto (batter-runner, baserunning): -0.0000
-  - Michael Rucker (pitcher, pitching): -0.0001
+  - Michael Rucker (pitcher, pitching): +0.0002
   - SEA coaching (positioning, coaching): +0.0001
-  - J.P. Crawford (3B, fielding): -0.0023
-  - J.P. Crawford (3B, fielding): +0.0003
-  - J.P. Crawford (3B, fielding): -0.0000
-  - SEA coaching (positioning, coaching): +0.0000
+  - J.P. Crawford (3B, fielding): -0.0024
+  - J.P. Crawford (3B, fielding): +0.0002
+  - J.P. Crawford (3B, fielding): -0.0001
+  - SEA coaching (positioning, coaching): +0.0001
 
 **7T, 0 out, SD vs AZ** - Ty France reaches on a fielder's choice. Xander Bogaerts to 3rd. Gavin Sheets to 2nd. Fielding error by shortstop Geraldo Perdomo. (change +0.129 for the offense; xBA 0.093)
   - Ty France (batter, batting): +0.1590
   - Gavin Sheets (runner, baserunning): -0.0126
   - Xander Bogaerts (runner, baserunning): -0.0126
   - Ty France (batter-runner, baserunning): -0.0048
-  - Taylor Clarke (pitcher, pitching): +0.0240
+  - Taylor Clarke (pitcher, pitching): +0.0249
   - AZ coaching (positioning, coaching): -0.0024
-  - Geraldo Perdomo (SS, fielding): -0.1806
+  - Geraldo Perdomo (SS, fielding): -0.1815
   - Geraldo Perdomo (SS, fielding): +0.0300
-  - Geraldo Perdomo (SS, fielding): +0.0128
-  - AZ coaching (positioning, coaching): -0.0128
+  - Geraldo Perdomo (SS, fielding): +0.0125
+  - AZ coaching (positioning, coaching): -0.0125
 
 ## triple_play (1 plays)
 
@@ -1000,16 +1003,16 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **8T, 2 out, TEX vs PHI** - Josh Jung lines out to right fielder Adolis García. (change -0.013 for the offense; xBA 0.531; catch prob 0.25)
   - Josh Jung (batter, batting): -0.0130
-  - Tim Mayza (pitcher, pitching): -0.0038
-  - PHI coaching (positioning, coaching): -0.0235
-  - Adolis García (RF, fielding): +0.0403
+  - Tim Mayza (pitcher, pitching): -0.0027
+  - PHI coaching (positioning, coaching): -0.0220
+  - Adolis García (RF, fielding): +0.0376
 
 **4B, 0 out, ATL vs NYM** - Mike Yastrzemski lines out to right fielder Carson Benge. (change -0.022 for the offense; xBA 0.383; catch prob 0.20)
   - Mike Yastrzemski (batter, batting): -0.0218
   - Austin Riley (runner, baserunning): -0.0002
-  - Freddy Peralta (pitcher, pitching): +0.0021
-  - NYM coaching (positioning, coaching): -0.0350
-  - Carson Benge (RF, fielding): +0.0573
+  - Freddy Peralta (pitcher, pitching): +0.0027
+  - NYM coaching (positioning, coaching): -0.0340
+  - Carson Benge (RF, fielding): +0.0557
   - Freddy Peralta (pitcher, pitching): -0.0026
   - Carson Benge (RF, fielding): +0.0002
 
@@ -1052,17 +1055,17 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 **2T, 0 out, SEA vs TB** - Victor Robles out on a sacrifice fly to center fielder Cedric Mullins. Josh Naylor scores. Mitch Garver to 3rd. (change -0.002 for the offense; catch prob 0.20)
   - Victor Robles (batter, batting): -0.0212
   - Mitch Garver (runner, baserunning): +0.0192
-  - Ian Seymour (pitcher, pitching): +0.0243
-  - TB coaching (positioning, coaching): -0.1111
-  - Cedric Mullins (CF, fielding): +0.1321
+  - Ian Seymour (pitcher, pitching): +0.0244
+  - TB coaching (positioning, coaching): -0.1106
+  - Cedric Mullins (CF, fielding): +0.1315
   - Ian Seymour (pitcher, pitching): -0.0241
   - Cedric Mullins (CF, fielding): -0.0192
 
 **6T, 0 out, STL vs ATH** - Nolan Gorman lines out to center fielder Henry Bolte. (change -0.024 for the offense; xBA 0.526; catch prob 0.05)
   - Nolan Gorman (batter, batting): -0.0240
-  - J.T. Ginn (pitcher, pitching): +0.0035
-  - ATH coaching (positioning, coaching): -0.0419
-  - Henry Bolte (CF, fielding): +0.0624
+  - J.T. Ginn (pitcher, pitching): +0.0023
+  - ATH coaching (positioning, coaching): -0.0445
+  - Henry Bolte (CF, fielding): +0.0662
 
 ## Outfield drop with catch probability over 90% (425 plays)
 
@@ -1121,13 +1124,14 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Luke Keaschall (CF, fielding): -0.0000
 
 **5T, 2 out, AZ vs COL** - Nolan Arenado singles on a fly ball to center fielder Cole Carrigg, deflected by left fielder Jake McCarthy. Geraldo Perdomo scores. Pavin Smith to 3rd. (change +0.003 for the offense; xBA 0.171; catch prob 0.99)
-  - Nolan Arenado (batter, batting): +0.0043
-  - Nolan Arenado (batter-runner, baserunning): -0.0013
-  - Jimmy Herget (pitcher, pitching): +0.0004
-  - COL coaching (positioning, coaching): +0.0005
-  - Jake McCarthy (LF, fielding): -0.0062
-  - Jimmy Herget (pitcher, pitching): +0.0009
-  - Cole Carrigg (CF, fielding): +0.0013
+  - Nolan Arenado (batter, batting): +0.0026
+  - Pavin Smith (runner, baserunning): +0.0003
+  - Geraldo Perdomo (runner, baserunning): +0.0001
+  - Jimmy Herget (pitcher, pitching): +0.0006
+  - COL coaching (positioning, coaching): +0.0004
+  - Jake McCarthy (LF, fielding): -0.0041
+  - Jimmy Herget (pitcher, pitching): +0.0006
+  - Cole Carrigg (CF, fielding): -0.0004
 
 **5T, 0 out, PIT vs ATH** - Tyler Callihan singles on a sharp line drive to center fielder Henry Bolte. (change +0.041 for the offense; xBA 0.809; catch prob 0.99)
   - Tyler Callihan (batter, batting): +0.0405
