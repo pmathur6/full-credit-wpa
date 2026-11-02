@@ -1,0 +1,36 @@
+name: war-check
+
+# Correlates our WAR scale with Baseball-Reference (and FanGraphs, if reachable) WAR for every
+# season with site data; commits reports/war_check.md.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Leaderboards from each season's site export
+        run: |
+          mkdir -p site_data seasons
+          for tag in $(gh release list --limit 100 --json tagName --jq '.[].tagName' | grep -E '^data-[0-9]{4}$'); do
+            y=${tag#data-}
+            gh release download "$tag" -p "site_$y.tar.gz" -D /tmp/dl --clobber && tar -xzf "/tmp/dl/site_$y.tar.gz" -C site_data "$y/leaderboard.json" && echo "$y" >> seasons/list
+          done
+          cat seasons/list
+      - run: python src/analysis/war_check.py site_data $(sort seasons/list)
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/war_check.md
+          git commit -m "WAR check report" || echo "No changes"
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push && break; sleep $((RANDOM % 20 + 5)); done
