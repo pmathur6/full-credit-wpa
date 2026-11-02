@@ -107,12 +107,12 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **6T, 1 out, COL vs SF** - Ryan McMahon grounds into a double play, shortstop Brandon Crawford to first baseman LaMonte Wade Jr. Ezequiel Tovar out at 2nd. Ryan McMahon out at 1st. (change -0.013 for the offense; xBA 0.437)
   - Ryan McMahon (batter, batting): -0.0130
-  - Logan Webb (pitcher, pitching): +0.0075
-  - SF coaching (positioning, coaching): -0.0001
-  - Brandon Crawford (SS, fielding): +0.0025
-  - Logan Webb (pitcher, pitching): +0.0031
-  - Brandon Crawford (SS, fielding): +0.0004
-  - SF coaching (positioning, coaching): -0.0004
+  - Logan Webb (pitcher, pitching): +0.0054
+  - SF coaching (positioning, coaching): -0.0002
+  - Brandon Crawford (SS, fielding): +0.0043
+  - Logan Webb (pitcher, pitching): +0.0035
+  - Brandon Crawford (SS, fielding): +0.0007
+  - SF coaching (positioning, coaching): -0.0007
 
 **2T, 0 out, SD vs PHI** - Gary Sanchez grounds into a double play, shortstop Trea Turner to second baseman Bryson Stott to first baseman Darick Hall. Jake Cronenworth out at 2nd. Gary Sanchez out at 1st. (change -0.070 for the offense; xBA 0.055)
   - Gary Sánchez (batter, batting): -0.0700
@@ -252,16 +252,16 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 ## sac_bunt (429 plays)
 
 **10T, 0 out, SEA vs KC** - Sam Haggerty out on a sacrifice bunt, pitcher Tucker Davidson to second baseman Samad Taylor. Cade Marlowe to 3rd. Jose Caballero to 2nd. (change +0.012 for the offense)
-  - SEA coaching (bunt call, coaching): +0.0294
+  - SEA coaching (bunt call, coaching): +0.0279
   - Sam Haggerty (batter, batting): +0.0000
-  - José Caballero (runner, baserunning): -0.0022
-  - Cade Marlowe (runner, baserunning): -0.0033
-  - Sam Haggerty (batter-runner, baserunning): -0.0120
-  - Tucker Davidson (pitcher, pitching): +0.0356
-  - KC coaching (positioning, coaching): +0.0098
-  - Tucker Davidson (P, fielding): +0.0391
-  - Tucker Davidson (pitcher, pitching): -0.1139
-  - Tucker Davidson (P, fielding): +0.0174
+  - José Caballero (runner, baserunning): -0.0020
+  - Cade Marlowe (runner, baserunning): -0.0030
+  - Sam Haggerty (batter-runner, baserunning): -0.0109
+  - Tucker Davidson (pitcher, pitching): +0.0383
+  - KC coaching (positioning, coaching): +0.0094
+  - Tucker Davidson (P, fielding): +0.0376
+  - Tucker Davidson (pitcher, pitching): -0.1132
+  - Tucker Davidson (P, fielding): +0.0159
 
 **3T, 0 out, CHC vs PIT** - Nick Madrigal out on a sacrifice bunt, first baseman Connor Joe to second baseman Ji Hwan Bae. Miguel Amaya to 3rd. Mike Tauchman to 2nd. (change -0.007 for the offense)
   - CHC coaching (bunt call, coaching): +0.0026
@@ -290,9 +290,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - NYM coaching (bunt call, coaching): -0.0109
   - Tomás Nido (batter, batting): +0.0000
   - Tomás Nido (batter-runner, baserunning): -0.0021
-  - José Berríos (pitcher, pitching): +0.0262
+  - José Berríos (pitcher, pitching): +0.0264
   - TOR coaching (positioning, coaching): -0.0030
-  - Vladimir Guerrero Jr. (1B, fielding): +0.0183
+  - Vladimir Guerrero Jr. (1B, fielding): +0.0182
   - José Berríos (pitcher, pitching): -0.0306
   - Vladimir Guerrero Jr. (1B, fielding): +0.0021
   - Vladimir Guerrero Jr. (1B, fielding): -0.0045
@@ -563,15 +563,15 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - OAK coaching (positioning, coaching): +0.0004
 
 **3T, 1 out, SEA vs NYY** - Mariners challenged (other), call on the field was overturned: Mariners challenged (stadium boundary call), call on the field was upheld: Umpire reviewed (rules check), call on the field was upheld: Mike Ford reaches on a fielder's choice, fielded by third baseman Josh Donaldson. Eugenio Suarez scores. Mike Ford to 3rd. Fielding error by third baseman Josh Donaldson. Missed catch error by pitcher Domingo German, assist to third baseman Josh Donaldson. (change +0.030 for the offense; xBA 0.119)
-  - Mike Ford (batter, batting): +0.0127
-  - Eugenio Suárez (runner, baserunning): +0.0080
-  - Mike Ford (batter-runner, baserunning): +0.0092
-  - Domingo Germán (pitcher, pitching): +0.0054
+  - Mike Ford (batter, batting): +0.0099
+  - Eugenio Suárez (runner, baserunning): +0.0094
+  - Mike Ford (batter-runner, baserunning): +0.0108
+  - Domingo Germán (pitcher, pitching): +0.0058
   - NYY coaching (positioning, coaching): -0.0000
-  - Josh Donaldson (3B, fielding): -0.0181
-  - Josh Donaldson (3B, fielding): -0.0173
-  - Josh Donaldson (3B, fielding): -0.0006
-  - NYY coaching (positioning, coaching): +0.0006
+  - Josh Donaldson (3B, fielding): -0.0156
+  - Josh Donaldson (3B, fielding): -0.0201
+  - Josh Donaldson (3B, fielding): -0.0005
+  - NYY coaching (positioning, coaching): +0.0005
 
 ## triple_play (1 plays)
 
@@ -1085,10 +1085,10 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 **3T, 0 out, STL vs WSH** - Tommy Edman triples (3) on a line drive to left fielder Corey Dickerson, deflected by center fielder Victor Robles. Paul DeJong scores. (change +0.081 for the offense; xBA 0.348; catch prob 0.95)
   - Tommy Edman (batter, batting): +0.0816
   - Tommy Edman (batter-runner, baserunning): -0.0006
-  - Josiah Gray (pitcher, pitching): +0.0275
-  - WSH coaching (positioning, coaching): -0.0024
-  - Victor Robles (CF, fielding): +0.0169
-  - Josiah Gray (pitcher, pitching): -0.1235
+  - Josiah Gray (pitcher, pitching): +0.0078
+  - WSH coaching (positioning, coaching): +0.0120
+  - Victor Robles (CF, fielding): -0.0830
+  - Josiah Gray (pitcher, pitching): -0.0183
   - Corey Dickerson (LF, fielding): +0.0006
 
 **1B, 2 out, CWS vs DET** - Elvis Andrus singles on a fly ball to left fielder Akil Baddoo. Eloy Jimenez scores. Yoan Moncada to 3rd. Elvis Andrus to 2nd. (change +0.097 for the offense; xBA 0.358; catch prob 0.95)
