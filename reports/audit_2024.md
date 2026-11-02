@@ -5,20 +5,20 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 ## field_error (1,112 plays)
 
 **8B, 0 out, WSH vs TOR** - Joey Meneses reaches on a throwing error by pitcher Trevor Richards. (change +0.031 for the offense; xBA 0.149)
-  - Joey Meneses (batter, batting): +0.0311
-  - Joey Meneses (batter-runner, baserunning): -0.0001
+  - Joey Meneses (batter, batting): +0.0316
+  - Joey Meneses (batter-runner, baserunning): -0.0006
   - Trevor Richards (pitcher, pitching): +0.0083
   - TOR coaching (positioning, coaching): +0.0012
-  - Trevor Richards (P, fielding): -0.0406
-  - Trevor Richards (P, fielding): +0.0001
+  - Trevor Richards (P, fielding): -0.0410
+  - Trevor Richards (P, fielding): +0.0006
 
 **4T, 0 out, HOU vs OAK** - Jeremy Peña reaches on a fielding error by shortstop Max Schuemann. (change +0.039 for the offense; xBA 0.064)
-  - Jeremy Peña (batter, batting): +0.0392
-  - Jeremy Peña (batter-runner, baserunning): -0.0002
+  - Jeremy Peña (batter, batting): +0.0410
+  - Jeremy Peña (batter-runner, baserunning): -0.0020
   - Hogan Harris (pitcher, pitching): +0.0146
   - OAK coaching (positioning, coaching): -0.0006
-  - Max Schuemann (SS, fielding): -0.0533
-  - Max Schuemann (SS, fielding): +0.0002
+  - Max Schuemann (SS, fielding): -0.0550
+  - Max Schuemann (SS, fielding): +0.0020
   - Max Schuemann (SS, fielding): +0.0017
   - OAK coaching (positioning, coaching): -0.0017
 
@@ -167,10 +167,10 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **4B, 0 out, SF vs LAD** - Wilmer Flores grounds into a double play, pitcher Gavin Stone to second baseman Gavin Lux to first baseman Freddie Freeman. LaMonte Wade Jr. out at 2nd. Wilmer Flores out at 1st. (change -0.068 for the offense; xBA 0.132)
   - Wilmer Flores (batter, batting): -0.0680
-  - Gavin Stone (pitcher, pitching): +0.0389
-  - LAD coaching (positioning, coaching): +0.0005
-  - Gavin Stone (P, fielding): +0.0047
-  - Gavin Stone (pitcher, pitching): +0.0239
+  - Gavin Stone (pitcher, pitching): +0.0314
+  - LAD coaching (positioning, coaching): +0.0011
+  - Gavin Stone (P, fielding): +0.0102
+  - Gavin Stone (pitcher, pitching): +0.0254
 
 **5T, 1 out, ATL vs BOS** - Michael Harris II grounds into a double play, second baseman Jamie Westbrook to shortstop Ceddanne Rafaela to first baseman Dominic Smith. Orlando Arcia out at 2nd. Michael Harris II out at 1st. (change -0.070 for the offense; xBA 0.322)
   - Michael Harris II (batter, batting): -0.0700
@@ -298,9 +298,9 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Max Schuemann (batter, batting): +0.0000
   - Zack Gelof (runner, baserunning): -0.0005
   - Max Schuemann (batter-runner, baserunning): -0.0018
-  - Taj Bradley (pitcher, pitching): -0.0049
+  - Taj Bradley (pitcher, pitching): -0.0047
   - TB coaching (positioning, coaching): -0.0011
-  - Taj Bradley (P, fielding): +0.0168
+  - Taj Bradley (P, fielding): +0.0166
   - Taj Bradley (pitcher, pitching): -0.0091
   - Taj Bradley (P, fielding): +0.0023
 
@@ -336,13 +336,13 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Oswaldo Cabrera (batter, batting): +0.0000
   - Anthony Volpe (runner, baserunning): -0.0029
   - Oswaldo Cabrera (batter-runner, baserunning): -0.0102
-  - Kris Bubic (pitcher, pitching): -0.0209
-  - KC coaching (positioning, coaching): -0.0145
-  - Maikel Garcia (3B, fielding): +0.1012
+  - Kris Bubic (pitcher, pitching): -0.0228
+  - KC coaching (positioning, coaching): -0.0148
+  - Maikel Garcia (3B, fielding): +0.1033
   - Kris Bubic (pitcher, pitching): -0.0548
   - Maikel Garcia (3B, fielding): +0.0131
-  - Maikel Garcia (3B, fielding): +0.0078
-  - KC coaching (positioning, coaching): -0.0078
+  - Maikel Garcia (3B, fielding): +0.0080
+  - KC coaching (positioning, coaching): -0.0080
 
 **8T, 0 out, HOU vs CWS** - César Salazar out on a sacrifice bunt, third baseman Lenyn Sosa to first baseman Gavin Sheets. Jake Meyers to 3rd. (change -0.002 for the offense)
   - HOU coaching (bunt call, coaching): -0.0001
@@ -574,12 +574,12 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
 
 **9B, 0 out, LAD vs SD** - Dodgers challenged (force play), call on the field was upheld: Dodgers challenged (force play), call on the field was upheld: Dodgers challenged (force play), call on the field was upheld: Miguel Rojas grounds into a triple play, third baseman Manny Machado to second baseman Jake Cronenworth to first baseman Donovan Solano. Tommy Edman out at 3rd. Enrique Hernández out at 2nd. Miguel Rojas out at 1st. (change -0.334 for the offense; xBA 0.247)
   - Miguel Rojas (batter, batting): -0.3340
-  - Robert Suarez (pitcher, pitching): +0.0804
-  - SD coaching (positioning, coaching): +0.0131
-  - Manny Machado (3B, fielding): +0.0363
-  - Robert Suarez (pitcher, pitching): +0.2041
-  - Manny Machado (3B, fielding): -0.0005
-  - SD coaching (positioning, coaching): +0.0005
+  - Robert Suarez (pitcher, pitching): +0.0624
+  - SD coaching (positioning, coaching): +0.0173
+  - Manny Machado (3B, fielding): +0.0479
+  - Robert Suarez (pitcher, pitching): +0.2064
+  - Manny Machado (3B, fielding): -0.0006
+  - SD coaching (positioning, coaching): +0.0006
 
 **3B, 0 out, DET vs PHI** - Matt Vierling lines into a triple play, pitcher Aaron Nola to first baseman Bryce Harper to third baseman Alec Bohm. Zach McKinstry out at 3rd. Carson Kelly out at 1st. (change -0.147 for the offense; xBA 0.131)
   - Matt Vierling (batter, batting): -0.1470
@@ -1084,14 +1084,13 @@ Random sample of unusual plays (fixed seed). Credits are in the player's own tea
   - Brent Rooker (LF, fielding): -0.0009
 
 **7T, 1 out, TB vs TOR** - Alex Jackson doubles (5) on a fly ball to center fielder Daulton Varsho. Amed Rosario scores. Taylor Walls to 3rd. (change +0.004 for the offense; xBA 0.103; catch prob 0.95)
-  - Alex Jackson (batter, batting): +0.0047
-  - Taylor Walls (runner, baserunning): -0.0006
-  - Alex Jackson (batter-runner, baserunning): -0.0000
-  - Ryan Burr (pitcher, pitching): +0.0016
+  - Alex Jackson (batter, batting): +0.0040
+  - Alex Jackson (batter, batting): +0.0000
+  - Ryan Burr (pitcher, pitching): +0.0019
   - TOR coaching (positioning, coaching): -0.0002
-  - George Springer (RF, fielding): -0.0067
-  - Ryan Burr (pitcher, pitching): +0.0006
-  - Daulton Varsho (CF, fielding): +0.0007
+  - George Springer (RF, fielding): -0.0058
+  - Ryan Burr (pitcher, pitching): +0.0001
+  - Daulton Varsho (CF, fielding): -0.0000
 
 **5B, 1 out, CWS vs TB** - Andrew Benintendi singles on a fly ball to center fielder Randy Arozarena. Gavin Sheets scores. Andrew Vaughn to 2nd. (change +0.063 for the offense; xBA 0.013; catch prob 0.99)
   - Andrew Benintendi (batter, batting): +0.0665
