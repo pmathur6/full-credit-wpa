@@ -141,7 +141,7 @@
     const body = shown.map((r, i) => {
       const cells = {
         rank: `<td class="rank">${i + 1}</td>`,
-        name: `<td class="name"><a href="player.html?id=${r.id}&season=${S.season}">${esc(r.name)}</a><div class="sub">${esc(r.pos)} · ${esc(r.team)}</div></td>`,
+        name: `<td class="name"><a href="player.html?id=${r.id}&season=${S.season}${S.board === 'pitchers' ? '&role=pitching' : S.board === 'hitters' ? '&role=hitting' : ''}${S.unit === 'r' ? '&unit=r' : ''}">${esc(r.name)}</a><div class="sub">${esc(r.pos)} · ${esc(r.team)}</div></td>`,
         pa: `<td class="dim">${r.pa || '–'}</td>`, bf: `<td class="dim">${r.bf || '–'}</td>`,
         total: `<td class="strong${r.total < 0 ? ' neg' : ''}">${fmt(r.total, u)}</td>`,
         bar: `<td class="l"><div role="img" aria-label="${r.parts.map(([b, v]) => `${LABEL[b]} ${fmt(v, u)}`).join(', ')}">${bar(r.parts, scale, zero, W)}</div></td>`,

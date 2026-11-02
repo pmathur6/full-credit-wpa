@@ -4,6 +4,18 @@ const FC = (() => {
   const BUCKETS = ['batting', 'baserunning', 'fielding', 'pitching'];
   const LABEL = { batting: 'Batting', baserunning: 'Baserunning', fielding: 'Fielding', pitching: 'Pitching' };
   const cache = new Map();
+  const TEAMS = { ATH: 'Athletics', ATL: 'Atlanta Braves', AZ: 'Arizona Diamondbacks', BAL: 'Baltimore Orioles', BOS: 'Boston Red Sox',
+    CHC: 'Chicago Cubs', CIN: 'Cincinnati Reds', CLE: 'Cleveland Guardians', COL: 'Colorado Rockies', CWS: 'Chicago White Sox',
+    DET: 'Detroit Tigers', HOU: 'Houston Astros', KC: 'Kansas City Royals', LAA: 'Los Angeles Angels', LAD: 'Los Angeles Dodgers',
+    MIA: 'Miami Marlins', MIL: 'Milwaukee Brewers', MIN: 'Minnesota Twins', NYM: 'New York Mets', NYY: 'New York Yankees',
+    OAK: 'Oakland Athletics', PHI: 'Philadelphia Phillies', PIT: 'Pittsburgh Pirates', SD: 'San Diego Padres', SEA: 'Seattle Mariners',
+    SF: 'San Francisco Giants', STL: 'St. Louis Cardinals', TB: 'Tampa Bay Rays', TEX: 'Texas Rangers', TOR: 'Toronto Blue Jays',
+    WSH: 'Washington Nationals' };
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  // '2026-05-22' -> 'May 22'
+  function shortDate(d) { const [, m, day] = d.split('-'); return `${MONTHS[+m - 1]} ${+day}`; }
+  function ordinal(n) { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+  const BASES = ['bases empty', 'runner on 1st', 'runner on 2nd', '1st & 2nd', 'runner on 3rd', '1st & 3rd', '2nd & 3rd', 'bases loaded'];
 
   async function getJSON(path) {
     if (!cache.has(path)) {
@@ -77,5 +89,5 @@ const FC = (() => {
     return `<div class="bar" style="width:${width}px">${html}<span class="zero" style="left:${zero - 1}px"></span></div>`;
   }
 
-  return { COLORS, BUCKETS, LABEL, getJSON, fmt, rowsToObjects, params, setParams, esc, seasons, header, bar };
+  return { COLORS, BUCKETS, LABEL, TEAMS, MONTHS, BASES, shortDate, ordinal, getJSON, fmt, rowsToObjects, params, setParams, esc, seasons, header, bar };
 })();
