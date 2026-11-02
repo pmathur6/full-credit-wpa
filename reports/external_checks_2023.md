@@ -6,50 +6,50 @@ Our numbers are wins weighted by game situation; Savant's are context-neutral ru
 
 | Comparison | Players | Correlation | Note |
 |---|---|---|---|
-| Batting vs traditional batter WPA (200+ PA) | 363 | 0.986 | same plays, runners' share removed |
-| Batting + baserunning vs traditional batter WPA | 363 | 0.966 |  |
-| Pitching vs traditional pitcher WPA (200+ BF) | 376 | 0.903 | fielders' share removed |
-| Baserunning vs Savant baserunning run value | 187 | 0.656 | Savant: extra bases + steals |
-|   ...vs Savant extra-base runs only | 187 | 0.538 |  |
-|   ...vs Savant stolen-base runs only | 187 | 0.569 |  |
-| Fielding vs Savant fielding run value (all non-pitchers) | 550 | 0.575 |  |
-|   Outfielders vs Savant range + arm | 204 | 0.629 |  |
-|   Infielders vs Savant range + arm + DP | 261 | 0.728 |  |
-|   Catchers vs Savant throwing + blocking | 85 | 0.690 | framing is not in our numbers |
-|   Catchers vs Savant total catching | 85 | 0.306 | includes framing |
+| Batting vs traditional batter WPA (200+ PA) | 363 | 0.988 | same plays, runners' share removed |
+| Batting + baserunning vs traditional batter WPA | 363 | 0.968 |  |
+| Pitching vs traditional pitcher WPA (200+ BF) | 376 | 0.902 | fielders' share removed |
+| Baserunning vs Savant baserunning run value | 187 | 0.664 | Savant: extra bases + steals |
+|   ...vs Savant extra-base runs only | 187 | 0.539 |  |
+|   ...vs Savant stolen-base runs only | 187 | 0.584 |  |
+| Fielding vs Savant fielding run value (all non-pitchers) | 550 | 0.588 |  |
+|   Outfielders vs Savant range + arm | 204 | 0.650 |  |
+|   Infielders vs Savant range + arm + DP | 261 | 0.734 |  |
+|   Catchers vs Savant throwing + blocking | 85 | 0.692 | framing is not in our numbers |
+|   Catchers vs Savant total catching | 85 | 0.308 | includes framing |
 
 Biggest disagreements, baserunning (standardized; + = we rate higher):
 
 | Player | Pos | Ours | Savant |
 |---|---|---|---|
-| José Ramírez | 3B/DH | +1.18 wins | +0.7 runs |
-| Enrique Hernández | SS/2B/CF/3B/LF/1B | +0.80 wins | -1.6 runs |
-| Dominic Smith | 1B | +0.28 wins | -5.1 runs |
-| Esteury Ruiz | CF/LF/RF | +0.16 wins | +5.8 runs |
-| CJ Abrams | SS | +0.49 wins | +8.0 runs |
+| José Ramírez | 3B/DH | +1.16 wins | +0.7 runs |
+| Dominic Smith | 1B | +0.36 wins | -5.1 runs |
+| Bryan De La Cruz | LF/RF | +0.37 wins | -3.6 runs |
+| CJ Abrams | SS | +0.39 wins | +8.0 runs |
+| Esteury Ruiz | CF/LF/RF | +0.14 wins | +5.8 runs |
 | Bobby Witt Jr. | SS | +0.64 wins | +8.5 runs |
 
 Biggest disagreements, outfield (standardized; + = we rate higher):
 
 | Player | Pos | Ours | Savant |
 |---|---|---|---|
-| Masataka Yoshida | LF/DH | -0.36 wins | -11.2 runs |
-| Ian Happ | LF | +0.07 wins | -4.4 runs |
-| Randy Arozarena | LF/DH | -0.24 wins | -6.8 runs |
-| Lane Thomas | RF/CF | -1.57 wins | +1.6 runs |
-| Teoscar Hernández | RF/DH | -1.54 wins | +1.8 runs |
-| Myles Straw | CF | -1.34 wins | +3.3 runs |
+| Masataka Yoshida | LF/DH | -0.50 wins | -11.2 runs |
+| Isiah Kiner-Falefa | CF/LF/3B | +0.84 wins | +2.4 runs |
+| Ian Happ | LF | +0.12 wins | -4.4 runs |
+| Lane Thomas | RF/CF | -1.61 wins | +1.6 runs |
+| Teoscar Hernández | RF/DH | -1.49 wins | +1.8 runs |
+| Mickey Moniak | CF/RF/LF | -1.24 wins | +2.7 runs |
 
 Biggest disagreements, infield (standardized; + = we rate higher):
 
 | Player | Pos | Ours | Savant |
 |---|---|---|---|
-| Adam Frazier | 2B | -0.13 wins | -11.5 runs |
-| Alec Bohm | 3B/1B | +0.76 wins | -3.8 runs |
+| Alec Bohm | 3B/1B | +0.77 wins | -3.8 runs |
 | Pete Alonso | 1B/DH | +1.09 wins | -0.8 runs |
-| Andrés Giménez | 2B | +0.47 wins | +15.2 runs |
-| Ezequiel Tovar | SS | +0.25 wins | +13.3 runs |
-| Bryson Stott | 2B | +0.16 wins | +10.1 runs |
+| Adam Frazier | 2B | -0.18 wins | -11.5 runs |
+| Andrés Giménez | 2B | +0.48 wins | +15.2 runs |
+| Ezequiel Tovar | SS | +0.26 wins | +13.3 runs |
+| Bryson Stott | 2B | +0.11 wins | +10.1 runs |
 
 ## Sources
 
