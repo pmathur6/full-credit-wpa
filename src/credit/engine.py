@@ -41,12 +41,15 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "build"))
-from winprob import WinProb  # noqa: E402
+from winprob import RunExp, WinProb  # noqa: E402
 
 season = sys.argv[1]
 BUILD = Path(sys.argv[2] if len(sys.argv) > 2 else "data/build")
 OUT = Path(sys.argv[3] if len(sys.argv) > 3 else "data/credit")
 OUT.mkdir(parents=True, exist_ok=True)
+# "wins" (default): MLB win probability. "runs": context-neutral run expectancy, same split.
+MODE = sys.argv[4] if len(sys.argv) > 4 else "wins"
+SUFFIX = "_runs" if MODE == "runs" else ""
 
 ev = pd.read_parquet(BUILD / f"events_{season}.parquet")
 IFP = {}
@@ -58,7 +61,14 @@ if (BUILD / f"infield_prob_{season}.parquet").exists():
 FCOLS = [f"f{i}" for i in range(2, 10)]
 ev[FCOLS] = ev.groupby(["game_pk", "fielding_team"])[FCOLS].transform(lambda c: c.ffill().bfill())
 mv = pd.read_parquet(BUILD / f"runner_moves_{season}.parquet")
-WP = WinProb(pd.read_parquet(BUILD / f"we_lookup_{season}.parquet"))
+if MODE == "runs":
+    # same engine, valued in runs: swap the value columns and the state-value function
+    for w, r in (("we_before", "re_before"), ("we_after", "re_after"), ("we_res", "re_res"),
+                 ("mid_sum", "re_mid_sum"), ("d_we_home", "d_re_home"), ("d_we_bat", "d_re_bat")):
+        ev[w] = ev[r]
+    WP = RunExp(pd.read_parquet(BUILD / f"re_lookup_{season}.parquet"))
+else:
+    WP = WinProb(pd.read_parquet(BUILD / f"we_lookup_{season}.parquet"))
 
 HITS = ["single", "double", "triple", "home_run"]
 OUTS = {"field_out", "force_out", "grounded_into_double_play", "double_play", "fielders_choice_out",
@@ -69,6 +79,9 @@ POS_NAME = {1: "P", 2: "C", 3: "1B", 4: "2B", 5: "3B", 6: "SS", 7: "LF", 8: "CF"
 
 
 def bat(w, half):
+    """Home-perspective value -> batting team's value."""
+    if MODE == "runs":
+        return w if half == "bottom" else -w
     return w if half == "bottom" else 1.0 - w
 
 
@@ -603,5 +616,5 @@ if (REF / f"oaa_{season}.csv").exists():
 else:
     stats["infield positioning: no Savant OAA reference"] += 1
 cr["player_id"] = cr["player_id"].astype("Int64")
-cr.to_parquet(OUT / f"credits_{season}.parquet", index=False)
+cr.to_parquet(OUT / f"credits{SUFFIX}_{season}.parquet", index=False)
 print(f"credit rows: {len(cr):,}; notes: {dict(stats)}; win-prob fallbacks: {dict(WP.fallbacks)}")

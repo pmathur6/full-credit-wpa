@@ -27,7 +27,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent))
-from winprob import WinProb  # noqa: E402
+from winprob import RunExp, WinProb  # noqa: E402
 
 season = sys.argv[1]
 RAW = Path(sys.argv[2] if len(sys.argv) > 2 else "data/raw")
@@ -41,6 +41,9 @@ we = WinProb.build(p)
 we.to_parquet(OUT / f"we_lookup_{season}.parquet", index=False)
 WP = WinProb(we)
 fallbacks = WP.fallbacks
+re_tab = RunExp.build(p)
+re_tab.to_parquet(OUT / f"re_lookup_{season}.parquet", index=False)
+RE = RunExp(re_tab)
 
 
 def mask(st):
@@ -50,6 +53,11 @@ def mask(st):
 def state_we(st, balls=0, strikes=0):
     """Home win probability for a tracked state; 3 outs = start of the next half-inning."""
     return WP.state(st["inning"], st["half"], st["outs"], mask(st), st["home"], st["away"], balls, strikes)
+
+
+def state_re(st, balls=0, strikes=0):
+    """Context-neutral (run expectancy) value of a tracked state; 3 outs = half over."""
+    return RE.state(st["inning"], st["half"], st["outs"], mask(st), st["home"], st["away"], balls, strikes)
 
 
 def num(v):
@@ -158,6 +166,8 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
                 checks["score_match"] += (st["home"], st["away"]) == (sv["home_score"], sv["away_score"])
 
             pa_start = state_we(st)
+            pa_start_re = state_re(st)
+            re_mid_sum = 0.0
             pa_state = {"outs_before": st["outs"], "on_1b": st["bases"][1], "on_2b": st["bases"][2],
                         "on_3b": st["bases"][3], "home_before": st["home"], "away_before": st["away"]}
             mid_sum = 0.0
@@ -177,7 +187,7 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
                 if is_pa:  # state the result is judged from (after any earlier mid-PA events)
                     res_snap = {"r_outs": st["outs"], "r_on_1b": st["bases"][1], "r_on_2b": st["bases"][2],
                                 "r_on_3b": st["bases"][3], "r_home": st["home"], "r_away": st["away"],
-                                "we_res": state_we(st)}
+                                "we_res": state_we(st), "re_res": state_re(st)}
                 if not is_pa:
                     cnt = ev.get("count", {})
                     balls, strikes = cnt.get("balls", 0), cnt.get("strikes", 0)
@@ -186,6 +196,7 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
                         c0 = evs[prev[-1]].get("count", {}) if prev else {}
                         balls, strikes = c0.get("balls", 0), c0.get("strikes", 0)
                     before = state_we(st, balls, strikes)
+                    before_re = state_re(st, balls, strikes)
                     snap = {"outs_before": st["outs"], "on_1b": st["bases"][1], "on_2b": st["bases"][2],
                             "on_3b": st["bases"][3], "home_before": st["home"], "away_before": st["away"]}
                 # apply each runner's final outcome for this event at once, so the
@@ -221,6 +232,8 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
                 if not is_pa:
                     after = state_we(st, balls, strikes)
                     mid_sum += after - before
+                    after_re = state_re(st, balls, strikes)
+                    re_mid_sum += after_re - before_re
                     events.append({
                         "game_pk": gpk, "at_bat_index": pl["atBatIndex"], "play_index": idx, "kind": "mid",
                         "event_type": ev.get("details", {}).get("eventType") or rs[0]["details"].get("eventType"),
@@ -230,6 +243,7 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
                         "balls": balls, "strikes": strikes, "batter": batter, "pitcher": pitcher,
                         **fielders_at(gpk, abn, pitch_no.get(idx, 0)),
                         "we_before": before, "we_after": after, "d_we_home": after - before,
+                        "re_before": before_re, "re_after": after_re, "d_re_home": after_re - before_re,
                         "play_id": ev.get("playId") or ev.get("actionPlayId"),
                     })
                     if st["outs"] >= 3:
@@ -251,9 +265,10 @@ with gzip.open(RAW / f"feeds_{season}.jsonl.gz", "rt") as fh:
                 "balls": 0, "strikes": 0, "batter": batter, "pitcher": pitcher,
                 **fielders_at(gpk, abn, pitch_no.get(final_pitch, 0) if final_pitch is not None else 1),
                 "we_before": pa_start, "we_after": None, "mid_sum": mid_sum,
+                "re_before": pa_start_re, "re_after": state_re(st), "re_mid_sum": re_mid_sum,
                 **(res_snap or {"r_outs": st["outs"], "r_on_1b": st["bases"][1], "r_on_2b": st["bases"][2],
                                 "r_on_3b": st["bases"][3], "r_home": st["home"], "r_away": st["away"],
-                                "we_res": state_we(st)}),
+                                "we_res": state_we(st), "re_res": state_re(st)}),
                 "a_on_1b": st["bases"][1], "a_on_2b": st["bases"][2], "a_on_3b": st["bases"][3],
                 "play_id": fp_play,
                 "has_review": bool(review), "review_type": review.get("reviewType"),
@@ -276,6 +291,8 @@ nxt = ev[pa].groupby("game_pk")["we_before"].shift(-1)
 ev.loc[pa, "we_after"] = ev.loc[pa, "we_after"].fillna(nxt)
 ev.loc[pa, "d_we_home"] = ev.loc[pa, "we_after"] - ev.loc[pa, "we_before"] - ev.loc[pa, "mid_sum"]
 ev["d_we_bat"] = np.where(ev["half"].eq("bottom"), ev["d_we_home"], -ev["d_we_home"])
+ev.loc[pa, "d_re_home"] = ev.loc[pa, "re_after"] - ev.loc[pa, "re_before"] - ev.loc[pa, "re_mid_sum"]
+ev["d_re_bat"] = np.where(ev["half"].eq("bottom"), ev["d_re_home"], -ev["d_re_home"])
 mv = pd.DataFrame(moves)
 ev.to_parquet(OUT / f"events_{season}.parquet", index=False)
 mv.to_parquet(OUT / f"runner_moves_{season}.parquet", index=False)
@@ -284,6 +301,10 @@ mv.to_parquet(OUT / f"runner_moves_{season}.parquet", index=False)
 g = ev.groupby("game_pk").agg(d=("d_we_home", "sum"), start=("we_before", "first"),
                                h=("home_after", "last"), a=("away_after", "last"))
 g["gap"] = (g.d - (np.where(g.h > g.a, 1.0, np.where(g.h < g.a, 0.0, 0.5)) - g.start)).abs()
+# runs version: within each half-inning, deltas telescope from its first state to its last
+hh = ev.groupby(["game_pk", "inning", "half"], sort=False)
+hp = ev[pa].groupby(["game_pk", "inning", "half"], sort=False)
+re_gap = (hh["d_re_home"].sum() - (hp["re_after"].last() - hp["re_before"].first())).abs()
 c = checks["pa_checked"]
 lines = [
     f"# Play table build: {season}", "",
@@ -292,6 +313,8 @@ lines = [
     f"outs {checks['outs_match'] / c:.2%}, score {checks['score_match'] / c:.2%}",
     f"- Games whose deltas sum to the final result (within .001): {(g.gap < 1e-3).mean():.2%} of {len(g):,}; max gap {g.gap.max():.4f}",
     f"- Win-prob lookups needing a fallback: {dict(fallbacks)}",
+    f"- Runs version: half-innings whose deltas telescope (within 1e-9): {(re_gap < 1e-9).mean():.2%} of {len(re_gap):,}; "
+    f"run-expectancy fallbacks: {dict(RE.fallbacks)}",
     f"- PAs with a batted ball: {ev.loc[pa, 'bb_type'].notna().sum():,}; with outfield catch probability: {ev['catch_prob'].notna().sum():,}",
     f"- PAs with a Savant final pitch: {ev.loc[pa, 'events'].notna().mean():.2%}; truncated PAs: {(ev.event_type == 'truncated_pa').sum():,}",
     "", "Mid-PA event types:", "",

@@ -88,7 +88,13 @@ Infield ground balls use our own model (`src/model/infield.py`, report in `repor
 
 Stolen-base attempts: baseline league caught-stealing rate, then the pitcher's and the catcher's season effect (Savant pitcher running game and catcher throwing), each credited with their piece; the rest splits 50/50.
 
-Still simplified: air balls with no tracked catch chance (infield liners and popups, outfield hits Savant doesn't count as chances) stay with the pitcher.
+Still simplified: air balls with no tracked catch chance (infield liners and popups, outfield hits Savant doesn't count as chances) stay with the pitcher. The fielder who handled the ball is still recorded, with zero credit.
+
+Win probability for rare lopsided states missing from the season's table (e.g. down 5 in the 12th) is interpolated across score margins for the same inning, outs, bases and count, in log-odds.
+
+### Runs version (context-neutral)
+
+The same engine, run with `engine.py <season> data/build data/credit runs`, values every state by run expectancy instead of win probability: expected runs for the rest of the half-inning by outs, bases and count (innings 1-8 of the same season, `re_lookup_<season>.parquet`), plus runs already scored. Score and inning don't matter, so a play is worth the same in a blowout as in a tie game. Each half-inning is valued on its own (three outs = 0 expected runs). Output `credits_runs_<season>.parquet`; checks in `reports/credit_report_runs_<season>.md`; player table `output/players_runs_<season>.csv`.
 
 ## How it runs
 

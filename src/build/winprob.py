@@ -87,3 +87,40 @@ class WinProb:
         if half == "bottom" and inning >= 9 and diff > 0:
             return 1.0  # walk-off: game over
         return self.lookup(inning, half, outs, bases, balls, strikes, diff)
+
+
+class RunExp:
+    """Context-neutral value: run expectancy by (outs, bases, count), same interface as WinProb.
+
+    `state` returns a home-perspective value: home - away runs, plus the batting team's
+    expected runs for the rest of the half-inning (subtracted when the away team bats).
+    At 3 outs the half is over (expected runs 0); unlike WinProb it does not roll into the
+    next half, so each half-inning is valued on its own and score/inning never matter.
+    """
+    KEY = ["outs_when_up", "bases", "balls", "strikes"]
+
+    def __init__(self, table: pd.DataFrame):
+        self.exact = {tuple(int(x) for x in r[:-1]): r[-1] for r in table[self.KEY + ["re"]].itertuples(index=False)}
+        self.fallbacks = Counter()
+
+    @staticmethod
+    def build(pitches: pd.DataFrame) -> pd.DataFrame:
+        p = pitches[pitches.inning.le(8)].assign(
+            bases=lambda d: d["on_1b"].notna().astype(int) + 2 * d["on_2b"].notna() + 4 * d["on_3b"].notna())
+        end = p.groupby(["game_pk", "inning", "inning_topbot"])["post_bat_score"].transform("max")
+        p = p.assign(re=end - p["bat_score"])
+        t = p.groupby(RunExp.KEY, as_index=False).agg(re=("re", "mean"), n=("re", "size"))
+        return t
+
+    def lookup(self, outs, bases, balls=0, strikes=0):
+        if outs >= 3:
+            return 0.0
+        k = (int(outs), int(bases), min(int(balls), 3), min(int(strikes), 2))
+        if k in self.exact:
+            return self.exact[k]
+        self.fallbacks["count 0-0"] += 1
+        return self.exact[(int(outs), int(bases), 0, 0)]
+
+    def state(self, inning, half, outs, bases, home, away, balls=0, strikes=0):
+        re = self.lookup(outs, bases, balls, strikes)
+        return (home - away) + (re if half == "bottom" else -re)

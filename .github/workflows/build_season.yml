@@ -41,7 +41,8 @@ jobs:
           gh release upload "data-$SEASON" --clobber \
             "data/build/events_$SEASON.parquet" \
             "data/build/runner_moves_$SEASON.parquet" \
-            "data/build/we_lookup_$SEASON.parquet"
+            "data/build/we_lookup_$SEASON.parquet" \
+            "data/build/re_lookup_$SEASON.parquet"
       - name: Commit report
         run: |
           mkdir -p reports && cp "data/build/build_report_$SEASON.md" reports/
