@@ -3,13 +3,182 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Full-Credit WPA — How it works</title>
+<title>How it works — Full-Credit WPA</title>
+<meta name="description" content="How Full-Credit WPA splits every play's change in win probability across the batter, runners, pitcher, fielders and coaching.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<style>
+  .doc { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; }
+  .toc { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+  .toc a { color: var(--ink-2); text-decoration: none; padding: 6px 0; }
+  .toc a:hover { color: var(--ink); }
+  .prose { max-width: 720px; display: flex; flex-direction: column; gap: 14px; }
+  .prose h2 { font-size: 22px; margin-top: 18px; scroll-margin-top: 16px; }
+  .prose h3 { font-size: 16px; margin: 6px 0 0; }
+  .prose p, .prose li { margin: 0; color: #2A303A; }
+  .prose ul, .prose ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .prose table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .prose th { text-align: left; font-size: 12px; color: var(--ink-2); font-weight: 600; padding: 8px; border-bottom: 1px solid var(--line-2); background: var(--bg-2); }
+  .prose td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .prose td.n { font-family: var(--mono); text-align: right; white-space: nowrap; }
+  .prose th.n { text-align: right; }
+  .callout { padding: 14px 16px; border-left: 3px solid var(--link); background: #F4F6FB; border-radius: 0 8px 8px 0; }
+  .ex { border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .ex .sit { font-size: 13px; color: var(--ink-2); }
+  .bk { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+  @media (max-width: 560px) { .oc { display: none; } }
+  @media (max-width: 820px) { .doc { grid-template-columns: 1fr; } .toc { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px 14px; } .table-scroll { overflow-x: auto; } }
+</style>
 </head>
 <body>
-<div class="wrap" id="app"></div>
+<div class="wrap" id="app">
+<div id="head"></div>
+<div class="doc">
+<nav class="toc" aria-label="On this page">
+  <a href="#idea">The idea</a>
+  <a href="#rules">The rules</a>
+  <a href="#example">Worked examples</a>
+  <a href="#buckets">The buckets</a>
+  <a href="#coaching">Coaching</a>
+  <a href="#special">Special plays</a>
+  <a href="#runs">Wins vs runs</a>
+  <a href="#checks">How we check it</a>
+  <a href="#limits">Limitations</a>
+  <a href="#data">Data</a>
+</nav>
+<article class="prose">
+
+<h2 id="idea">The idea</h2>
+<p><b>Win Probability Added</b> (WPA) measures how much each play changed a team's chance of winning. Traditional WPA gives the whole change to the batter and the pitcher. If a shortstop dives to rob a hit, the pitcher gets the credit; if a left fielder misplays a routine fly, the pitcher takes the blame.</p>
+<p><b>Full-Credit WPA</b> splits every play across everyone who took part: the batter, the runners, the pitcher, the catcher, the fielders and the team's coaching staff. Season totals add up those shares, so a great defender or baserunner finally shows up next to the big bats and aces.</p>
+
+<h2 id="rules">The rules</h2>
+<ol>
+  <li><b>Results, not expectations.</b> Every play is scored on what actually happened. The batting team gets the real change in win probability and the fielding team gets exactly the opposite, so every play, and every game, adds to zero. Players eat their own bad luck: a line drive caught at the wall is still an out for the batter.</li>
+  <li><b>Statcast only decides the split.</b> Expected values (expected batting average, outfield catch probability, our infield model, typical runner advancement) are used to divide each side's actual share among its players. They never add or take away credit.</li>
+  <li><b>Defense on a ball in play is split in stages.</b>
+    <ul>
+      <li><i>Contact</i> goes to the <b>pitcher</b>: how dangerous was the ball he allowed, against an average defense?</li>
+      <li><i>Positioning</i> goes to <b>coaching</b>: how much easier or harder did the fielders' starting spots make it?</li>
+      <li><i>Conversion</i> goes to the <b>fielder</b>: did he make the play, given how hard it was from where he stood?</li>
+      <li><i>Type of hit or out</i> (single vs double, one out vs two) goes back to the pitcher, since it mostly reflects where and how the ball was hit.</li>
+      <li><i>Runner advancement</i> on the play goes to the throwers who cut a runner down, or to the fielder who fielded the ball.</li>
+    </ul></li>
+  <li><b>Offense with runners on</b>: the batter gets his result at standard advancement; each runner gets credit or blame for taking more or fewer bases than usual.</li>
+  <li><b>Events between pitches</b> (steals, pickoffs, wild pitches, passed balls, balks) are their own plays, measured at the count when they happened.</li>
+</ol>
+
+<h2 id="example">Worked examples</h2>
+<div class="ex">
+  <div class="sit">May 22, 2026 · Guardians at Phillies · top 1st, 1 out, bases empty</div>
+  <p><b>José Ramírez lines out sharply to left fielder Brandon Marsh.</b> The ball left the bat at 102 mph at 17°, a ball that usually falls for a hit. But Marsh was standing almost exactly where it landed: Statcast gave him a 99% catch probability. The out moved Philadelphia's win probability by +0.016.</p>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Who</th><th>Stage</th><th class="n oc">Out chance</th><th class="n">Wins</th></tr></thead>
+    <tbody>
+      <tr><td>José Ramírez (batter)</td><td>The actual result</td><td class="n oc"></td><td class="n">−0.016</td></tr>
+      <tr><td>Cristopher Sánchez (pitcher)</td><td>A typical outfield chance at that speed and angle</td><td class="n oc">0 → ~21%</td><td class="n">+0.003</td></tr>
+      <tr><td>Phillies coaching</td><td>Marsh's starting spot made it a 99% catch</td><td class="n oc">~21% → 99%</td><td class="n">+0.012</td></tr>
+      <tr><td>Brandon Marsh (LF)</td><td>Turned a 99% chance into an out</td><td class="n oc">99% → 100%</td><td class="n">+0.0005</td></tr>
+    </tbody></table></div>
+  <p>Three-quarters of the defense's credit went to positioning: the ball was dangerous, and the reason it was an out is where Marsh stood. Making a 99% catch is worth almost nothing; dropping it would have cost him nearly the whole play. On the site, credit this small shows as <i>negligible</i>.</p>
+  <a href="game.html?id=823461&season=2026&play=1.0.pa">See this play in the game →</a>
+</div>
+<div class="ex">
+  <div class="sit">April 20, 2026 · Orioles at Royals · bottom 11th, 2 out, runner on 3rd, Royals down 2–1</div>
+  <p><b>Bobby Witt Jr. singles to left; Isaac Collins scores to tie it.</b> Kansas City's win probability jumped from 16.9% to 56.3%.</p>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Who</th><th>Bucket</th><th class="n">Wins</th></tr></thead>
+    <tbody>
+      <tr><td>Bobby Witt Jr.</td><td>Batting</td><td class="n">+0.394</td></tr>
+      <tr><td>Anthony Nunez (pitcher)</td><td>Pitching</td><td class="n">−0.393</td></tr>
+      <tr><td>Taylor Ward (LF)</td><td>Fielding</td><td class="n">−0.001</td></tr>
+    </tbody></table></div>
+  <p>A clean line-drive single with nothing a fielder could do: almost all of the defensive side lands on the pitcher. The two teams' columns cancel exactly.</p>
+  <a href="game.html?id=824125&season=2026&player=677951">See this game →</a>
+</div>
+
+<h2 id="buckets">The buckets</h2>
+<p>Every player credit lands in one of four buckets, shown in the same colors across the site:</p>
+<ul>
+  <li><span class="bk"><span class="dot" style="background:var(--bat)"></span>Batting</span>: the batter's share of each plate appearance, at standard runner advancement.</li>
+  <li><span class="bk"><span class="dot" style="background:var(--br)"></span>Baserunning</span>: steals, extra bases, tagging up and advancing on wild pitches (positive); caught stealing, pickoffs, being thrown out or doubled off (negative). Includes the batter's own trip around the bases after a hit.</li>
+  <li><span class="bk"><span class="dot" style="background:var(--fld)"></span>Fielding</span>: catches and misses, throws that cut down runners, errors, and catcher work on steals and passed balls. One number per player, combined across every position he played.</li>
+  <li><span class="bk"><span class="dot" style="background:var(--pit)"></span>Pitching</span>: the pitcher's share of each plate appearance, plus wild pitches, balks and pickoffs, and his effect on would-be base stealers.</li>
+</ul>
+<p>For pitchers, the site also shows <b>defense behind him</b>: what his fielders and coaching added or cost on his plays. His pitching, his own fielding and the defense behind him always add up to his traditional WPA.</p>
+
+<h2 id="coaching">Coaching</h2>
+<p>A team-level bucket for decisions that changed plays. It isn't meant to judge managers' pinch-hitting or bullpen moves; it captures the coaching staff's influence on individual plays.</p>
+<ul>
+  <li><b>Defensive positioning.</b> Outfield: Statcast's catch probability from the fielder's actual starting spot, compared with the average for balls hit like this one. Infield: our model of how often an average infield converts a ground ball, with and without the alignment the team used, then calibrated so each infielder's total matches Statcast's Outs Above Average.</li>
+  <li><b>Intentional walks.</b> The defense's whole share goes to coaching; the batter keeps his.</li>
+  <li><b>Sacrifice bunt calls</b>, credited to the batting team's coaching.</li>
+  <li><b>Defensive indifference</b>: letting a runner take a base unchallenged.</li>
+</ul>
+
+<h2 id="special">Special plays</h2>
+<div class="table-scroll"><table>
+  <thead><tr><th>Play</th><th>How it's split</th></tr></thead>
+  <tbody>
+    <tr><td>Stolen base / caught stealing</td><td>The runner takes the offense's share. The defense starts from the league caught-stealing rate for that base, then credits the pitcher's and the catcher's season-long effect on runners (from Statcast's running-game data), and splits the rest 50/50.</td></tr>
+    <tr><td>Wild pitch, balk, pickoff</td><td>Pitcher vs the runners.</td></tr>
+    <tr><td>Passed ball</td><td>Catcher vs the runners.</td></tr>
+    <tr><td>Error</td><td>The fielder charged with the error takes the whole defensive share of what went wrong.</td></tr>
+    <tr><td>Double play, force out</td><td>Converting the ball goes to the fielder; turning one out into two goes to the pitcher for now (see limitations).</td></tr>
+    <tr><td>Runner thrown out</td><td>The throwers (assists, including relays) share the credit.</td></tr>
+    <tr><td>Extra-inning automatic runner</td><td>No credit for being placed on base; what he does after counts.</td></tr>
+    <tr><td>Walk-off</td><td>Win probability can't go above 100%, so runs after the winning run are worth nothing.</td></tr>
+    <tr><td>Substitutions mid-play</td><td>Whoever was on the field for that event.</td></tr>
+  </tbody></table></div>
+
+<h2 id="runs">Wins vs runs</h2>
+<p>The <b>Wins</b> view weights every play by the game situation: a two-out hit in a tie game in the 9th can be worth many times more than the same hit in a blowout. That's what actually decided games, but it's noisy and depends on opportunity.</p>
+<p>The <b>Runs (context-neutral)</b> view runs the exact same split on <b>run expectancy</b>: how many runs a team expects to score from each base, out and count situation, built from that season's games. Score and inning don't matter, so every play counts the same. Traditional run value (RE24) is the comparison column there. Runs are better for judging skill; wins for judging impact.</p>
+<p>The same player can look different in the two views. A fielder who makes a routine-looking play in a tie game late gets more wins than runs; a player who piles up value in lopsided games gets more runs than wins.</p>
+
+<h2 id="checks">How we check it</h2>
+<ul>
+  <li><b>Every play balances.</b> The batting team's credits equal the play's change in win probability, and the fielding team's equal the opposite, for all ~190,000 plays a season, to rounding error. Each team's season total equals its wins minus its summed starting win probability.</li>
+  <li><b>Our play-by-play matches MLB's.</b> Bases, outs and score are tracked independently and match Statcast at the start of 100% of plate appearances.</li>
+  <li><b>Against public stats</b> (2026):
+    <div class="table-scroll"><table>
+      <thead><tr><th>Comparison</th><th class="n">Correlation</th></tr></thead>
+      <tbody>
+        <tr><td>Batting vs traditional batter WPA</td><td class="n oc">0.98</td></tr>
+        <tr><td>Pitching vs traditional pitcher WPA</td><td class="n oc">0.91</td></tr>
+        <tr><td>Infield fielding vs Statcast fielding run value</td><td class="n oc">0.79</td></tr>
+        <tr><td>Outfield fielding vs Statcast fielding run value</td><td class="n oc">0.74</td></tr>
+        <tr><td>Baserunning vs Statcast baserunning run value</td><td class="n oc">0.66</td></tr>
+        <tr><td>Outfield outs above expected vs Statcast OAA</td><td class="n">~0.97</td></tr>
+      </tbody></table></div>
+    Batting and pitching track traditional WPA closely by design, minus what we hand to runners and fielders. Fielding and baserunning agree with Statcast's run values but aren't identical, because ours are weighted by game situation.</li>
+  <li><b>Signal vs noise.</b> Splitting each season into alternating games, baserunning and fielding become reliable faster than batting does in wins: a season of win-weighted batting is about as much luck as skill. Outfield outs above expected stabilize in about 35 games.</li>
+</ul>
+
+<h2 id="limits">Limitations</h2>
+<ul>
+  <li><b>Infield line drives and popups</b> have no public catch probability, so the pitcher keeps the whole play. The fielder who caught it is still shown, with negligible credit.</li>
+  <li><b>Turning double plays</b> is credited to the pitcher for now; a model for the pivot and relay is planned.</li>
+  <li><b>Fielder jumps vs positioning.</b> Outfield catch probability is measured from where the fielder started, so his jump and route are his, and his starting spot is coaching. A fielder who positions himself well gets that credited to coaching.</li>
+  <li><b>Intentional walks</b> can't be untangled from what happens next, so coaching takes the defense's whole share of the walk itself.</li>
+  <li><b>Wins are noisy.</b> Like any WPA, this records what happened and how much it mattered, not true talent. Use the runs view for skill.</li>
+  <li><b>Regular season only</b>, 2023 to the present.</li>
+</ul>
+
+<h2 id="data">Data</h2>
+<ul>
+  <li><b>Baseball Savant</b> pitch-level data: game state, fielder alignment, batted balls, expected batting average, and MLB's win-probability model.</li>
+  <li><b>MLB Stats API</b> game feeds: every runner movement with putouts, assists and errors, and events between pitches.</li>
+  <li><b>Savant outfield catch probability</b> for each play, plus Outs Above Average, catcher throwing, pitcher running game and sprint speed.</li>
+</ul>
+<p>Everything runs automatically on GitHub Actions. The code, data checks and reports are in the <a href="https://github.com/pmathur6/full-credit-wpa">full-credit-wpa repository</a>.</p>
+</article>
+</div>
+<footer class="site-foot"><p>Data: MLB Stats API, Baseball Savant.</p><p><a href="./">Leaderboard</a></p></footer>
+</div>
 <script src="assets/common.js"></script>
-<script>document.getElementById('app').innerHTML = FC.header('about', { title: 'How it works' }) + '<p class="empty">This page is being built. <a href="./">Back to the leaderboard</a></p>';</script>
+<script>document.getElementById('head').outerHTML = FC.header('about', { title: 'How it works', lede: "Every play's change in win probability, split across everyone who took part." });</script>
 </body>
 </html>

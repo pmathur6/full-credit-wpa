@@ -54,13 +54,14 @@ Every credit lands in one of four buckets:
 | Walk-off | Win probability is capped at 1, so extra runs are worth 0 |
 | Mid-play substitutions | Whoever was on the field for that event |
 
-## Output (planned)
+## Website
 
-A GitHub Pages site:
+**https://pmathur6.github.io/full-credit-wpa/** — plain HTML/JS in `site/`, published by the `site` workflow (GitHub Pages) with each season's exported data.
 
-- **Leaderboard**: one row per player, total WPA plus Batting / Baserunning / Fielding / Pitching, alongside traditional WPA and the difference. Hitter / pitcher toggle (two-way players on both). Filters for season, team, position and minimum PA/IP. Positions listed like `2B/SS`, for every position with 10+ appearances, ordered by games.
-- **Player page**: game log by component; each game expands to every play he was involved in and his share. Fielding broken out by position.
-- **Game view**: win-probability chart with each play's split across all players, plus the zero-sum check.
+- **Leaderboard**: hitters and pitchers on one board (or separately), team coaching; wins or runs; season, team, position, minimum PA/BF, search; sortable, shareable URLs.
+- **Player page**: summary tiles, cumulative chart, fielding by position, game log where each game expands to every play he was part of and his share (pitchers: the defense behind him). Two-way players switch between hitting and pitching.
+- **Game page**: team totals, win-probability chart, the split of any play across every player, collapsible play-by-play.
+- **Games index** and a plain-English **How it works** page.
 
 ## Data sources
 
